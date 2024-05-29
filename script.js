@@ -33,7 +33,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Typing effect for subdomains in the header
     const options = {
-        strings: ['jake.smith.box', 'jessica.smith.box', 'alex.smith.box', 'taylor.smith.box'],
+        strings: [
+            'Agent.Smith.box', 
+            'Sam.Smith.box', 
+            'Jessica.Smith.box', 
+            'Dave.Smith.box', 
+            'Zoe.Smith.box', 
+            'Wallet.Smith.box', 
+            'NFT.Smith.box', 
+            '1.Smith.box', 
+            'Tom.Smith.box'
+        ],
         typeSpeed: 100,
         backSpeed: 50,
         backDelay: 1500,
