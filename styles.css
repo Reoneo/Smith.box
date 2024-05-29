@@ -207,7 +207,6 @@ p {
     font-size: 1.1em;
 }
 
-/* Additional animations and styles */
 .cta-button, .submit-button {
     position: relative;
     overflow: hidden;
@@ -241,7 +240,6 @@ p {
     transform: translateY(0);
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
     .header-content h1 {
         font-size: 2em;
