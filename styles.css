@@ -18,7 +18,7 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end; /* Align items to the bottom */
     align-items: center;
 }
 
@@ -27,6 +27,7 @@ body {
     z-index: 2;
     max-width: 80%;
     text-align: center;
+    margin-bottom: 50px; /* Add margin to lower the content */
 }
 
 .image-wrapper {
@@ -37,7 +38,7 @@ body {
 }
 
 .image-wrapper img {
-    max-width: 100px; /* Adjust this value as needed for proper size */
+    max-width: 200px; /* Slightly larger size */
     height: auto;
 }
 
