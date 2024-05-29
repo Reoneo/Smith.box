@@ -37,7 +37,7 @@ body {
 }
 
 #typed-header {
-    font-size: 3em; /* Base font size */
+    font-size: 2.5em; /* Base font size */
     font-weight: bold;
     border-right: .15em solid #fff;
     white-space: nowrap;
@@ -253,7 +253,7 @@ p {
 
 @media (max-width: 768px) {
     .header-content h1 {
-        font-size: 2em;
+        font-size: 1.8em; /* Adjusted font size */
     }
 
     .cta-button {
@@ -280,7 +280,7 @@ p {
     }
 
     h1 {
-        font-size: 2em;
+        font-size: 1.8em; /* Adjusted font size */
     }
 
     h2 {
@@ -292,13 +292,13 @@ p {
     }
 
     #typed-header {
-        font-size: 2.5em; /* Adjusted font size for smaller screens */
+        font-size: 2em; /* Adjusted font size for smaller screens */
     }
 }
 
 @media (max-width: 480px) {
     .header-content h1 {
-        font-size: 1.5em;
+        font-size: 1.5em; /* Adjusted font size */
     }
 
     .cta-button {
@@ -325,7 +325,7 @@ p {
     }
 
     h1 {
-        font-size: 1.8em;
+        font-size: 1.5em; /* Adjusted font size */
     }
 
     h2 {
@@ -337,6 +337,6 @@ p {
     }
 
     #typed-header {
-        font-size: 2em; /* Adjusted font size for even smaller screens */
+        font-size: 1.5em; /* Adjusted font size for even smaller screens */
     }
 }
