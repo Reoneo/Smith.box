@@ -72,29 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Animate header elements on load
     anime({
-        targets: '.header-content h1',
+        targets: '.header-content h1, .header-content .avatar, .header-content p, .header-content .cta-button',
         opacity: [0, 1],
         translateY: [-50, 0],
         easing: 'easeOutExpo',
         duration: 1500,
-    });
-
-    anime({
-        targets: '.header-content p',
-        opacity: [0, 1],
-        translateY: [-50, 0],
-        delay: 500,
-        easing: 'easeOutExpo',
-        duration: 1500,
-    });
-
-    anime({
-        targets: '.cta-button',
-        opacity: [0, 1],
-        scale: [0.8, 1],
-        delay: 1000,
-        easing: 'easeOutExpo',
-        duration: 1500,
+        delay: anime.stagger(300) // delay each item by 300ms
     });
 
     // Button hover animation
