@@ -7,14 +7,15 @@
     <meta property="og:image" content="https://i.imgur.com/lua6tDw.jpeg">
     <title>Smith.box | Creating Digital IDs</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="scripts.js" defer></script>
 </head>
 <body>
     <header class="header">
         <div class="header-content">
-            <h1 id="typed-text"></h1>
+            <div class="typing-wrapper">
+                <h1 id="typed-header"></h1>
+            </div>
             <p>Creating Digital IDs for the Future</p>
             <a href="#about" class="cta-button">Learn More</a>
         </div>
@@ -77,5 +78,45 @@
     <footer class="footer">
         <p>&copy; 2024 Smith.box. All rights reserved.</p>
     </footer>
+
+    <script>
+        const subdomains = [
+            'Agent.Smith.box', 
+            'Sam.Smith.box', 
+            'Jessica.Smith.box', 
+            'Dave.Smith.box', 
+            'Zoe.Smith.box', 
+            'Wallet.Smith.box', 
+            'NFT.Smith.box', 
+            '1.Smith.box', 
+            'Tom.Smith.box'
+        ];
+        let currentIndex = 0;
+        const typingSpeed = 100;
+        const erasingSpeed = 50;
+        const delayBetweenWords = 2000;
+        const headerElement = document.getElementById('typed-header');
+
+        function typeWord(word, index = 0) {
+            if (index < word.length) {
+                headerElement.textContent += word.charAt(index);
+                setTimeout(() => typeWord(word, index + 1), typingSpeed);
+            } else {
+                setTimeout(eraseWord, delayBetweenWords);
+            }
+        }
+
+        function eraseWord() {
+            if (headerElement.textContent.length > 0) {
+                headerElement.textContent = headerElement.textContent.slice(0, -1);
+                setTimeout(eraseWord, erasingSpeed);
+            } else {
+                currentIndex = (currentIndex + 1) % subdomains.length;
+                setTimeout(() => typeWord(subdomains[currentIndex]), typingSpeed);
+            }
+        }
+
+        typeWord(subdomains[currentIndex]);
+    </script>
 </body>
 </html>
