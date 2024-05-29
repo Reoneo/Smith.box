@@ -29,10 +29,16 @@ body {
     text-align: center;
 }
 
-.image-wrapper img {
-    max-width: 150px; /* Adjust as needed to match the size of the original male figure */
-    height: auto;
+.image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 20px; /* Add some space below the image */
+}
+
+.image-wrapper img {
+    max-width: 100px; /* Adjust this value as needed for proper size */
+    height: auto;
 }
 
 .typing-wrapper {
