@@ -29,13 +29,6 @@ body {
     text-align: center;
 }
 
-.avatar {
-    width: 150px; /* Adjust size as needed */
-    height: 150px; /* Adjust size as needed */
-    border-radius: 50%;
-    margin-bottom: 20px;
-}
-
 .typing-wrapper {
     display: flex;
     justify-content: center;
@@ -44,7 +37,7 @@ body {
 }
 
 #typed-header {
-    font-size: 2em; /* Adjusted base font size */
+    font-size: 2.5em; /* Base font size */
     font-weight: bold;
     border-right: .15em solid #fff;
     white-space: nowrap;
@@ -299,12 +292,7 @@ p {
     }
 
     #typed-header {
-        font-size: 1.8em; /* Adjusted font size for smaller screens */
-    }
-
-    .avatar {
-        width: 120px; /* Adjust size for smaller screens */
-        height: 120px; /* Adjust size for smaller screens */
+        font-size: 2em; /* Adjusted font size for smaller screens */
     }
 }
 
@@ -351,6 +339,4 @@ p {
     #typed-header {
         font-size: 1.5em; /* Adjusted font size for even smaller screens */
     }
-
-    .avatar {
-        width: 100px; /* Adjust size for smallest screens */
+}
