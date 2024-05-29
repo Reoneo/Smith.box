@@ -32,25 +32,43 @@ document.addEventListener('DOMContentLoaded', () => {
     revealOnScroll(); // Trigger on load
 
     // Typing effect for subdomains in the header
-    const options = {
-        strings: [
-            'Agent.Smith.box', 
-            'Sam.Smith.box', 
-            'Jessica.Smith.box', 
-            'Dave.Smith.box', 
-            'Zoe.Smith.box', 
-            'Wallet.Smith.box', 
-            'NFT.Smith.box', 
-            '1.Smith.box', 
-            'Tom.Smith.box'
-        ],
-        typeSpeed: 100,
-        backSpeed: 50,
-        backDelay: 1500,
-        loop: true
-    };
+    const subdomains = [
+        'Agent.Smith.box', 
+        'Sam.Smith.box', 
+        'Jessica.Smith.box', 
+        'Dave.Smith.box', 
+        'Zoe.Smith.box', 
+        'Wallet.Smith.box', 
+        'NFT.Smith.box', 
+        '1.Smith.box', 
+        'Tom.Smith.box'
+    ];
+    let currentIndex = 0;
+    const typingSpeed = 100;
+    const erasingSpeed = 50;
+    const delayBetweenWords = 2000;
+    const headerElement = document.getElementById('typed-header');
 
-    const typed = new Typed('#typed-text', options);
+    function typeWord(word, index = 0) {
+        if (index < word.length) {
+            headerElement.textContent += word.charAt(index);
+            setTimeout(() => typeWord(word, index + 1), typingSpeed);
+        } else {
+            setTimeout(eraseWord, delayBetweenWords);
+        }
+    }
+
+    function eraseWord() {
+        if (headerElement.textContent.length > 0) {
+            headerElement.textContent = headerElement.textContent.slice(0, -1);
+            setTimeout(eraseWord, erasingSpeed);
+        } else {
+            currentIndex = (currentIndex + 1) % subdomains.length;
+            setTimeout(() => typeWord(subdomains[currentIndex]), typingSpeed);
+        }
+    }
+
+    typeWord(subdomains[currentIndex]);
 
     // Animate header elements on load
     anime({
