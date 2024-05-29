@@ -29,6 +29,21 @@ body {
     text-align: center;
 }
 
+.typing-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px; /* Adjust height as needed */
+}
+
+#typed-header {
+    font-size: 3em; /* Increased font size */
+    font-weight: bold;
+    border-right: .15em solid #fff;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 .header::before {
     content: '';
     position: absolute;
@@ -48,11 +63,6 @@ body {
     100% {
         transform: rotate(360deg);
     }
-}
-
-#typed-text {
-    font-size: 2.5em;
-    font-weight: bold;
 }
 
 .cta-button {
