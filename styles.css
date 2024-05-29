@@ -37,7 +37,7 @@ body {
 }
 
 #typed-header {
-    font-size: 2.5em; /* Base font size */
+    font-size: 2em; /* Adjusted base font size */
     font-weight: bold;
     border-right: .15em solid #fff;
     white-space: nowrap;
@@ -292,7 +292,7 @@ p {
     }
 
     #typed-header {
-        font-size: 2em; /* Adjusted font size for smaller screens */
+        font-size: 1.8em; /* Adjusted font size for smaller screens */
     }
 }
 
