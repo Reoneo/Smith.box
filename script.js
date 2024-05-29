@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
     // Smooth scrolling for nav links
     const navLinks = document.querySelectorAll('.navbar ul li a');
     navLinks.forEach(link => {
@@ -69,15 +69,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     typeWord(subdomains[currentIndex]);
-
-    // Menu button functionality
-    const menuButton = document.getElementById('menu-button');
-    const menuOverlay = document.getElementById('menu-overlay');
-
-    menuButton.addEventListener('click', function() {
-        menuButton.classList.toggle('active');
-        menuOverlay.classList.toggle('active');
-    });
 
     // Animate header elements on load
     anime({
