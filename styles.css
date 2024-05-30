@@ -14,7 +14,7 @@ body {
 .header {
     position: relative;
     overflow: hidden;
-    height: 80vh; /* Adjusted height to ensure header takes up more space */
+    height: calc(100vh - 50px); /* Adjust height to ensure header takes up most of the space */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -105,6 +105,7 @@ body {
     font-size: 1.2em;
     display: inline-block;
     margin-top: 20px;
+    margin-bottom: 40px; /* Increase space below the button */
 }
 
 .cta-button:hover {
@@ -338,24 +339,7 @@ p {
 
     .navbar ul {
         flex-direction: row;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .navbar ul li {
-        margin: 8px 5px;
-    }
-
-    .navbar ul li a {
-        font-size: 0.8em; /* Adjusted font size for even smaller screens */
-    }
-
-    .section {
-        padding: 30px 10px;
-    }
-
-    h1 {
-        font-size: 1.5 @media (max-width: 480px) {
+@media (max-width: 480px) {
     .header-content h1 {
         font-size: 1.5em; /* Adjusted font size */
     }
