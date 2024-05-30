@@ -117,8 +117,8 @@ body {
 .navbar {
     background-color: #000; /* Black background */
     color: #fff; /* White text */
-    position: fixed; /* Fixed position to always be visible */
-    bottom: 0; /* Stick to bottom */
+    position: sticky; /* Sticky position to float at the top */
+    top: 0; /* Stick to top */
     width: 100%;
     z-index: 1000;
     padding: 5px 0; /* Reduced padding */
@@ -343,7 +343,13 @@ p {
         flex-wrap: wrap;
     }
 
-    @media (max-width: 480px) {
+    .navbar ul li {
+        margin: 8px 5px;
+    }
+
+    .navbar ul li a {
+        font-size:
+@media (max-width: 480px) {
     .header-content h1 {
         font-size: 1.5em; /* Adjusted font size */
     }
