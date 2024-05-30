@@ -118,7 +118,7 @@ body {
     z-index: 1000;
     padding: 5px 0; /* Reduced padding */
     box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-    margin-top: 20px; /* Added margin to move the navbar lower */
+    margin-top: 40px; /* Increased margin to move the navbar lower */
 }
 
 .navbar ul {
@@ -352,7 +352,48 @@ p {
     }
 
     h1 {
+        font-size: 1.5em; /* Adjusted font size
+@media (max-width: 480px) {
+    .header-content h1 {
         font-size: 1.5em; /* Adjusted font size */
     }
 
-    h
+    .cta-button {
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+
+    .navbar ul {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .navbar ul li {
+        margin: 8px 5px;
+    }
+
+    .navbar ul li a {
+        font-size: 0.8em; /* Adjusted font size for even smaller screens */
+    }
+
+    .section {
+        padding: 30px 10px;
+    }
+
+    h1 {
+        font-size: 1.5em; /* Adjusted font size */
+    }
+
+    h2 {
+        font-size: 1.3em;
+    }
+
+    p {
+        font-size: 0.9em;
+    }
+
+    #typed-header {
+        font-size: 1.8em; /* Adjusted font size for smaller screens */
+    }
+}
