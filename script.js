@@ -9,7 +9,19 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+document.getElementById('menu-button').style.opacity = '1';
+        }, 500);
+    });
 
+    // Menu button functionality
+    const menuButton = document.getElementById('menu-button');
+    const menuOverlay = document.getElementById('menu-overlay');
+
+    menuButton.addEventListener('click', function () {
+        menuButton.classList.toggle('active');
+        menuOverlay.classList.toggle('active');
+    });
+});
     // Reveal sections on scroll
     const sections = document.querySelectorAll('.section');
     const revealOnScroll = () => {
