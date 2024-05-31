@@ -10,16 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Make the menu button visible after a delay
-    setTimeout(() => {
-        document.getElementById('menu-button').style.opacity = '1';
-    }, 500);
-
     // Menu button functionality
     const menuButton = document.getElementById('menu-button');
     const menuOverlay = document.getElementById('menu-overlay');
 
-    menuButton.addEventListener('click', function () {
+    menuButton.addEventListener('click', () => {
         menuButton.classList.toggle('active');
         menuOverlay.classList.toggle('active');
     });
@@ -63,16 +58,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const delayBetweenWords = 2000;
     const headerElement = document.getElementById('typed-header');
 
-    function typeWord(word, index = 0) {
+    const typeWord = (word, index = 0) => {
         if (index < word.length) {
             headerElement.textContent += word.charAt(index);
             setTimeout(() => typeWord(word, index + 1), typingSpeed);
         } else {
             setTimeout(eraseWord, delayBetweenWords);
         }
-    }
+    };
 
-    function eraseWord() {
+    const eraseWord = () => {
         if (headerElement.textContent.length > 0) {
             headerElement.textContent = headerElement.textContent.slice(0, -1);
             setTimeout(eraseWord, erasingSpeed);
@@ -80,36 +75,40 @@ document.addEventListener('DOMContentLoaded', () => {
             currentIndex = (currentIndex + 1) % subdomains.length;
             setTimeout(() => typeWord(subdomains[currentIndex]), typingSpeed);
         }
-    }
+    };
 
     typeWord(subdomains[currentIndex]);
 
     // Animate header elements on load
-    anime({
-        targets: '.header-content h1',
-        opacity: [0, 1],
-        translateY: [-50, 0],
-        easing: 'easeOutExpo',
-        duration: 1500,
-    });
+    const animateHeaderElements = () => {
+        anime({
+            targets: '.header-content h1',
+            opacity: [0, 1],
+            translateY: [-50, 0],
+            easing: 'easeOutExpo',
+            duration: 1500,
+        });
 
-    anime({
-        targets: '.header-content p',
-        opacity: [0, 1],
-        translateY: [-50, 0],
-        delay: 500,
-        easing: 'easeOutExpo',
-        duration: 1500,
-    });
+        anime({
+            targets: '.header-content p',
+            opacity: [0, 1],
+            translateY: [-50, 0],
+            delay: 500,
+            easing: 'easeOutExpo',
+            duration: 1500,
+        });
 
-    anime({
-        targets: '.cta-button',
-        opacity: [0, 1],
-        scale: [0.8, 1],
-        delay: 1000,
-        easing: 'easeOutExpo',
-        duration: 1500,
-    });
+        anime({
+            targets: '.cta-button',
+            opacity: [0, 1],
+            scale: [0.8, 1],
+            delay: 1000,
+            easing: 'easeOutExpo',
+            duration: 1500,
+        });
+    };
+
+    animateHeaderElements();
 
     // Button hover animation
     const buttons = document.querySelectorAll('.cta-button, .submit-button');
