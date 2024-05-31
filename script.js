@@ -9,9 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
-document.getElementById('menu-button').style.opacity = '1';
-        }, 500);
-    });
+
+    // Make the menu button visible after a delay
+    setTimeout(() => {
+        document.getElementById('menu-button').style.opacity = '1';
+    }, 500);
 
     // Menu button functionality
     const menuButton = document.getElementById('menu-button');
@@ -21,7 +23,7 @@ document.getElementById('menu-button').style.opacity = '1';
         menuButton.classList.toggle('active');
         menuOverlay.classList.toggle('active');
     });
-});
+
     // Reveal sections on scroll
     const sections = document.querySelectorAll('.section');
     const revealOnScroll = () => {
