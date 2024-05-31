@@ -93,7 +93,6 @@ body {
     border-right: .15em solid #fff;
     white-space: nowrap;
     overflow: hidden;
-    color: #fff; /* Ensure the changing text is visible */
 }
 
 .cta-button {
@@ -190,9 +189,6 @@ form {
 
 form label {
     margin-bottom: 5px;
-    font-size:
-form label {
-    margin-bottom: 5px;
     font-size: 1.1em;
 }
 
@@ -276,7 +272,7 @@ p {
 }
 
 #menu-button {
-    position: fixed; /* Fixed to ensure it stays in the top right corner */
+    position: absolute;
     top: 20px;
     right: 20px;
     z-index: 4;
@@ -288,7 +284,7 @@ p {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    opacity: 1; /* Ensure the button is visible */
+    opacity: 1; /* Change this to 1 to make the button visible */
     transition: opacity 0.5s ease;
 }
 
@@ -311,11 +307,11 @@ p {
 }
 
 #menu-button div::before {
-    top: -6px; /* Adjust position to align correctly */
+    top: -6px;
 }
 
 #menu-button div::after {
-    top: 6px; /* Adjust position to align correctly */
+    bottom: -6px;
 }
 
 #menu-button.active div {
@@ -328,25 +324,25 @@ p {
 }
 
 #menu-button.active div::after {
-    top: 0;
+    bottom: 0;
     transform: rotate(-45deg);
 }
 
 #menu-overlay {
-    position: fixed; /* Fixed to ensure it covers the whole screen */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
     background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
     z-index: 3;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-end;
 }
 
 #menu-overlay.active {
