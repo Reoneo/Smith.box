@@ -1,29 +1,27 @@
-/* General Styling */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #ffffff;
-    color: #000000;
+    background-color: #ffffff; /* Set the background color to white */
+    color: #000000; /* Default text color */
     scroll-behavior: smooth;
     overflow-x: hidden;
-    min-height: 100vh;
+    min-height: 100vh; /* Ensure the body takes up full viewport height */
     display: flex;
     flex-direction: column;
 }
 
-/* Header Styling */
 .header {
     position: relative;
     overflow: hidden;
-    height: calc(100vh - 50px);
+    height: calc(100vh - 50px); /* Adjust height to ensure header takes up most of the space */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: #fff;
     text-align: center;
-    flex-grow: 1;
+    flex-grow: 1; /* Allow header to grow and push down other elements */
 }
 
 .header::before {
@@ -74,11 +72,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 10px; /* Reduced space below the image */
 }
 
 .image-wrapper img {
-    max-width: 200px;
+    max-width: 200px; /* Slightly larger size */
     height: auto;
 }
 
@@ -86,18 +84,17 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 40px;
+    height: 40px; /* Adjust height as needed */
 }
 
 #typed-header {
-    font-size: 2em;
+    font-size: 2em; /* Adjusted font size */
     font-weight: bold;
     border-right: .15em solid #fff;
     white-space: nowrap;
     overflow: hidden;
 }
 
-/* CTA Button */
 .cta-button {
     background-color: #ffffff;
     color: #4a90e2;
@@ -108,7 +105,7 @@ body {
     font-size: 1.2em;
     display: inline-block;
     margin-top: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 40px; /* Increase space below the button */
 }
 
 .cta-button:hover {
@@ -117,15 +114,14 @@ body {
     transform: scale(1.05);
 }
 
-/* Navbar Styling */
 .navbar {
-    background-color: #000;
-    color: #fff;
-    position: sticky;
-    top: 0;
+    background-color: #000; /* Black background */
+    color: #fff; /* White text */
+    position: sticky; /* Sticky position to float at the top */
+    top: 0; /* Stick to top */
     width: 100%;
     z-index: 1000;
-    padding: 5px 0;
+    padding: 5px 0; /* Reduced padding */
     box-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
@@ -145,20 +141,19 @@ body {
 .navbar ul li a {
     color: #fff;
     text-decoration: none;
-    padding: 10px 0;
+    padding: 10px 0; /* Reduced padding */
     display: block;
     transition: color 0.3s;
-    font-size: 1em;
+    font-size: 1em; /* Reduced font size */
 }
 
 .navbar ul li a:hover {
     color: #4a90e2;
 }
 
-/* Section Styling */
 .section {
     padding: 60px 20px;
-    background: #ffffff;
+    background: #ffffff; /* White background */
     margin: 20px auto;
     width: 90%;
     max-width: 1200px;
@@ -180,9 +175,9 @@ body {
 
 .footer {
     text-align: center;
-    padding: 10px 0;
-    background: #000;
-    color: #fff;
+    padding: 10px 0; /* Reduced padding */
+    background: #000; /* Black background */
+    color: #fff; /* White text */
     margin-top: 20px;
     font-size: 0.9em;
 }
@@ -225,7 +220,6 @@ form button:hover {
     transform: scale(1.05);
 }
 
-/* List Styling */
 ul {
     padding-left: 20px;
 }
@@ -235,7 +229,6 @@ ul li {
     line-height: 1.6;
 }
 
-/* Header and Paragraph Styling */
 h1, h2 {
     font-weight: bold;
 }
@@ -256,7 +249,6 @@ p {
     font-size: 1.1em;
 }
 
-/* Button Hover Effects */
 .cta-button, .submit-button {
     position: relative;
     overflow: hidden;
@@ -279,7 +271,6 @@ p {
     left: 100%;
 }
 
-/* Menu Button Styling */
 #menu-button {
     position: absolute;
     top: 20px;
@@ -293,7 +284,7 @@ p {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    opacity: 1;
+    opacity: 1; /* Change this to 1 to make the button visible */
     transition: opacity 0.5s ease;
 }
 
@@ -337,7 +328,6 @@ p {
     transform: rotate(-45deg);
 }
 
-/* Menu Overlay */
 #menu-overlay {
     position: absolute;
     top: 10px;
@@ -360,11 +350,9 @@ p {
     visibility: visible;
 }
 
-/* Section Transition Effects */
 .section p, .section ul {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
@@ -373,10 +361,9 @@ p {
     transform: translateY(0);
 }
 
-/* Media Queries */
 @media (max-width: 768px) {
     .header-content h1 {
-        font-size: 1.8em;
+        font-size: 1.8em; /* Adjusted font size */
     }
 
     .cta-button {
@@ -395,7 +382,7 @@ p {
     }
 
     .navbar ul li a {
-        font-size: 0.9em;
+        font-size: 0.9em; /* Adjusted font size for smaller screens */
     }
 
     .section {
@@ -403,7 +390,7 @@ p {
     }
 
     h1 {
-        font-size: 1.8em;
+        font-size: 1.8em; /* Adjusted font size */
     }
 
     h2 {
@@ -415,13 +402,13 @@ p {
     }
 
     #typed-header {
-        font-size: 2em;
+        font-size: 2em; /* Adjusted font size for smaller screens */
     }
 }
 
 @media (max-width: 480px) {
     .header-content h1 {
-        font-size: 1.5em;
+        font-size: 1.5em; /* Adjusted font size */
     }
 
     .cta-button {
@@ -440,7 +427,7 @@ p {
     }
 
     .navbar ul li a {
-        font-size: 0.8em;
+        font-size: 0.8em; /* Adjusted font size for even smaller screens */
     }
 
     .section {
@@ -448,18 +435,18 @@ p {
     }
 
     h1 {
-        font-size: 1.5em;
+        font-size: 1.5em; /* Adjusted font size */
     }
 
     h2 {
-        font-size: 1.3em;
+        font-size: 1.3em; /* Adjusted font size */
     }
 
     p {
-        font-size: 0.9em;
+        font-size: 0.9em; /* Adjusted font size */
     }
 
     #typed-header {
-        font-size: 1.5em;
+        font-size: 1.5em; /* Adjusted font size for smaller screens */
     }
 }
