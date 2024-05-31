@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Other head elements -->
-
-    <!-- Link to the image you want to use for the shortcut icon -->
-    <link rel="shortcut icon" href="images/meta-image.png" type="image/png">
-
-    <!-- Other head elements -->
-</head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Smith.box - Creating Digital IDs">
@@ -16,6 +9,8 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="scripts.js" defer></script>
+    <!-- Link to the image you want to use for the shortcut icon -->
+    <link rel="shortcut icon" href="images/meta-image.png" type="image/png">
 </head>
 <body>
     <header class="header">
@@ -28,16 +23,15 @@
             </div>
             <p>Mint Your Own Digital ID</p>
             <a href="#about" class="cta-button">Learn More</a>
-    
- <div id="menu-button">
-        <div></div>
-    </div>
-    
-    <div id="menu-overlay">
-        <iframe src="https://open.spotify.com/embed/playlist/37i9dQZEVXbNG2KDcFcKOF?si=3TE7UwfiSaKMs3AA-a78ng" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-    </div>    
 
-</div>
+            <div id="menu-button">
+                <div></div>
+            </div>
+
+            <div id="menu-overlay">
+                <iframe src="https://open.spotify.com/embed/playlist/37i9dQZEVXbNG2KDcFcKOF?si=3TE7UwfiSaKMs3AA-a78ng" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            </div>
+        </div>
     </header>
 
     <nav class="navbar">
@@ -97,45 +91,5 @@
     <footer class="footer">
         <p>&copy; 2024 Smith.box. All rights reserved.</p>
     </footer>
-
-    <script>
-        const subdomains = [
-            'Agent.Smith.box', 
-            'Tim.Smith.box', 
-            'Sarah.Smith.box', 
-            'Dave.Smith.box', 
-            'Zoe.Smith.box', 
-            'Wallet.Smith.box', 
-            'NFT.Smith.box', 
-            'Mr.Smith.box', 
-            'Mrs.Smith.box'
-        ];
-        let currentIndex = 0;
-        const typingSpeed = 100;
-        const erasingSpeed = 50;
-        const delayBetweenWords = 2000;
-        const headerElement = document.getElementById('typed-header');
-
-        function typeWord(word, index = 0) {
-            if (index < word.length) {
-                headerElement.textContent += word.charAt(index);
-                setTimeout(() => typeWord(word, index + 1), typingSpeed);
-            } else {
-                setTimeout(eraseWord, delayBetweenWords);
-            }
-        }
-
-        function eraseWord() {
-            if (headerElement.textContent.length > 0) {
-                headerElement.textContent = headerElement.textContent.slice(0, -1);
-                setTimeout(eraseWord, erasingSpeed);
-            } else {
-                currentIndex = (currentIndex + 1) % subdomains.length;
-                setTimeout(() => typeWord(subdomains[currentIndex]), typingSpeed);
-            }
-        }
-
-        typeWord(subdomains[currentIndex]);
-    </script>
 </body>
 </html>
