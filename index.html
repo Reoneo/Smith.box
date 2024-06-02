@@ -19,113 +19,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
     <script src="scripts.js" defer></script>
     <style>
-        /* Include the CSS inline for convenience */
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #ffffff; /* Set the background color to white */
-            color: #000000; /* Default text color */
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-            min-height: 100vh; /* Ensure the body takes up full viewport height */
-            display: flex;
-            flex-direction: column;
-        }
-
-        .header {
-            position: relative;
-            overflow: hidden;
-            height: calc(100vh - 50px); /* Adjust height to ensure header takes up most of the space */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-            text-align: center;
-            flex-grow: 1; /* Allow header to grow and push down other elements */
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #4a90e2, #9013fe);
-            background-size: 300% 300%;
-            z-index: 1;
-            animation: futuristicAnimation 8s infinite linear;
-        }
-
-        @keyframes futuristicAnimation {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        .header::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            z-index: 2;
-            backdrop-filter: blur(5px);
-        }
-
         .header-content {
-            position: relative;
-            z-index: 3;
-            max-width: 80%;
             text-align: center;
-        }
-
-        .image-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 10px; /* Reduced space below the image */
-        }
-
-        .image-wrapper img {
-            max-width: 200px; /* Slightly larger size */
-            height: auto;
-        }
-
-        .typing-wrapper {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: auto; /* Adjust height as needed */
+            padding: 10px; /* Reduced padding */
         }
 
         #typed-header {
-            font-size: 1.6em; /* Adjusted font size */
-            font-weight: bold;
-            color: black; /* Set the color to black */
-            white-space: nowrap;
-            overflow: hidden;
-            margin: 0; /* Remove margin */
+            color: black;
+            font-size: 1.5em; /* Reduced font size */
+            margin-bottom: 5px; /* Reduce the gap */
         }
 
         #changing-text {
-            font-size: 1.5em; /* Adjusted font size */
-            color: white; /* Set the color to white */
-            margin: 10px 0; /* Add margin to separate from the header */
+            color: white;
+            font-size: 1.2em; /* Adjusted font size */
             border-right: 0.1em solid white; /* Type cursor */
             animation: blink-caret 0.75s step-end infinite;
-            min-height: 1.5em; /* Prevent jumping by setting min-height */
+            margin: 5px 0; /* Adjust margin */
+            min-height: 1.2em; /* Prevent jumping by setting min-height */
         }
 
         @keyframes blink-caret {
@@ -134,308 +45,6 @@
             }
             50% {
                 border-color: white;
-            }
-        }
-
-        .cta-button {
-            background-color: #ffffff;
-            color: #4a90e2;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 25px;
-            transition: background-color 0.3s, color 0.3s, transform 0.3s;
-            font-size: 1.2em;
-            display: inline-block;
-            margin-top: 20px;
-            margin-bottom: 40px; /* Increase space below the button */
-        }
-
-        .cta-button:hover {
-            background-color: #4a90e2;
-            color: #ffffff;
-            transform: scale(1.05);
-        }
-
-        .navbar {
-            background-color: #000; /* Black background */
-            color: #fff; /* White text */
-            position: sticky; /* Sticky position to float at the top */
-            top: 0; /* Stick to top */
-            width: 100%;
-            z-index: 1000;
-            padding: 5px 0; /* Reduced padding */
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
-
-        .navbar ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            padding: 0;
-            margin: 0;
-            flex-wrap: wrap;
-        }
-
-        .navbar ul li {
-            margin: 0 10px;
-        }
-
-        .navbar ul li a {
-            color: #fff;
-            text-decoration: none;
-            padding: 10px 0; /* Reduced padding */
-            display: block;
-            transition: color 0.3s;
-            font-size: 1em; /* Reduced font size */
-        }
-
-        .navbar ul li a:hover {
-            color: #4a90e2;
-        }
-
-        .section {
-            padding: 60px 20px;
-            background: #ffffff; /* White background */
-            margin: 20px auto;
-            width: 90%;
-            max-width: 1200px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .intro {
-            text-align: center;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 10px 0; /* Reduced padding */
-            background: #000; /* Black background */
-            color: #fff; /* White text */
-            margin-top: 20px;
-            font-size: 0.9em;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        form label {
-            margin-bottom: 5px;
-            font-size: 1.1em;
-        }
-
-        form input, form textarea {
-            margin-bottom: 15px;
-            padding: 10px;
-            border: 1px solid #555;
-            border-radius: 5px;
-            background: #333;
-            color: #fff;
-            width: 100%;
-            box-sizing: border-box;
-            font-size: 1em;
-        }
-
-        form button {
-            padding: 15px;
-            border: none;
-            border-radius: 5px;
-            background-color: #4a90e2;
-            color: #fff;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-            font-size: 1.1em;
-        }
-
-        form button:hover {
-            background-color: #9013fe;
-            transform: scale(1.05);
-        }
-
-        ul {
-            padding-left: 20px;
-        }
-
-        ul li {
-            margin-bottom: 10px;
-            line-height: 1.6;
-        }
-
-        h1, h2 {
-            font-weight: bold;
-        }
-
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
-
-        h2 {
-            font-size: 2em;
-            margin-bottom: 15px;
-        }
-
-        p {
-            line-height: 1.6;
-            margin-bottom: 15px;
-            font-size: 1.1em;
-        }
-
-        .cta-button, .submit-button {
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .cta-button::before, .submit-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transition: left 0.3s;
-            z-index: -1;
-        }
-
-        .cta-button:hover::before, .submit-button:hover::before {
-            left: 100%;
-        }
-
-        #menu-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 4;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(0, 0, 0, 0.7);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            opacity: 1; /* Change this to 1 to make the button visible */
-            transition: opacity 0.5s ease;
-        }
-
-        .section p, .section ul {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .section.visible p, .section.visible ul {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @media (max-width: 768px) {
-            .header-content h1 {
-                font-size: 1.8em; /* Adjusted font size */
-            }
-
-            .cta-button {
-                padding: 10px 20px;
-                font-size: 1em;
-            }
-
-            .navbar ul {
-                flex-direction: row;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-
-            .navbar ul li {
-                margin: 10px 5px;
-            }
-
-            .navbar ul li a {
-                font-size: 0.9em; /* Adjusted font size for smaller screens */
-            }
-
-            .section {
-                padding: 40px 15px;
-            }
-
-            h1 {
-                font-size: 1.8em; /* Adjusted font size */
-            }
-
-            h2 {
-                font-size: 1.5em;
-            }
-
-            p {
-                font-size: 1em;
-            }
-
-            #typed-header {
-                font-size: 1.5em; /* Adjusted font size for smaller screens */
-            }
-
-            #changing-text {
-                font-size: 1.2em; /* Adjusted font size for smaller screens */
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header-content h1 {
-                font-size: 1.5em; /* Adjusted font size */
-            }
-
-            .cta-button {
-                padding: 8px 16px;
-                font-size: 0.9em;
-            }
-
-            .navbar ul {
-                flex-direction: row;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-
-            .navbar ul li {
-                margin: 8px 5px;
-            }
-
-            .navbar ul li a {
-                font-size: 0.8em; /* Adjusted font size for even smaller screens */
-            }
-
-            .section {
-                padding: 30px 10px;
-            }
-
-            h1 {
-                font-size: 1.5em; /* Adjusted font size */
-            }
-
-            h2 {
-                font-size: 1.3em; /* Adjusted font size */
-            }
-
-            p {
-                font-size: 0.9em; /* Adjusted font size */
-            }
-
-            #typed-header {
-                font-size: 1.3em; /* Adjusted font size for smaller screens */
-            }
-
-            #changing-text {
-                font-size: 1em; /* Adjusted font size for smaller screens */
             }
         }
     </style>
@@ -448,7 +57,7 @@
             </div>
             <div class="typing-wrapper">
                 <h1 id="typed-header">Reserve Your Digital ID</h1>
-                <p id="changing-text"></p>
+                <div id="changing-text">Agent.Smith.box</div> <!-- Initial text to prevent jumping -->
             </div>
             <a href="#about" class="cta-button">Learn More</a>
         </div>
@@ -466,4 +75,208 @@
     <section id="home" class="section home">
         <div class="intro">
             <h2>What is a Digital ID?</h2>
-            <p>A Digital ID is a unique identifier that can be used to securely manage your online presence. Mint your own Digital ID to⬤
+            <p>A Digital ID is a unique identifier that can be used to securely manage your online presence. Mint your own Digital ID to enjoy the full benefits of our tokenized WEB2 & WEB3 domain NFT naming service. Reserve your Digital ID today to start taking control of your online identity.</p>
+        </div>
+    </section>
+
+    <section id="about" class="section about">
+        <div class="content">
+            <h2>About Our Service</h2>
+            <p>Welcome to Smith.box, your gateway to a revolutionary Web3 service that empowers users to create unique digital identities through personalized subdomains. With our platform, you can generate subdomains like jake.smith.box or jessica.smith.box, offering a secure and easily recognizable digital ID for all your online activities. Mint your own Digital ID with our tokenized WEB2 & WEB3 domain NFT naming service to enhance your online security and presence. Reserve your Digital ID and join our secure network today.</p>
+            <p>At Smith.box, we leverage blockchain technology to ensure each Digital ID is tokenized and securely stored, guaranteeing full ownership and control over your identity. This prevents unauthorized access or tampering, ensuring your digital presence is always protected. Reserve your Digital ID to take advantage of our robust security measures.</p>
+            <p>Your Digital ID also functions as an email address, such as jake@smith.box, merging your online presence with seamless and secure communication tools. This integration makes managing your digital identity more efficient and secure. Reserve your Digital ID to streamline your online interactions.</p>
+            <p>Our Digital IDs can be used for various purposes, including secure logins on websites and applications, personalized email addresses, and even wallet addresses for cryptocurrency transactions. The versatility of our service ensures you can use your Digital ID across multiple platforms without compromising security or privacy. Reserve your Digital ID to unlock these benefits.</p>
+            <p>Smith.box is dedicated to decentralization and user empowerment. Our platform uses blockchain technology to create a secure, immutable record of your digital identity, ensuring it cannot be altered or duplicated without your permission. Reserve your Digital ID to safeguard your identity.</p>
+            <p>The blockchain securely stores your digital identity in an immutable ledger, guaranteeing that your Digital ID remains unaltered and preventing unauthorized modifications. This ensures that your identity is always safe and under your control. Reserve your Digital ID to benefit from this advanced protection.</p>
+            <p>Our tokenized IDs are easily transferable, allowing you to retain control over your identity even if you switch platforms or services. This feature ensures that you always have ownership and flexibility over your digital presence, no matter where you go. Reserve your Digital ID to maintain control over your online presence.</p>
+            <p>Built on the robust infrastructure of ENS (Ethereum Name Service), 3DNS, and the Optimism blockchain, our service integrates with ICANN and Intercap registry. This provides a decentralized, reliable foundation for your digital identity, ensuring its security and reliability. Reserve your Digital ID to join a secure and reliable network.</p>
+            <p>Smith.box offers a comprehensive Web3 solution for managing your digital identity, providing unmatched security, convenience, and versatility. Whether you need a secure login, a unique email address, or a reliable wallet address, our Digital IDs meet all your needs. Mint your own Digital ID today and take advantage of our tokenized WEB2 & WEB3 domain NFT naming service. Reserve your Digital ID and experience the future of digital identity management.</p>
+            <p>Based in the United Kingdom, Smith.box is committed to pioneering the future of digital identities. By utilizing advanced blockchain technology and integrating with key internet services, we provide an innovative, dependable, and future-proof service. Reserve your Digital ID with Smith.box and join the forefront of digital identity technology.</p>
+            <p>Currently in beta, the subdomain feature is forthcoming, as confirmed by the .box team. Several prominent companies, such as Google (google.box), Visa (visa.box), YouTube (youtube.box), LinkedIn (linkedin.box), and Reddit (reddit.box), have already secured their Digital IDs via .box, underscoring the trust and potential of our platform. Reserve your Digital ID now and be part of this trusted network.</p>
+            <p>Join Smith.box today and future-proof your online presence with a secure, decentralized, and easily recognizable Digital ID. With our service, confidently navigate the digital world, knowing that your identity is protected and wholly owned by you. Reserve your Digital ID and take control of your digital future.</p>
+        </div>
+    </section>
+
+    <section id="benefits" class="section benefits">
+        <div class="content">
+            <h2>Benefits of a Web3 Domain</h2>
+            <ul>
+                <li>Decentralization: Web3 domains are not controlled by any single entity.</li>
+                <li>Security: Enhanced security through blockchain technology.</li>
+                <li>Ownership: Full ownership of your digital identity.</li>
+                <li>Interoperability: Seamlessly use your ID across various platforms.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="contact" class="section contact">
+        <div class="content">
+            <h2>Contact Us</h2>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+                <button type="submit" class="submit-button">Send</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 Smith.box. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Smooth scrolling for nav links
+            const navLinks = document.querySelectorAll('.navbar ul li a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.querySelector(link.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Make the menu button visible
+            setTimeout(() => {
+                document.getElementById('menu-button').style.opacity = '1';
+            }, 500);
+
+            // Menu button functionality
+            const menuButton = document.getElementById('menu-button');
+            const menuOverlay = document.getElementById('menu-overlay');
+
+            menuButton.addEventListener('click', function () {
+                menuButton.classList.toggle('active');
+                menuOverlay.classList.toggle('active');
+            });
+
+            // Reveal sections on scroll
+            const sections = document.querySelectorAll('.section');
+            const revealOnScroll = () => {
+                const scrollY = window.pageYOffset;
+                sections.forEach(section => {
+                    if (section.offsetTop - window.innerHeight / 1.2 < scrollY) {
+                        section.classList.add('visible');
+                        anime({
+                            targets: section,
+                            opacity: [0, 1],
+                            translateY: [50, 0],
+                            easing: 'easeOutExpo',
+                            duration: 1000,
+                        });
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', revealOnScroll);
+            revealOnScroll(); // Trigger on load
+
+            // Typing effect for subdomains in the header
+            const subdomains = [
+                'Agent.Smith.box', 
+                'Sam.Smith.box', 
+                'Jessica.Smith.box', 
+                'Dave.Smith.box', 
+                'Zoe.Smith.box', 
+                'Wallet.Smith.box', 
+                'NFT.Smith.box', 
+                '1.Smith.box', 
+                'Tom.Smith.box'
+            ];
+            let currentIndex = 0;
+            const typingSpeed = 100;
+            const erasingSpeed = 50;
+            const delayBetweenWords = 2000;
+            const changingTextElement = document.getElementById('changing-text');
+
+            function typeWord(word, index = 0) {
+                if (index < word.length) {
+                    changingTextElement.textContent += word.charAt(index);
+                    setTimeout(() => typeWord(word, index + 1), typingSpeed);
+                } else {
+                    setTimeout(eraseWord, delayBetweenWords);
+                }
+            }
+
+            function eraseWord() {
+                if (changingTextElement.textContent.length > 0) {
+                    changingTextElement.textContent = changingTextElement.textContent.slice(0, -1);
+                    setTimeout(eraseWord, erasingSpeed);
+                } else {
+                    currentIndex = (currentIndex + 1) % subdomains.length;
+                    setTimeout(() => typeWord(subdomains[currentIndex]), typingSpeed);
+                }
+            }
+
+            typeWord(subdomains[currentIndex]);
+
+            // Animate header elements on load
+            anime({
+                targets: '.header-content h1',
+                opacity: [0, 1],
+                translateY: [-50, 0],
+                easing: 'easeOutExpo',
+                duration: 1500,
+            });
+
+            anime({
+                targets: '.header-content p',
+                opacity: [0, 1],
+                translateY: [-50, 0],
+                delay: 500,
+                easing: 'easeOutExpo',
+                duration: 1500,
+            });
+
+            anime({
+                targets: '.cta-button',
+                opacity: [0, 1],
+                scale: [0.8, 1],
+                delay: 1000,
+                easing: 'easeOutExpo',
+                duration: 1500,
+            });
+
+            // Button hover animation
+            const buttons = document.querySelectorAll('.cta-button, .submit-button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseover', () => {
+                    anime({
+                        targets: button,
+                        scale: 1.1,
+                        duration: 300,
+                        easing: 'easeOutExpo'
+                    });
+                });
+
+                button.addEventListener('mouseout', () => {
+                    anime({
+                        targets: button,
+                        scale: 1.0,
+                        duration: 300,
+                        easing: 'easeOutExpo'
+                    });
+                });
+            });
+
+            // Floating animations for header background
+            anime({
+                targets: '.header::before',
+                keyframes: [
+                    { translateY: -10 },
+                    { translateY: 10 },
+                ],
+                duration: 10000,
+                easing: 'easeInOutSine',
+                direction: 'alternate',
+                loop: true
+            });
+        });
+    </script>
+</body>
+</html>
