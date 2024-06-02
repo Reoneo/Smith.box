@@ -49,7 +49,6 @@
         .social-share img {
             width: 50px; /* Adjust the size as needed */
             height: auto;
-            margin: 0 10px; /* Add margin for spacing */
         }
 
         .header {
@@ -516,15 +515,6 @@
         <a href="https://www.facebook.com/share/KNz4wB7MJdmAsXab/">
             <img src="https://i.imgur.com/ORIRFfD.png" alt="Facebook">
         </a>
-        <a href="https://x.com/prettyulgy?t=f_Z7wLOsaZMbbwCiQeLdfQ&s=09">
-            <img src="https://i.imgur.com/cVDEphd.png" alt="Twitter">
-        </a>
-        <a href="https://www.linkedin.com/in/reon-franklyn-7a5733133?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">
-            <img src="https://i.imgur.com/xTV3vGf.png" alt="LinkedIn">
-        </a>
-        <a href="https://youtube.com/@finesser?si=5usjiDTIAtv1_BcG">
-            <img src="https://i.imgur.com/jamlhNh.png" alt="Instagram">
-        </a>
     </div>
     <!-- End of Social Share Section -->
 
@@ -623,68 +613,6 @@
             }
 
             typeWord(subdomains[currentIndex]);
-
-            // Animate header elements on load
-            anime({
-                targets: '.header-content h1',
-                opacity: [0, 1],
-                translateY: [-50, 0],
-                easing: 'easeOutExpo',
-                duration: 1500,
-            });
-
-            anime({
-                targets: '.header-content p',
-                opacity: [0, 1],
-                translateY: [-50, 0],
-                delay: 500,
-                easing: 'easeOutExpo',
-                duration: 1500,
-            });
-
-            anime({
-                targets: '.cta-button',
-                opacity: [0, 1],
-                scale: [0.8, 1],
-                delay: 1000,
-                easing: 'easeOutExpo',
-                duration: 1500,
-            });
-
-            // Button hover animation
-            const buttons = document.querySelectorAll('.cta-button, .submit-button');
-            buttons.forEach(button => {
-                button.addEventListener('mouseover', () => {
-                    anime({
-                        targets: button,
-                        scale: 1.1,
-                        duration: 300,
-                        easing: 'easeOutExpo'
-                    });
-                });
-
-                button.addEventListener('mouseout', () => {
-                    anime({
-                        targets: button,
-                        scale: 1.0,
-                        duration: 300,
-                        easing: 'easeOutExpo'
-                    });
-                });
-            });
-
-            // Floating animations for header background
-            anime({
-                targets: '.header::before',
-                keyframes: [
-                    { translateY: -10 },
-                    { translateY: 10 },
-                ],
-                duration: 10000,
-                easing: 'easeInOutSine',
-                direction: 'alternate',
-                loop: true
-            });
         });
     </script>
 </body>
