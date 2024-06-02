@@ -122,13 +122,13 @@
                 setTimeout(eraseWord, erasingSpeed);
             } else {
                 currentIndex = (currentIndex + 1) % subdomains.length;
-                setTimeout(() => typeWord(subdomains[current
+                setTimeout(() => typeWord(subdomains
 setTimeout(() => typeWord(subdomains[currentIndex]), typingSpeed);
             }
         }
 
         setTimeout(() => {
-            eraseWord();
+            typeWord(subdomains[currentIndex]);
         }, 2000);
     </script>
 </body>
