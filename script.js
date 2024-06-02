@@ -82,7 +82,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    typeWord(subdomains[currentIndex]);
+    // Ensure the changing text starts immediately on page load
+    setTimeout(() => {
+        typeWord(subdomains[currentIndex]);
+    }, 0);
 
     // Animate header elements on load
     anime({
