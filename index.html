@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Other head elements -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Smith.box offers tokenized WEB2 & WEB3 domain NFT naming.">
+    <meta property="og:image" content="https://i.imgur.com/lua6tDw.jpeg">
+    <title>Tokenized WEB2 & WEB3 Domain NFT Naming Service</title>
 
     <!-- Link to the image you want to use for the shortcut icon -->
     <link rel="shortcut icon" href="images/meta-image.png" type="image/png">
@@ -9,21 +13,22 @@
     <!-- Link to the image you want to use for the touch icon -->
     <link rel="apple-touch-icon" href="https://i.imgur.com/lua6tDw.jpeg">
 
-    <!-- Other head elements -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Smith.box offers tokenized WEB2 & WEB3 domain NFT naming.">
-    <meta property="og:image" content="https://i.imgur.com/lua6tDw.jpeg">
-    <title>Tokenized WEB2 & WEB3 Domain NFT Naming Service</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <!-- Preload critical resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" as="script">
+
+    <!-- Load CSS asynchronously -->
+    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
+
+    <!-- Defer JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
     <script src="scripts.js" defer></script>
 </head>
 <body>
     <header class="header">
         <div class="header-content">
             <div class="image-wrapper">
-                <img src="https://i.imgur.com/R3tbBZn.png" alt="Logo Image">
+                <img src="https://i.imgur.com/R3tbBZn.png" alt="Logo Image" loading="lazy">
             </div>
             <div class="typing-wrapper">
                 <h1 id="typed-header"></h1>
@@ -100,20 +105,12 @@
 
     <script>
         const subdomains = [
-            'Agent.Smith.box', 
-            'Tim.Smith.box', 
-            'Sarah.Smith.box', 
-            'Dave.Smith.box', 
-            'Zoe.Smith.box', 
-            'Wallet.Smith.box', 
-            'NFT.Smith.box', 
-            'Mr.Smith.box', 
-            'Mrs.Smith.box'
+            'Agent.Smith.box', 'Tim.Smith.box', 'Sarah.Smith.box', 
+            'Dave.Smith.box', 'Zoe.Smith.box', 'Wallet.Smith.box', 
+            'NFT.Smith.box', 'Mr.Smith.box', 'Mrs.Smith.box'
         ];
         let currentIndex = 0;
-        const typingSpeed = 100;
-        const erasingSpeed = 50;
-        const delayBetweenWords = 2000;
+        const typingSpeed = 100, erasingSpeed = 50, delayBetweenWords = 2000;
         const headerElement = document.getElementById('typed-header');
 
         function typeWord(word, index = 0) {
