@@ -9,9 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
-document.getElementById('menu-button').style.opacity = '1';
-        }, 500);
-    });
+
+    // Make the menu button visible
+    setTimeout(() => {
+        document.getElementById('menu-button').style.opacity = '1';
+    }, 500);
 
     // Menu button functionality
     const menuButton = document.getElementById('menu-button');
@@ -21,7 +23,7 @@ document.getElementById('menu-button').style.opacity = '1';
         menuButton.classList.toggle('active');
         menuOverlay.classList.toggle('active');
     });
-});
+
     // Reveal sections on scroll
     const sections = document.querySelectorAll('.section');
     const revealOnScroll = () => {
@@ -59,11 +61,11 @@ document.getElementById('menu-button').style.opacity = '1';
     const typingSpeed = 100;
     const erasingSpeed = 50;
     const delayBetweenWords = 2000;
-    const headerElement = document.getElementById('typed-header');
+    const changingTextElement = document.getElementById('changing-text');
 
     function typeWord(word, index = 0) {
         if (index < word.length) {
-            headerElement.textContent += word.charAt(index);
+            changingTextElement.textContent += word.charAt(index);
             setTimeout(() => typeWord(word, index + 1), typingSpeed);
         } else {
             setTimeout(eraseWord, delayBetweenWords);
@@ -71,8 +73,8 @@ document.getElementById('menu-button').style.opacity = '1';
     }
 
     function eraseWord() {
-        if (headerElement.textContent.length > 0) {
-            headerElement.textContent = headerElement.textContent.slice(0, -1);
+        if (changingTextElement.textContent.length > 0) {
+            changingTextElement.textContent = changingTextElement.textContent.slice(0, -1);
             setTimeout(eraseWord, erasingSpeed);
         } else {
             currentIndex = (currentIndex + 1) % subdomains.length;
