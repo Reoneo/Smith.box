@@ -12,17 +12,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Make the menu button visible
     setTimeout(() => {
-        document.getElementById('menu-button').style.opacity = '1';
+        const menuButton = document.getElementById('menu-button');
+        if (menuButton) {
+            menuButton.style.opacity = '1';
+        }
     }, 500);
 
     // Menu button functionality
     const menuButton = document.getElementById('menu-button');
     const menuOverlay = document.getElementById('menu-overlay');
 
-    menuButton.addEventListener('click', function () {
-        menuButton.classList.toggle('active');
-        menuOverlay.classList.toggle('active');
-    });
+    if (menuButton && menuOverlay) {
+        menuButton.addEventListener('click', function () {
+            menuButton.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+        });
+    }
 
     // Reveal sections on scroll
     const sections = document.querySelectorAll('.section');
@@ -47,15 +52,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Typing effect for subdomains in the header
     const subdomains = [
-        'Agent.Smith.Box', 
-        'Mr.Smith.Box', 
-        'Mrs.Smith.Box', 
-        'Will.Smith.Box', 
-        'Kim.Smith.Box', 
-        'Tim.Smith.Box',
-        'Zoe.Smith.Box',
-        '007.Smith.Box',
-        'Wallet.Smith.Box'
+        'Agent.Smith.box', 
+        'Sam.Smith.box', 
+        'Jessica.Smith.box', 
+        'Dave.Smith.box', 
+        'Zoe.Smith.box', 
+        'Wallet.Smith.box', 
+        'NFT.Smith.box', 
+        '1.Smith.box', 
+        'Tom.Smith.box'
     ];
     let currentIndex = 0;
     const typingSpeed = 100;
@@ -82,9 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    setTimeout(() => {
-        typeWord(subdomains[currentIndex]);
-    }, 0);
+    typeWord(subdomains[currentIndex]);
 
     // Animate header elements on load
     anime({
