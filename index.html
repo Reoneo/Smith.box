@@ -49,6 +49,7 @@
         .social-share img {
             width: 50px; /* Adjust the size as needed */
             height: auto;
+            margin: 0 10px; /* Add margin for spacing */
         }
 
         .header {
@@ -122,6 +123,9 @@
             white-space: nowrap;
             overflow: hidden;
             margin: 0; /* Remove margin */
+            opacity: 1; /* Ensure it's visible immediately */
+            position: static; /* Ensure it stays in one place */
+            top: 0; /* Remove any top positioning */
         }
 
         #changing-text {
@@ -273,7 +277,8 @@
 
         h1 {
             font-size: 2.5em;
-            margin-bottom: 20px}
+            margin-bottom: 20px;
+        }
 
         h2 {
             font-size: 2em;
@@ -433,6 +438,18 @@
                 font-size: 1em; /* Adjusted font size for smaller screens */
             }
         }
+
+        /* Social share images */
+        .social-share {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .social-share img {
+            width: 50px; /* Adjust the size as needed */
+            height: auto;
+            margin: 0 10px; /* Add margin for spacing */
+        }
     </style>
 </head>
 <body>
@@ -515,6 +532,15 @@
         <a href="https://www.facebook.com/share/KNz4wB7MJdmAsXab/">
             <img src="https://i.imgur.com/ORIRFfD.png" alt="Facebook">
         </a>
+        <a href="https://x.com/prettyulgy?t=f_Z7wLOsaZMbbwCiQeLdfQ&s=09">
+            <img src="https://i.imgur.com/cVDEphd.png" alt="Twitter">
+        </a>
+        <a href="https://www.linkedin.com/in/reon-franklyn-7a5733133?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">
+            <img src="https://i.imgur.com/xTV3vGf.png" alt="LinkedIn">
+        </a>
+        <a href="https://www.instagram.com/30315.eth?igsh=MTBkMzJ2bDU0eDRnZw==">
+            <img src="https://i.imgur.com/jamlhNh.png" alt="Instagram">
+        </a>
     </div>
     <!-- End of Social Share Section -->
 
@@ -561,13 +587,6 @@
                 sections.forEach(section => {
                     if (section.offsetTop - window.innerHeight / 1.2 < scrollY) {
                         section.classList.add('visible');
-                        anime({
-                            targets: section,
-                            opacity: [0, 1],
-                            translateY: [50, 0],
-                            easing: 'easeOutExpo',
-                            duration: 1000,
-                        });
                     }
                 });
             };
@@ -577,7 +596,7 @@
 
             // Typing effect for subdomains in the header
             const subdomains = [
-                '', 
+                'Agent.Smith.box', 
                 'Sam.Smith.box', 
                 'Jessica.Smith.box', 
                 'Dave.Smith.box', 
