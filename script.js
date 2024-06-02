@@ -47,15 +47,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Typing effect for subdomains in the header
     const subdomains = [
-        'Agent.Smith.box', 
-        'Sam.Smith.box', 
-        'Jessica.Smith.box', 
-        'Dave.Smith.box', 
-        'Zoe.Smith.box', 
-        'Wallet.Smith.box', 
-        'NFT.Smith.box', 
-        '1.Smith.box', 
-        'Tom.Smith.box'
+        'Agent.Smith.Box', 
+        'Mr.Smith.Box', 
+        'Mrs.Smith.Box', 
+        'Will.Smith.Box', 
+        'Kim.Smith.Box', 
+        'Tim.Smith.Box',
+        'Zoe.Smith.Box',
+        '007.Smith.Box',
+        'Wallet.Smith.Box'
     ];
     let currentIndex = 0;
     const typingSpeed = 100;
@@ -82,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Ensure the changing text starts immediately on page load
     setTimeout(() => {
         typeWord(subdomains[currentIndex]);
     }, 0);
