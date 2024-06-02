@@ -82,17 +82,25 @@ body {
 
 .typing-wrapper {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 40px; /* Adjust height as needed */
+    height: auto; /* Adjust height as needed */
 }
 
 #typed-header {
     font-size: 2em; /* Adjusted font size */
     font-weight: bold;
-    border-right: .15em solid #fff;
+    color: black; /* Set the color to black */
     white-space: nowrap;
     overflow: hidden;
+    margin-bottom: 0; /* Remove margin */
+}
+
+#changing-text {
+    font-size: 1.5em; /* Adjusted font size */
+    color: white; /* Set the color to white */
+    margin: 10px 0; /* Add margin to separate from the header */
 }
 
 .cta-button {
@@ -288,8 +296,6 @@ p {
     transition: opacity 0.5s ease;
 }
 
-
-
 .section p, .section ul {
     opacity: 0;
     transform: translateY(20px);
@@ -330,7 +336,7 @@ p {
     }
 
     h1 {
-        font-size: 1.8em; /* Adjusted font size */
+        font-size: 1.8em; /*font-size: 1.8em; /* Adjusted font size */
     }
 
     h2 {
@@ -343,6 +349,10 @@ p {
 
     #typed-header {
         font-size: 2em; /* Adjusted font size for smaller screens */
+    }
+
+    #changing-text {
+        font-size: 1.2em; /* Adjusted font size for smaller screens */
     }
 }
 
@@ -388,5 +398,9 @@ p {
 
     #typed-header {
         font-size: 1.5em; /* Adjusted font size for smaller screens */
+    }
+
+    #changing-text {
+        font-size: 1em; /* Adjusted font size for smaller screens */
     }
 }
