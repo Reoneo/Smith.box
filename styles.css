@@ -95,6 +95,9 @@ body {
     white-space: nowrap;
     overflow: hidden;
     margin: 0; /* Remove margin */
+    opacity: 1; /* Ensure it's visible immediately */
+    position: static; /* Ensure it stays in one place */
+    top: 0; /* Remove any top positioning */
 }
 
 #changing-text {
@@ -331,7 +334,7 @@ p {
 
     .navbar ul {
         flex-direction: row;
-        justify
+        justify-content: center;
         flex-wrap: wrap;
     }
 
@@ -415,4 +418,16 @@ p {
     #changing-text {
         font-size: 1em; /* Adjusted font size for smaller screens */
     }
+}
+
+/* Social share images */
+.social-share {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.social-share img {
+    width: 50px; /* Adjust the size as needed */
+    height: auto;
+    margin: 0 10px; /* Add margin for spacing */
 }
