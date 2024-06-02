@@ -74,19 +74,6 @@
             background: linear-gradient(135deg, #4a90e2, #9013fe);
             background-size: 300% 300%;
             z-index: 1;
-            animation: futuristicAnimation 8s infinite linear;
-        }
-
-        @keyframes futuristicAnimation {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
         }
 
         .header::after {
@@ -286,8 +273,7 @@
 
         h1 {
             font-size: 2.5em;
-            margin-bottom: 20px;
-        }
+            margin-bottom: 20px}
 
         h2 {
             font-size: 2em;
@@ -493,7 +479,7 @@
             <p>Smith.box offers a comprehensive Web3 solution for managing your digital identity, providing unmatched security, convenience, and versatility. Whether you need a secure login, a unique email address, or a reliable wallet address, our Digital IDs meet all your needs. Mint your own Digital ID today and take advantage of our tokenized WEB2 & WEB3 domain NFT naming service. Reserve your Digital ID and experience the future of digital identity management.</p>
             <p>Based in the United Kingdom, Smith.box is committed to pioneering the future of digital identities. By utilizing advanced blockchain technology and integrating with key internet services, we provide an innovative, dependable, and future-proof service. Reserve your Digital ID with Smith.box and join the forefront of digital identity technology.</p>
             <p>Currently in beta, the subdomain feature is forthcoming, as confirmed by the .box team. Several prominent companies, such as Google (google.box), Visa (visa.box), YouTube (youtube.box), LinkedIn (linkedin.box), and Reddit (reddit.box), have already secured their Digital IDs via .box, underscoring the trust and potential of our platform. Reserve your Digital ID now and be part of this trusted network.</p>
-            <p>Join Smith.box today and future-proof your online presence with a secure, decentralized, and easily recognizable Digital ID. With our service, confidently navigate knowing that your identity is protected and wholly owned by you. Reserve your Digital ID and take control of your digital future.</p>
+            <p>Join Smith.box today and future-proof your online presence with a secure, decentralized, and easily recognizable Digital ID. With our service, confidently navigate your digital world, knowing that your identity is protected and wholly owned by you. Reserve your Digital ID and take control of your digital future.</p>
         </div>
     </section>
 
@@ -627,68 +613,6 @@
             }
 
             typeWord(subdomains[currentIndex]);
-
-            // Animate header elements on load
-            anime({
-                targets: '.header-content h1',
-                opacity: [0, 1],
-                translateY: [-50, 0],
-                easing: 'easeOutExpo',
-                duration: 1500,
-            });
-
-            anime({
-                targets: '.header-content p',
-                opacity: [0, 1],
-                translateY: [-50, 0],
-                delay: 500,
-                easing: 'easeOutExpo',
-                duration: 1500,
-            });
-
-            anime({
-                targets: '.cta-button',
-                opacity: [0, 1],
-                scale: [0.8, 1],
-                delay: 1000,
-                easing: 'easeOutExpo',
-                duration: 1500,
-            });
-
-            // Button hover animation
-            const buttons = document.querySelectorAll('.cta-button, .submit-button');
-            buttons.forEach(button => {
-                button.addEventListener('mouseover', () => {
-                    anime({
-                        targets: button,
-                        scale: 1.1,
-                        duration: 300,
-                        easing: 'easeOutExpo'
-                    });
-                });
-
-                button.addEventListener('mouseout', () => {
-                    anime({
-                        targets: button,
-                        scale: 1.0,
-                        duration: 300,
-                        easing: 'easeOutExpo'
-                    });
-                });
-            });
-
-            // Floating animations for header background
-            anime({
-                targets: '.header::before',
-                keyframes: [
-                    { translateY: -10 },
-                    { translateY: 10 },
-                ],
-                duration: 10000,
-                easing: 'easeInOutSine',
-                direction: 'alternate',
-                loop: true
-            });
         });
     </script>
 </body>
