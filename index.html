@@ -21,19 +21,31 @@
     <style>
         .header-content {
             text-align: center;
-            padding: 20px;
+            padding: 10px; /* Reduced padding */
         }
 
         #typed-header {
             color: black;
-            font-size: 2em;
-            margin-bottom: 0;
+            font-size: 1.5em; /* Reduced font size */
+            margin-bottom: 5px; /* Reduce the gap */
         }
 
         #changing-text {
             color: white;
-            font-size: 1.5em;
-            margin: 10px 0;
+            font-size: 1.2em; /* Adjusted font size */
+            border-right: 0.1em solid white; /* Type cursor */
+            animation: blink-caret 0.75s step-end infinite;
+            margin: 5px 0; /* Adjust margin */
+            min-height: 1.2em; /* Prevent jumping by setting min-height */
+        }
+
+        @keyframes blink-caret {
+            from, to {
+                border-color: transparent;
+            }
+            50% {
+                border-color: white;
+            }
         }
     </style>
 </head>
@@ -45,7 +57,7 @@
             </div>
             <div class="typing-wrapper">
                 <h1 id="typed-header">Reserve Your Digital ID</h1>
-                <div id="changing-text"></div>
+                <div id="changing-text">Agent.Smith.box</div> <!-- Initial text to prevent jumping -->
             </div>
             <a href="#about" class="cta-button">Learn More</a>
         </div>
@@ -117,36 +129,155 @@
     </footer>
 
     <script>
-        const subdomains = [
-            'Agent.Smith.box', 'Tim.Smith.box', 'Sarah.Smith.box', 
-            'Dave.Smith.box', 'Zoe.Smith.box', 'Wallet.Smith.box', 
-            'NFT.Smith.box', 'Mr.Smith.box', 'Mrs.Smith.box'
-        ];
-        let currentIndex = 0;
-        const typingSpeed = 100, erasingSpeed = 50, delayBetweenWords = 2000;
-        const changingTextElement = document.getElementById('changing-text');
+        document.addEventListener('DOMContentLoaded', () => {
+            // Smooth scrolling for nav links
+            const navLinks = document.querySelectorAll('.navbar ul li a');
+            navLinks.forEach(link => {
+navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.querySelector(link.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
 
-        function typeWord(word, index = 0) {
-            if (index < word.length) {
-                changingTextElement.textContent += word.charAt(index);
-                setTimeout(() => typeWord(word, index + 1), typingSpeed);
-            } else {
-                setTimeout(eraseWord, delayBetweenWords);
-            }
-        }
-function eraseWord() {
-            if (changingTextElement.textContent.length > 0) {
-                changingTextElement.textContent = changingTextElement.textContent.slice(0, -1);
-                setTimeout(eraseWord, erasingSpeed);
-            } else {
-                currentIndex = (currentIndex + 1) % subdomains.length;
-                setTimeout(() => typeWord(subdomains[currentIndex]), typingSpeed);
-            }
-        }
+            // Make the menu button visible
+            setTimeout(() => {
+                document.getElementById('menu-button').style.opacity = '1';
+            }, 500);
 
-        setTimeout(() => {
+            // Menu button functionality
+            const menuButton = document.getElementById('menu-button');
+            const menuOverlay = document.getElementById('menu-overlay');
+
+            menuButton.addEventListener('click', function () {
+                menuButton.classList.toggle('active');
+                menuOverlay.classList.toggle('active');
+            });
+
+            // Reveal sections on scroll
+            const sections = document.querySelectorAll('.section');
+            const revealOnScroll = () => {
+                const scrollY = window.pageYOffset;
+                sections.forEach(section => {
+                    if (section.offsetTop - window.innerHeight / 1.2 < scrollY) {
+                        section.classList.add('visible');
+                        anime({
+                            targets: section,
+                            opacity: [0, 1],
+                            translateY: [50, 0],
+                            easing: 'easeOutExpo',
+                            duration: 1000,
+                        });
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', revealOnScroll);
+            revealOnScroll(); // Trigger on load
+
+            // Typing effect for subdomains in the header
+            const subdomains = [
+                'Agent.Smith.box', 
+                'Sam.Smith.box', 
+                'Jessica.Smith.box', 
+                'Dave.Smith.box', 
+                'Zoe.Smith.box', 
+                'Wallet.Smith.box', 
+                'NFT.Smith.box', 
+                '1.Smith.box', 
+                'Tom.Smith.box'
+            ];
+            let currentIndex = 0;
+            const typingSpeed = 100;
+            const erasingSpeed = 50;
+            const delayBetweenWords = 2000;
+            const changingTextElement = document.getElementById('changing-text');
+
+            function typeWord(word, index = 0) {
+                if (index < word.length) {
+                    changingTextElement.textContent += word.charAt(index);
+                    setTimeout(() => typeWord(word, index + 1), typingSpeed);
+                } else {
+                    setTimeout(eraseWord, delayBetweenWords);
+                }
+            }
+
+            function eraseWord() {
+                if (changingTextElement.textContent.length > 0) {
+                    changingTextElement.textContent = changingTextElement.textContent.slice(0, -1);
+                    setTimeout(eraseWord, erasingSpeed);
+                } else {
+                    currentIndex = (currentIndex + 1) % subdomains.length;
+                    setTimeout(() => typeWord(subdomains[currentIndex]), typingSpeed);
+                }
+            }
+
             typeWord(subdomains[currentIndex]);
-        }, 2000);
+
+            // Animate header elements on load
+            anime({
+                targets: '.header-content h1',
+                opacity: [0, 1],
+                translateY: [-50, 0],
+                easing: 'easeOutExpo',
+                duration: 1500,
+            });
+
+            anime({
+                targets: '.header-content p',
+                opacity: [0, 1],
+                translateY: [-50, 0],
+                delay: 500,
+                easing: 'easeOutExpo',
+                duration: 1500,
+            });
+
+            anime({
+                targets: '.cta-button',
+                opacity: [0, 1],
+                scale: [0.8, 1],
+                delay: 1000,
+                easing: 'easeOutExpo',
+                duration: 1500,
+            });
+
+            // Button hover animation
+            const buttons = document.querySelectorAll('.cta-button, .submit-button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseover', () => {
+                    anime({
+                        targets: button,
+                        scale: 1.1,
+                        duration: 300,
+                        easing: 'easeOutExpo'
+                    });
+                });
+
+                button.addEventListener('mouseout', () => {
+                    anime({
+                        targets: button,
+                        scale: 1.0,
+                        duration: 300,
+                        easing: 'easeOutExpo'
+                    });
+                });
+            });
+
+            // Floating animations for header background
+            anime({
+                targets: '.header::before',
+                keyframes: [
+                    { translateY: -10 },
+                    { translateY: 10 },
+                ],
+                duration: 10000,
+                easing: 'easeInOutSine',
+                direction: 'alternate',
+                loop: true
+            });
+        });
     </script>
 </body>
 </html>
