@@ -89,12 +89,12 @@ body {
 }
 
 #typed-header {
-    font-size: 2em; /* Adjusted font size */
+    font-size: 1.6em; /* Adjusted font size */
     font-weight: bold;
     color: black; /* Set the color to black */
     white-space: nowrap;
     overflow: hidden;
-    margin-bottom: 0; /* Remove margin */
+    margin: 0; /* Remove margin */
 }
 
 #changing-text {
