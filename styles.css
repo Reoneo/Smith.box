@@ -101,6 +101,18 @@ body {
     font-size: 1.5em; /* Adjusted font size */
     color: white; /* Set the color to white */
     margin: 10px 0; /* Add margin to separate from the header */
+    border-right: 0.1em solid white; /* Type cursor */
+    animation: blink-caret 0.75s step-end infinite;
+    min-height: 1.5em; /* Prevent jumping by setting min-height */
+}
+
+@keyframes blink-caret {
+    from, to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: white;
+    }
 }
 
 .cta-button {
@@ -336,8 +348,7 @@ p {
     }
 
     h1 {
-        font-size: 1.8em; /*
-font-size: 1.8em; /* Adjusted font size */
+        font-size: 1.8em; /* Adjusted font size */
     }
 
     h2 {
@@ -349,7 +360,7 @@ font-size: 1.8em; /* Adjusted font size */
     }
 
     #typed-header {
-        font-size: 2em; /* Adjusted font size for smaller screens */
+        font-size: 1.5em; /* Adjusted font size for smaller screens */
     }
 
     #changing-text {
@@ -398,7 +409,7 @@ font-size: 1.8em; /* Adjusted font size */
     }
 
     #typed-header {
-        font-size: 1.5em; /* Adjusted font size for smaller screens */
+        font-size: 1.3em; /* Adjusted font size for smaller screens */
     }
 
     #changing-text {
