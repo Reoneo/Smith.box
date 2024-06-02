@@ -18,6 +18,24 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
     <script src="scripts.js" defer></script>
+    <style>
+        .header-content {
+            text-align: center;
+            padding: 20px;
+        }
+
+        #typed-header {
+            color: black;
+            font-size: 2em;
+            margin-bottom: 0;
+        }
+
+        #changing-text {
+            color: white;
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -27,6 +45,7 @@
             </div>
             <div class="typing-wrapper">
                 <h1 id="typed-header">Reserve Your Digital ID</h1>
+                <div id="changing-text"></div>
             </div>
             <a href="#about" class="cta-button">Learn More</a>
         </div>
@@ -105,25 +124,23 @@
         ];
         let currentIndex = 0;
         const typingSpeed = 100, erasingSpeed = 50, delayBetweenWords = 2000;
-        const headerElement = document.getElementById('typed-header');
+        const changingTextElement = document.getElementById('changing-text');
 
         function typeWord(word, index = 0) {
             if (index < word.length) {
-                headerElement.textContent += word.charAt(index);
+                changingTextElement.textContent += word.charAt(index);
                 setTimeout(() => typeWord(word, index + 1), typingSpeed);
             } else {
                 setTimeout(eraseWord, delayBetweenWords);
             }
         }
-
-        function eraseWord() {
-            if (headerElement.textContent.length > 0) {
-                headerElement.textContent = headerElement.textContent.slice(0, -1);
+function eraseWord() {
+            if (changingTextElement.textContent.length > 0) {
+                changingTextElement.textContent = changingTextElement.textContent.slice(0, -1);
                 setTimeout(eraseWord, erasingSpeed);
             } else {
                 currentIndex = (currentIndex + 1) % subdomains.length;
-                setTimeout(() => typeWord(subdomains
-setTimeout(() => typeWord(subdomains[currentIndex]), typingSpeed);
+                setTimeout(() => typeWord(subdomains[currentIndex]), typingSpeed);
             }
         }
 
