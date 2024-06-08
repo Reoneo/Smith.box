@@ -1,12 +1,16 @@
+html, body {
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #ffffff;
-    color: #000000;
+    background-color: #ffffff; /* Set the background color to white */
+    color: #000000; /* Default text color */
     scroll-behavior: smooth;
-    overflow-x: hidden;
-    min-height: 100vh;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    min-height: 100vh; /* Ensure the body takes up full viewport height */
     display: flex;
     flex-direction: column;
 }
@@ -14,14 +18,14 @@ body {
 .header {
     position: relative;
     overflow: hidden;
-    height: calc(100vh - 50px);
+    height: calc(100vh - 50px); /* Adjust height to ensure header takes up most of the space */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: #fff;
     text-align: center;
-    flex-grow: 1;
+    flex-grow: 1; /* Allow header to grow and push down other elements */
 }
 
 .header::before {
@@ -72,11 +76,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 10px; /* Reduced space below the image */
 }
 
 .image-wrapper img {
-    max-width: 200px;
+    max-width: 200px; /* Slightly larger size */
     height: auto;
 }
 
@@ -85,25 +89,25 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: auto;
+    height: auto; /* Adjust height as needed */
 }
 
 #typed-header {
-    font-size: 1.6em;
+    font-size: 1.6em; /* Adjusted font size */
     font-weight: bold;
-    color: black;
+    color: black; /* Set the color to black */
     white-space: nowrap;
     overflow: hidden;
-    margin: 0;
+    margin: 0; /* Remove margin */
 }
 
 #changing-text {
-    font-size: 1.5em;
-    color: white;
-    margin: 10px 0;
-    border-right: 0.1em solid white;
+    font-size: 1.5em; /* Adjusted font size */
+    color: white; /* Set the color to white */
+    margin: 10px 0; /* Add margin to separate from the header */
+    border-right: 0.1em solid white; /* Type cursor */
     animation: blink-caret 0.75s step-end infinite;
-    min-height: 1.5em;
+    min-height: 1.5em; /* Prevent jumping by setting min-height */
 }
 
 @keyframes blink-caret {
@@ -125,7 +129,7 @@ body {
     font-size: 1.2em;
     display: inline-block;
     margin-top: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 40px; /* Increase space below the button */
 }
 
 .cta-button:hover {
@@ -135,13 +139,13 @@ body {
 }
 
 .navbar {
-    background-color: #000;
-    color: #fff;
-    position: sticky;
-    top: 0;
+    background-color: #000; /* Black background */
+    color: #fff; /* White text */
+    position: sticky; /* Sticky position to float at the top */
+    top: 0; /* Stick to top */
     width: 100%;
     z-index: 1000;
-    padding: 5px 0;
+    padding: 5px 0; /* Reduced padding */
     box-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
@@ -161,10 +165,10 @@ body {
 .navbar ul li a {
     color: #fff;
     text-decoration: none;
-    padding: 10px 0;
+    padding: 10px 0; /* Reduced padding */
     display: block;
     transition: color 0.3s;
-    font-size: 1em;
+    font-size: 1em; /* Reduced font size */
 }
 
 .navbar ul li a:hover {
@@ -173,7 +177,7 @@ body {
 
 .section {
     padding: 60px 20px;
-    background: #ffffff;
+    background: #ffffff; /* White background */
     margin: 20px auto;
     width: 90%;
     max-width: 1200px;
@@ -195,9 +199,9 @@ body {
 
 .footer {
     text-align: center;
-    padding: 10px 0;
-    background: #000;
-    color: #fff;
+    padding: 10px 0; /* Reduced padding */
+    background: #000; /* Black background */
+    color: #fff; /* White text */
     margin-top: 20px;
     font-size: 0.9em;
 }
@@ -304,120 +308,120 @@ p {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    opacity: 1;
+    opacity: 1; /* Change this to 1 to make the button visible */
     transition: opacity 0.5s ease;
 }
 
-.section p, .section ul {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.section.visible p, .section.visible ul {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-@media (max-width: 768px) {
-    .header-content h1 {
-        font-size: 1.8em;
+..section p, .section ul {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     }
 
-    .cta-button {
-        padding: 10px 20px;
-        font-size: 1em;
+    .section.visible p, .section.visible ul {
+        opacity: 1;
+        transform: translateY(0);
     }
 
-    .navbar ul {
-        flex-direction: row;
-        justify-content: center;
-        flex-wrap: wrap;
+    @media (max-width: 768px) {
+        .header-content h1 {
+            font-size: 1.8em;
+        }
+
+        .cta-button {
+            padding: 10px 20px;
+            font-size: 1em;
+        }
+
+        .navbar ul {
+            flex-direction: row;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .navbar ul li {
+            margin: 10px 5px;
+        }
+
+        .navbar ul li a {
+            font-size: 0.9em;
+        }
+
+        .section {
+            padding: 40px 15px;
+        }
+
+        h1 {
+            font-size: 1.8em;
+        }
+
+        h2 {
+            font-size: 1.5em;
+        }
+
+        p {
+            font-size: 1em;
+        }
+
+        #typed-header {
+            font-size: 1.5em;
+        }
+
+        #changing-text {
+            font-size: 1.2em;
+        }
     }
 
-    .navbar ul li {
-        margin: 10px 5px;
+    @media (max-width: 480px) {
+        .header-content h1 {
+            font-size: 1.5em;
+        }
+
+        .cta-button {
+            padding: 8px 16px;
+            font-size: 0.9em;
+        }
+
+        .navbar ul {
+            flex-direction: row;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .navbar ul li {
+            margin: 8px 5px;
+        }
+
+        .navbar ul li a {
+            font-size: 0.8em;
+        }
+
+        .section {
+            padding: 30px 10px;
+        }
+
+        h1 {
+            font-size: 1.5em;
+        }
+
+        h2 {
+            font-size: 1.3em;
+        }
+
+        p {
+            font-size: 0.9em;
+        }
+
+        #typed-header {
+            font-size: 1.3em;
+        }
+
+        #changing-text {
+            font-size: 1em;
+        }
     }
 
-    .navbar ul li a {
-        font-size: 0.9em;
+    /* Hide the additional links */
+    .hidden-link {
+        display: none;
     }
-
-    .section {
-        padding: 40px 15px;
-    }
-
-    h1 {
-        font-size: 1.8em;
-    }
-
-    h2 {
-        font-size: 1.5em;
-    }
-
-    p {
-        font-size: 1em;
-    }
-
-    #typed-header {
-        font-size: 1.5em;
-    }
-
-    #changing-text {
-        font-size: 1.2em;
-    }
-}
-
-@media (max-width: 480px) {
-    .header-content h1 {
-        font-size: 1.5em;
-    }
-
-    .cta-button {
-        padding: 8px 16px;
-        font-size: 0.9em;
-    }
-
-    .navbar ul {
-        flex-direction: row;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .navbar ul li {
-        margin: 8px 5px;
-    }
-
-    .navbar ul li a {
-        font-size: 0.8em;
-    }
-
-    .section {
-        padding: 30px 10px;
-    }
-
-    h1 {
-        font-size: 1.5em;
-    }
-
-    h2 {
-        font-size: 1.3em;
-    }
-
-    p {
-        font-size: 0.9em;
-    }
-
-    #typed-header {
-        font-size: 1.3em;
-    }
-
-    #changing-text {
-        font-size: 1em;
-    }
-}
-
-/* Hide the additional links */
-.hidden-link {
-    display: none;
-}
