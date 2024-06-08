@@ -2,11 +2,11 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #ffffff; /* Set the background color to white */
-    color: #000000; /* Default text color */
+    background-color: #ffffff;
+    color: #000000;
     scroll-behavior: smooth;
     overflow-x: hidden;
-    min-height: 100vh; /* Ensure the body takes up full viewport height */
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
@@ -14,14 +14,14 @@ body {
 .header {
     position: relative;
     overflow: hidden;
-    height: calc(100vh - 50px); /* Adjust height to ensure header takes up most of the space */
+    height: calc(100vh - 50px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: #fff;
     text-align: center;
-    flex-grow: 1; /* Allow header to grow and push down other elements */
+    flex-grow: 1;
 }
 
 .header::before {
@@ -72,11 +72,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 10px; /* Reduced space below the image */
+    margin-bottom: 10px;
 }
 
 .image-wrapper img {
-    max-width: 200px; /* Slightly larger size */
+    max-width: 200px;
     height: auto;
 }
 
@@ -85,25 +85,25 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: auto; /* Adjust height as needed */
+    height: auto;
 }
 
 #typed-header {
-    font-size: 1.6em; /* Adjusted font size */
+    font-size: 1.6em;
     font-weight: bold;
-    color: black; /* Set the color to black */
+    color: black;
     white-space: nowrap;
     overflow: hidden;
-    margin: 0; /* Remove margin */
+    margin: 0;
 }
 
 #changing-text {
-    font-size: 1.5em; /* Adjusted font size */
-    color: white; /* Set the color to white */
-    margin: 10px 0; /* Add margin to separate from the header */
-    border-right: 0.1em solid white; /* Type cursor */
+    font-size: 1.5em;
+    color: white;
+    margin: 10px 0;
+    border-right: 0.1em solid white;
     animation: blink-caret 0.75s step-end infinite;
-    min-height: 1.5em; /* Prevent jumping by setting min-height */
+    min-height: 1.5em;
 }
 
 @keyframes blink-caret {
@@ -125,7 +125,7 @@ body {
     font-size: 1.2em;
     display: inline-block;
     margin-top: 20px;
-    margin-bottom: 40px; /* Increase space below the button */
+    margin-bottom: 40px;
 }
 
 .cta-button:hover {
@@ -135,13 +135,13 @@ body {
 }
 
 .navbar {
-    background-color: #000; /* Black background */
-    color: #fff; /* White text */
-    position: sticky; /* Sticky position to float at the top */
-    top: 0; /* Stick to top */
+    background-color: #000;
+    color: #fff;
+    position: sticky;
+    top: 0;
     width: 100%;
     z-index: 1000;
-    padding: 5px 0; /* Reduced padding */
+    padding: 5px 0;
     box-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
@@ -161,10 +161,10 @@ body {
 .navbar ul li a {
     color: #fff;
     text-decoration: none;
-    padding: 10px 0; /* Reduced padding */
+    padding: 10px 0;
     display: block;
     transition: color 0.3s;
-    font-size: 1em; /* Reduced font size */
+    font-size: 1em;
 }
 
 .navbar ul li a:hover {
@@ -173,7 +173,7 @@ body {
 
 .section {
     padding: 60px 20px;
-    background: #ffffff; /* White background */
+    background: #ffffff;
     margin: 20px auto;
     width: 90%;
     max-width: 1200px;
@@ -195,9 +195,9 @@ body {
 
 .footer {
     text-align: center;
-    padding: 10px 0; /* Reduced padding */
-    background: #000; /* Black background */
-    color: #fff; /* White text */
+    padding: 10px 0;
+    background: #000;
+    color: #fff;
     margin-top: 20px;
     font-size: 0.9em;
 }
@@ -304,7 +304,7 @@ p {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    opacity: 1; /* Change this to 1 to make the button visible */
+    opacity: 1;
     transition: opacity 0.5s ease;
 }
 
@@ -321,7 +321,7 @@ p {
 
 @media (max-width: 768px) {
     .header-content h1 {
-        font-size: 1.8em; /* Adjusted font size */
+        font-size: 1.8em;
     }
 
     .cta-button {
@@ -331,7 +331,7 @@ p {
 
     .navbar ul {
         flex-direction: row;
-        justify
+        justify-content: center;
         flex-wrap: wrap;
     }
 
@@ -340,7 +340,7 @@ p {
     }
 
     .navbar ul li a {
-        font-size: 0.9em; /* Adjusted font size for smaller screens */
+        font-size: 0.9em;
     }
 
     .section {
@@ -348,7 +348,7 @@ p {
     }
 
     h1 {
-        font-size: 1.8em; /* Adjusted font size */
+        font-size: 1.8em;
     }
 
     h2 {
@@ -360,17 +360,17 @@ p {
     }
 
     #typed-header {
-        font-size: 1.5em; /* Adjusted font size for smaller screens */
+        font-size: 1.5em;
     }
 
     #changing-text {
-        font-size: 1.2em; /* Adjusted font size for smaller screens */
+        font-size: 1.2em;
     }
 }
 
 @media (max-width: 480px) {
     .header-content h1 {
-        font-size: 1.5em; /* Adjusted font size */
+        font-size: 1.5em;
     }
 
     .cta-button {
@@ -389,7 +389,7 @@ p {
     }
 
     .navbar ul li a {
-        font-size: 0.8em; /* Adjusted font size for even smaller screens */
+        font-size: 0.8em;
     }
 
     .section {
@@ -397,22 +397,27 @@ p {
     }
 
     h1 {
-        font-size: 1.5em; /* Adjusted font size */
+        font-size: 1.5em;
     }
 
     h2 {
-        font-size: 1.3em; /* Adjusted font size */
+        font-size: 1.3em;
     }
 
     p {
-        font-size: 0.9em; /* Adjusted font size */
+        font-size: 0.9em;
     }
 
     #typed-header {
-        font-size: 1.3em; /* Adjusted font size for smaller screens */
+        font-size: 1.3em;
     }
 
     #changing-text {
-        font-size: 1em; /* Adjusted font size for smaller screens */
+        font-size: 1em;
     }
+}
+
+/* Hide the additional links */
+.hidden-link {
+    display: none;
 }
