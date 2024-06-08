@@ -162,6 +162,10 @@
             transition: top 0.3s; /* Smooth transition for hiding/showing */
         }
 
+        .navbar.hidden {
+            top: -50px; /* Hide the navbar by moving it up */
+        }
+
         .navbar ul {
             list-style: none;
             display: flex;
@@ -299,7 +303,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.2);
             transition: left 0.3s;
             z-index: -1;
         }
@@ -504,7 +508,8 @@
         <div class="content">
             <h2>Benefits of a Web3 Domain</h2>
             <ul>
-                <li>Decentralization: Web3 domains are not controlled by any single entity. <li>Security: Enhanced security through blockchain technology.</li>
+                <li>Decentralization: Web3 domains are not controlled by any single entity.</li>
+                <li>Security: Enhanced security through blockchain technology.</li>
                 <li>Ownership: Full ownership of your digital identity.</li>
                 <li>Interoperability: Seamlessly use your ID across various platforms.</li>
             </ul>
@@ -706,6 +711,25 @@
                 easing: 'easeInOutSine',
                 direction: 'alternate',
                 loop: true
+            });
+
+            // Navbar hide/show functionality
+            let lastScrollY = window.pageYOffset;
+            const navbar = document.getElementById('navbar');
+
+            window.addEventListener('scroll', () => {
+                const currentScrollY = window.pageYOffset;
+                const bottomOffset = 100; // Adjust this value if necessary
+
+                if (currentScrollY > lastScrollY && currentScrollY > navbar.offsetHeight) {
+                    navbar.classList.add('hidden');
+                } else if (window.innerHeight + currentScrollY >= document.body.offsetHeight - bottomOffset) {
+                    navbar.classList.remove('hidden');
+                } else {
+                    navbar.classList.remove('hidden');
+                }
+
+                lastScrollY = currentScrollY <= 0 ? 0 : currentScrollY;
             });
         });
     </script>
