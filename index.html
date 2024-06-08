@@ -153,12 +153,17 @@
         .navbar {
             background-color: #000; /* Black background */
             color: #fff; /* White text */
-            position: sticky; /* Sticky position to float at the top */
+            position: fixed; /* Fixed position to stay at the top */
             top: 0; /* Stick to top */
             width: 100%;
             z-index: 1000;
             padding: 5px 0; /* Reduced padding */
             box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            transition: top 0.3s; /* Smooth transition for hiding/showing */
+        }
+
+        .navbar.hidden {
+            top: -50px; /* Hide the navbar by moving it up */
         }
 
         .navbar ul {
@@ -465,7 +470,7 @@
         </div>
     </header>
 
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <ul>
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
@@ -495,7 +500,7 @@
             <p>Smith.box offers a comprehensive Web3 solution for managing your digital identity, providing unmatched security, convenience, and versatility. Whether you need a secure login, a unique email address, or a reliable wallet address, our Digital IDs meet all your needs. Mint your own Digital ID today and take advantage of our tokenized WEB2 & WEB3 domain NFT naming service. Reserve your Digital ID and experience the future of digital identity management.</p>
             <p>Based in the United Kingdom, Smith.box is committed to pioneering the future of digital identities. By utilizing advanced blockchain technology and integrating with key internet services, we provide an innovative, dependable, and future-proof service. Reserve your Digital ID with Smith.box and join the forefront of digital identity technology.</p>
             <p>Currently in beta, the subdomain feature is forthcoming, as confirmed by the .box team. Several prominent companies, such as Google (google.box), Visa (visa.box), YouTube (youtube.box), LinkedIn (linkedin.box), and Reddit (reddit.box), have already secured their Digital IDs via .box, underscoring the trust and potential of our platform. Reserve your Digital ID now and be part of this trusted network.</p>
-            <p>Join Smith.box today and future-proof your online presence with a secure, decentralized, and easily recognizable Digital ID. With our service, confidently navigate your digital world, knowing that your identity is protected and wholly owned by you. Reserve your Digital ID and take control of your digital future.</p>
+            <p>Join Smith.box today and future-proof your online presence with a secure, decentralized, and easily recognizable Digital ID. With our service, confidently navigate your digital world, knowing that your identity is protected and owned by you. Reserve your Digital ID and take control of your digital future.</p>
         </div>
     </section>
 
@@ -505,7 +510,8 @@
             <ul>
                 <li>Decentralization: Web3 domains are not controlled by any single entity.</li>
                 <li>Security: Enhanced security through blockchain technology.</li>
-                <li>Ownership: Full ownership of your digital identity.<li>Interoperability: Seamlessly use your ID across various platforms.</li>
+                <li>Ownership: Full ownership of your digital identity.</li>
+                <li>Interoperability: Seamlessly use your ID across various platforms.</li>
             </ul>
         </div>
     </section>
@@ -608,7 +614,7 @@
 
             // Typing effect for subdomains in the header
             const subdomains = [
-                '', 
+                'Agent.Smith.box', 
                 'Sam.Smith.box', 
                 'Jessica.Smith.box', 
                 'Dave.Smith.box', 
@@ -706,8 +712,23 @@
                 direction: 'alternate',
                 loop: true
             });
+
+            // Navbar hide/show functionality
+            let lastScrollY = window.pageYOffset;
+            const navbar = document.getElementById('navbar');
+
+            window.addEventListener('scroll', () => {
+                const currentScrollY = window.pageYOffset;
+
+                if (currentScrollY > lastScrollY) {
+                    navbar.classList.add('hidden');
+                } else {
+                    navbar.classList.remove('hidden');
+                }
+
+                lastScrollY = currentScrollY <= 0 ? 0 : currentScrollY;
+            });
         });
     </script>
 </body>
 </html>
-    
