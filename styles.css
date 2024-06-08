@@ -326,9 +326,7 @@ p {
 @media (max-width: 768px) {
     .header-content h1 {
         font-size: 1.8em;
-    }
-
-    .cta-button {
+.cta-button {
         padding: 10px 20px;
         font-size: 1em;
     }
@@ -430,7 +428,7 @@ p {
 .social-share {
     text-align: center;
     margin-top: 20px;
-    margin-bottom: 20px; /* Add space above the footer */
+    margin-bottom: -30px; /* Move icons down closer to the footer */
 }
 
 .social-share a {
