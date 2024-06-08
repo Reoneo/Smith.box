@@ -313,132 +313,132 @@ p {
 }
 
 .section p, .section ul {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.section.visible p, .section.visible ul {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+    .header-content h1 {
+        font-size: 1.8em;
     }
 
-    .section.visible p, .section.visible ul {
-        opacity: 1;
-        transform: translateY(0);
+    .cta-button {
+        padding: 10px 20px;
+        font-size: 1em;
     }
 
-    @media (max-width: 768px) {
-        .header-content h1 {
-            font-size: 1.8em;
-        }
-
-        .cta-button {
-            padding: 10px 20px;
-            font-size: 1em;
-        }
-
-        .navbar ul {
-            flex-direction: row;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .navbar ul li {
-            margin: 10px 5px;
-        }
-
-        .navbar ul li a {
-            font-size: 0.9em;
-        }
-
-        .section {
-            padding: 40px 15px;
-        }
-
-        h1 {
-            font-size: 1.8em;
-        }
-
-        h2 {
-            font-size: 1.5em;
-        }
-
-        p {
-            font-size: 1em;
-        }
-
-        #typed-header {
-            font-size: 1.5em;
-        }
-
-        #changing-text {
-            font-size: 1.2em;
-        }
+    .navbar ul {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
     }
 
-    @media (max-width: 480px) {
-        .header-content h1 {
-            font-size: 1.5em;
-        }
-
-        .cta-button {
-            padding: 8px 16px;
-            font-size: 0.9em;
-        }
-
-        .navbar ul {
-            flex-direction: row;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .navbar ul li {
-            margin: 8px 5px;
-        }
-
-        .navbar ul li a {
-            font-size: 0.8em;
-        }
-
-        .section {
-            padding: 30px 10px;
-        }
-
-        h1 {
-            font-size: 1.5em;
-        }
-
-        h2 {
-            font-size: 1.3em;
-        }
-
-        p {
-            font-size: 0.9em;
-        }
-
-        #typed-header {
-            font-size: 1.3em;
-        }
-
-        #changing-text {
-            font-size: 1em;
-        }
+    .navbar ul li {
+        margin: 10px 5px;
     }
 
-    /* Hide the additional links */
-    .hidden-link {
-        display: none;
+    .navbar ul li a {
+        font-size: 0.9em;
     }
 
-    /* Social Share Icons */
-    .social-share {
-        text-align: center;
-        margin-top: 20px;
-        margin-bottom: 20px; /* Add space above the footer */
+    .section {
+        padding: 40px 15px;
     }
 
-    .social-share a {
-        display: inline-block;
-        margin: 0 10px; /* Adjust the spacing between icons */
+    h1 {
+        font-size: 1.8em;
     }
 
-    .social-share img {
-        width: 40px; /* Adjust the size of the icons */
-        height: auto;
+    h2 {
+        font-size: 1.5em;
     }
+
+    p {
+        font-size: 1em;
+    }
+
+    #typed-header {
+        font-size: 1.5em;
+    }
+
+    #changing-text {
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-content h1 {
+        font-size: 1.5em;
+    }
+
+    .cta-button {
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+
+    .navbar ul {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .navbar ul li {
+        margin: 8px 5px;
+    }
+
+    .navbar ul li a {
+        font-size: 0.8em;
+    }
+
+    .section {
+        padding: 30px 10px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    h2 {
+        font-size: 1.3em;
+    }
+
+    p {
+        font-size: 0.9em;
+    }
+
+    #typed-header {
+        font-size: 1.3em;
+    }
+
+    #changing-text {
+        font-size: 1em;
+    }
+}
+
+/* Hide the additional links */
+.hidden-link {
+    display: none;
+}
+
+/* Social Share Icons */
+.social-share {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px; /* Add space above the footer */
+}
+
+.social-share a {
+    display: inline-block;
+    margin: 0 10px; /* Adjust the spacing between icons */
+}
+
+.social-share img {
+    width: 40px; /* Adjust the size of the icons */
+    height: auto;
+}
