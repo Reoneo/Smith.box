@@ -326,8 +326,9 @@ p {
 @media (max-width: 768px) {
     .header-content h1 {
         font-size: 1.8em;
-.cta-button {
-        padding: 10px 20px;
+    }
+
+    padding: 10px 20px;
         font-size: 1em;
     }
 
@@ -428,7 +429,7 @@ p {
 .social-share {
     text-align: center;
     margin-top: 20px;
-    margin-bottom: -30px; /* Move icons down closer to the footer */
+    margin-bottom: 10px; /* Small gap above the footer */
 }
 
 .social-share a {
