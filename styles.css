@@ -308,7 +308,7 @@ p {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    opacity: 1; /* Change this to 1 to make the button visible */
+    opacity: 0; /* Change this to 1 to make the button visible */
     transition: opacity 0.5s ease;
 }
 
