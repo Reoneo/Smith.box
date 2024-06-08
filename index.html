@@ -153,13 +153,17 @@
         .navbar {
             background-color: #000; /* Black background */
             color: #fff; /* White text */
-            position: fixed; /* Fixed position */
+            position: sticky; /* Sticky position to float at the top */
             top: 0; /* Stick to top */
             width: 100%;
             z-index: 1000;
             padding: 5px 0; /* Reduced padding */
             box-shadow: 0 2px 10px rgba(0,0,0,0.5);
             transition: top 0.3s; /* Smooth transition for hiding/showing */
+        }
+
+        .navbar.hidden {
+            top: -50px; /* Hide the navbar by moving it up */
         }
 
         .navbar ul {
@@ -294,6 +298,7 @@
 
         .cta-button::before, .submit-button::before {
             content: '';
+            position: absolute; content: '';
             position: absolute;
             top: 0;
             left: -100%;
@@ -718,11 +723,11 @@
                 const bottomOffset = 100; // Adjust this value if necessary
 
                 if (currentScrollY > lastScrollY && currentScrollY > navbar.offsetHeight) {
-                    navbar.style.top = '-50px';
+                    navbar.classList.add('hidden');
                 } else if (window.innerHeight + currentScrollY >= document.body.offsetHeight - bottomOffset) {
-                    navbar.style.top = '0';
+                    navbar.classList.remove('hidden');
                 } else {
-                    navbar.style.top = '0';
+                    navbar.classList.remove('hidden');
                 }
 
                 lastScrollY = currentScrollY <= 0 ? 0 : currentScrollY;
