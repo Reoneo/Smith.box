@@ -13,22 +13,22 @@
     <style>
         .header-content {
             text-align: center;
-            padding: 10px; /* Reduced padding */
+            padding: 10px;
         }
 
         #typed-header {
             color: black;
-            font-size: 1.5em; /* Reduced font size */
-            margin-bottom: 5px; /* Reduce the gap */
+            font-size: 1.5em;
+            margin-bottom: 5px;
         }
 
         #changing-text {
             color: white;
-            font-size: 1.2em; /* Adjusted font size */
-            border-right: 0.1em solid white; /* Type cursor */
+            font-size: 1.2em;
+            border-right: 0.1em solid white;
             animation: blink-caret 0.75s step-end infinite;
-            margin: 5px 0; /* Adjust margin */
-            min-height: 1.2em; /* Prevent jumping by setting min-height */
+            margin: 5px 0;
+            min-height: 1.2em;
         }
 
         @keyframes blink-caret {
@@ -40,28 +40,28 @@
             }
         }
 
-        /* Add styles for the new image */
         .social-share {
             text-align: center;
             margin-top: 20px;
         }
 
         .social-share img {
-            width: 50px; /* Adjust the size as needed */
+            width: 50px;
             height: auto;
+            margin: 0 10px;
         }
 
         .header {
             position: relative;
             overflow: hidden;
-            height: calc(100vh - 50px); /* Adjust height to ensure header takes up most of the space */
+            height: calc(100vh - 50px);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             color: #fff;
             text-align: center;
-            flex-grow: 1; /* Allow header to grow and push down other elements */
+            flex-grow: 1;
         }
 
         .header::before {
@@ -99,11 +99,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 10px; /* Reduced space below the image */
+            margin-bottom: 10px;
         }
 
         .image-wrapper img {
-            max-width: 200px; /* Slightly larger size */
+            max-width: 200px;
             height: auto;
         }
 
@@ -112,25 +112,25 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: auto; /* Adjust height as needed */
+            height: auto;
         }
 
         #typed-header {
-            font-size: 1.6em; /* Adjusted font size */
+            font-size: 1.6em;
             font-weight: bold;
-            color: black; /* Set the color to black */
+            color: black;
             white-space: nowrap;
             overflow: hidden;
-            margin: 0; /* Remove margin */
+            margin: 0;
         }
 
         #changing-text {
-            font-size: 1.5em; /* Adjusted font size */
-            color: white; /* Set the color to white */
-            margin: 10px 0; /* Add margin to separate from the header */
-            border-right: 0.1em solid white; /* Type cursor */
+            font-size: 1.5em;
+            color: white;
+            margin: 10px 0;
+            border-right: 0.1em solid white;
             animation: blink-caret 0.75s step-end infinite;
-            min-height: 1.5em; /* Prevent jumping by setting min-height */
+            min-height: 1.5em;
         }
 
         .cta-button {
@@ -143,7 +143,7 @@
             font-size: 1.2em;
             display: inline-block;
             margin-top: 20px;
-            margin-bottom: 40px; /* Increase space below the button */
+            margin-bottom: 40px;
         }
 
         .cta-button:hover {
@@ -153,13 +153,13 @@
         }
 
         .navbar {
-            background-color: #000; /* Black background */
-            color: #fff; /* White text */
-            position: sticky; /* Sticky position to float at the top */
-            top: 0; /* Stick to top */
+            background-color: #000;
+            color: #fff;
+            position: sticky;
+            top: 0;
             width: 100%;
             z-index: 1000;
-            padding: 5px 0; /* Reduced padding */
+            padding: 5px 0;
             box-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
@@ -179,10 +179,10 @@
         .navbar ul li a {
             color: #fff;
             text-decoration: none;
-            padding: 10px 0; /* Reduced padding */
+            padding: 10px 0;
             display: block;
             transition: color 0.3s;
-            font-size: 1em; /* Reduced font size */
+            font-size: 1em;
         }
 
         .navbar ul li a:hover {
@@ -191,7 +191,7 @@
 
         .section {
             padding: 60px 20px;
-            background: #ffffff; /* White background */
+            background: #ffffff;
             margin: 20px auto;
             width: 90%;
             max-width: 1200px;
@@ -213,9 +213,9 @@
 
         .footer {
             text-align: center;
-            padding: 10px 0; /* Reduced padding */
-            background: #000; /* Black background */
-            color: #fff; /* White text */
+            padding: 10px 0;
+            background: #000;
+            color: #fff;
             margin-top: 20px;
             font-size: 0.9em;
         }
@@ -321,7 +321,7 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            opacity: 1; /* Change this to 1 to make the button visible */
+            opacity: 1;
             transition: opacity 0.5s ease;
         }
 
@@ -338,7 +338,7 @@
 
         @media (max-width: 768px) {
             .header-content h1 {
-                font-size: 1.8em; /* Adjusted font size */
+                font-size: 1.8em;
             }
 
             .cta-button {
@@ -357,7 +357,7 @@
             }
 
             .navbar ul li a {
-                font-size: 0.9em; /* Adjusted font size for smaller screens */
+                font-size: 0.9em;
             }
 
             .section {
@@ -365,7 +365,7 @@
             }
 
             h1 {
-                font-size: 1.8em; /* Adjusted font size */
+                font-size: 1.8em;
             }
 
             h2 {
@@ -377,17 +377,17 @@
             }
 
             #typed-header {
-                font-size: 1.5em; /* Adjusted font size for smaller screens */
+                font-size: 1.5em;
             }
 
             #changing-text {
-                font-size: 1.2em; /* Adjusted font size for smaller screens */
+                font-size: 1.2em;
             }
         }
 
         @media (max-width: 480px) {
             .header-content h1 {
-                font-size: 1.5em; /* Adjusted font size */
+                font-size: 1.5em;
             }
 
             .cta-button {
@@ -406,7 +406,7 @@
             }
 
             .navbar ul li a {
-                font-size: 0.8em; /* Adjusted font size for even smaller screens */
+                font-size: 0.8em;
             }
 
             .section {
@@ -414,23 +414,23 @@
             }
 
             h1 {
-                font-size: 1.5em; /* Adjusted font size */
+                font-size: 1.5em;
             }
 
             h2 {
-                font-size: 1.3em; /* Adjusted font size */
+                font-size: 1.3em;
             }
 
             p {
-                font-size: 0.9em; /* Adjusted font size */
+                font-size: 0.9em;
             }
 
             #typed-header {
-                font-size: 1.3em; /* Adjusted font size for smaller screens */
+                font-size: 1.3em;
             }
 
             #changing-text {
-                font-size: 1em; /* Adjusted font size for smaller screens */
+                font-size: 1em;
             }
         }
     </style>
@@ -443,7 +443,7 @@
             </div>
             <div class="typing-wrapper">
                 <h1 id="typed-header">Reserve Your Digital ID</h1>
-                <div id="changing-text">Agent.Smith.box</div> <!-- Initial text to prevent jumping -->
+                <div id="changing-text">Agent.Smith.box</div>
             </div>
             <a href="#about" class="cta-button">Learn More</a>
         </div>
@@ -512,8 +512,14 @@
 
     <!-- New Social Share Section -->
     <div class="social-share">
-        <a href="https://www.facebook.com/share/KNz4wB7MJdmAsXab/">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=YOUR_URL" target="_blank">
             <img src="https://i.imgur.com/ORIRFfD.png" alt="Facebook">
+        </a>
+        <a href="https://twitter.com/intent/tweet?url=YOUR_URL&text=YOUR_TEXT" target="_blank">
+            <img src="https://i.imgur.com/VfPLKaT.png" alt="Twitter">
+        </a>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=YOUR_URL&title=YOUR_TITLE&summary=YOUR_SUMMARY" target="_blank">
+            <img src="https://i.imgur.com/kPt9wSt.png" alt="LinkedIn">
         </a>
     </div>
     <!-- End of Social Share Section -->
