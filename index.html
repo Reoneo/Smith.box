@@ -6,10 +6,450 @@
     <meta name="description" content="Smith.box offers tokenized WEB2 & WEB3 domain NFT naming.">
     <meta property="og:image" content="https://i.imgur.com/ngwLlPH.jpeg">
     <title>Tokenized WEB2 & WEB3 Domain NFT Naming Service</title>
-    <link rel="stylesheet" href="styles.css">
     <link rel="shortcut icon" href="images/meta-image.png" type="image/png">
     <link rel="apple-touch-icon" href="https://i.imgur.com/ngwLlPH.jpeg">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
+    <style>
+        html, body {
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff; /* Set the background color to white */
+            color: #000000; /* Default text color */
+            scroll-behavior: smooth;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            min-height: 100vh; /* Ensure the body takes up full viewport height */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            position: relative;
+            overflow: hidden;
+            height: calc(100vh - 50px); /* Adjust height to ensure header takes up most of the space */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            text-align: center;
+            flex-grow: 1; /* Allow header to grow and push down other elements */
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #4a90e2, #9013fe);
+            background-size: 300% 300%;
+            z-index: 1;
+            animation: futuristicAnimation 8s infinite linear;
+        }
+
+        @keyframes futuristicAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 2;
+            backdrop-filter: blur(5px);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 3;
+            max-width: 80%;
+            text-align: center;
+        }
+
+        .image-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px; /* Reduced space below the image */
+        }
+
+        .image-wrapper img {
+            max-width: 200px; /* Slightly larger size */
+            height: auto;
+        }
+
+        .typing-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: auto; /* Adjust height as needed */
+        }
+
+        #typed-header {
+            font-size: 1.6em; /* Adjusted font size */
+            font-weight: bold;
+            color: black; /* Set the color to black */
+            white-space: nowrap;
+            overflow: hidden;
+            margin: 0; /* Remove margin */
+        }
+
+        #changing-text {
+            font-size: 1.5em; /* Adjusted font size */
+            color: white; /* Set the color to white */
+            margin: 10px 0; /* Add margin to separate from the header */
+            border-right: 0.1em solid white; /* Type cursor */
+            animation: blink-caret 0.75s step-end infinite;
+            min-height: 1.5em; /* Prevent jumping by setting min-height */
+        }
+
+        @keyframes blink-caret {
+            from, to {
+                border-color: transparent;
+            }
+            50% {
+                border-color: white;
+            }
+        }
+
+        .cta-button {
+            background-color: #ffffff;
+            color: #4a90e2;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: background-color 0.3s, color 0.3s, transform 0.3s;
+            font-size: 1.2em;
+            display: inline-block;
+            margin-top: 20px;
+            margin-bottom: 40px; /* Increase space below the button */
+        }
+
+        .cta-button:hover {
+            background-color: #4a90e2;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        .navbar {
+            background-color: #000; /* Black background */
+            color: #fff; /* White text */
+            position: sticky; /* Sticky position to float at the top */
+            top: 0; /* Stick to top */
+            width: 100%;
+            z-index: 1000;
+            padding: 5px 0; /* Reduced padding */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+            flex-wrap: wrap;
+        }
+
+        .navbar ul li {
+            margin: 0 10px;
+        }
+
+        .navbar ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 0; /* Reduced padding */
+            display: block;
+            transition: color 0.3s;
+            font-size: 1em; /* Reduced font size */
+        }
+
+        .navbar ul li a:hover {
+            color: #4a90e2;
+        }
+
+        .section {
+            padding: 60px 20px;
+            background: #ffffff; /* White background */
+            margin: 20px auto;
+            width: 90%;
+            max-width: 1200px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .intro {
+            text-align: center;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 10px 0; /* Reduced padding */
+            background: #000; /* Black background */
+            color: #fff; /* White text */
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form label {
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+
+        form input, form textarea {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background: #333;
+            color: #fff;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        form button {
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4a90e2;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            font-size: 1.1em;
+        }
+
+        form button:hover {
+            background-color: #9013fe;
+            transform: scale(1.05);
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        h1, h2 {
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .cta-button, .submit-button {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .cta-button::before, .submit-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.3s;
+            z-index: -1;
+        }
+
+        .cta-button:hover::before, .submit-button:hover::before {
+            left: 100%;
+        }
+
+        #menu-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 4;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0; /* Change this to 1 to make the button visible */
+            transition: opacity 0.5s ease;
+        }
+
+        .section p, .section ul {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .section.visible p, .section.visible ul {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 1.8em;
+            }
+
+            .navbar ul {
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .navbar ul li {
+                margin: 10px 5px;
+            }
+
+            .navbar ul li a {
+                font-size: 0.9em;
+            }
+
+            .section {
+                padding: 40px 15px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+
+            #typed-header {
+                font-size: 1.5em;
+            }
+
+            #changing-text {
+                font-size: 1.2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-content h1 {
+                font-size: 1.5em;
+            }
+
+            .cta-button {
+                padding: 8px 16px;
+                font-size: 0.9em;
+            }
+
+            .navbar ul {
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .navbar ul li {
+                margin: 8px 5px;
+            }
+
+            .navbar ul li a {
+                font-size: 0.8em;
+            }
+
+            .section {
+                padding: 30px 10px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            h2 {
+                font-size: 1.3em;
+            }
+
+            p {
+                font-size: 0.9em;
+            }
+
+            #typed-header {
+                font-size: 1.3em;
+            }
+
+            #changing-text {
+                font-size: 1em;
+            }
+        }
+
+        /* Hide the additional links */
+        .hidden-link {
+            display: none;
+        }
+
+        /* Social Share Icons */
+        .social-share {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 10px; /* Small gap above the footer */
+        }
+
+        .social-share a {
+            display: inline-block;
+            margin: 0 10px; /* Adjust the spacing between icons */
+        }
+
+        .social-share img {
+            width: 40px; /* Adjust the size of the icons */
+            height: auto;
+        }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -65,8 +505,7 @@
             <ul>
                 <li>Decentralization: Web3 domains are not controlled by any single entity.</li>
                 <li>Security: Enhanced security through blockchain technology.</li>
-                <li>Ownership: Full ownership of your digital identity.</li>
-                <li>Interoperability: Seamlessly use your ID across various platforms.</li>
+                <li>Ownership: Full ownership of your digital identity.<li>Interoperability: Seamlessly use your ID across various platforms.</li>
             </ul>
         </div>
     </section>
@@ -114,6 +553,161 @@
         <p>&copy; 2024 Smith.box. All rights reserved.</p>
     </footer>
 
-    <script src="scripts.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Smooth scrolling for nav links
+            const navLinks = document.querySelectorAll('.navbar ul li a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.querySelector(link.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Make the menu button visible
+            setTimeout(() => {
+                const menuButton = document.getElementById('menu-button');
+                if (menuButton) {
+                    menuButton.style.opacity = '1';
+                }
+            }, 500);
+
+            // Menu button functionality
+            const menuButton = document.getElementById('menu-button');
+            const menuOverlay = document.getElementById('menu-overlay');
+
+            if (menuButton && menuOverlay) {
+                menuButton.addEventListener('click', function () {
+                    menuButton.classList.toggle('active');
+                    menuOverlay.classList.toggle('active');
+                });
+            }
+
+            // Reveal sections on scroll
+            const sections = document.querySelectorAll('.section');
+            const revealOnScroll = () => {
+                const scrollY = window.pageYOffset;
+                sections.forEach(section => {
+                    if (section.offsetTop - window.innerHeight / 1.2 < scrollY) {
+                        section.classList.add('visible');
+                        anime({
+                            targets: section,
+                            opacity: [0, 1],
+                            translateY: [50, 0],
+                            easing: 'easeOutExpo',
+                            duration: 1000,
+                        });
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', revealOnScroll);
+            revealOnScroll(); // Trigger on load
+
+            // Typing effect for subdomains in the header
+            const subdomains = [
+                'Agent.Smith.box', 
+                'Sam.Smith.box', 
+                'Jessica.Smith.box', 
+                'Dave.Smith.box', 
+                'Zoe.Smith.box', 
+                'Wallet.Smith.box', 
+                'NFT.Smith.box', 
+                '1.Smith.box', 
+                'Tom.Smith.box'
+            ];
+            let currentIndex = 0;
+            const typingSpeed = 100;
+            const erasingSpeed = 50;
+            const delayBetweenWords = 2000;
+            const changingTextElement = document.getElementById('changing-text');
+
+            function typeWord(word, index = 0) {
+                if (index < word.length) {
+                    changingTextElement.textContent += word.charAt(index);
+                    setTimeout(() => typeWord(word, index + 1), typingSpeed);
+                } else {
+                    setTimeout(eraseWord, delayBetweenWords);
+                }
+            }
+
+            function eraseWord() {
+                if (changingTextElement.textContent.length > 0) {
+                    changingTextElement.textContent = changingTextElement.textContent.slice(0, -1);
+                    setTimeout(eraseWord, erasingSpeed);
+                } else {
+                    currentIndex = (currentIndex + 1) % subdomains.length;
+                    setTimeout(() => typeWord(subdomains[currentIndex]), typingSpeed);
+                }
+            }
+
+            typeWord(subdomains[currentIndex]);
+
+            // Animate header elements on load
+            anime({
+                targets: '.header-content h1',
+                opacity: [0, 1],
+                translateY: [-50, 0],
+                easing: 'easeOutExpo',
+                duration: 1500,
+            });
+
+            anime({
+                targets: '.header-content p',
+                opacity: [0, 1],
+                translateY: [-50, 0],
+                delay: 500,
+                easing: 'easeOutExpo',
+                duration: 1500,
+            });
+
+            anime({
+                targets: '.cta-button',
+                opacity: [0, 1],
+                scale: [0.8, 1],
+                delay: 1000,
+                easing: 'easeOutExpo',
+                duration: 1500,
+            });
+
+            // Button hover animation
+            const buttons = document.querySelectorAll('.cta-button, .submit-button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseover', () => {
+                    anime({
+                        targets: button,
+                        scale: 1.1,
+                        duration: 300,
+                        easing: 'easeOutExpo'
+                    });
+                });
+
+                button.addEventListener('mouseout', () => {
+                    anime({
+                        targets: button,
+                        scale: 1.0,
+                        duration: 300,
+                        easing: 'easeOutExpo'
+                    });
+                });
+            });
+
+            // Floating animations for header background
+            anime({
+                targets: '.header::before',
+                keyframes: [
+                    { translateY: -10 },
+                    { translateY: 10 },
+                ],
+                duration: 10000,
+                easing: 'easeInOutSine',
+                direction: 'alternate',
+                loop: true
+            });
+        });
+    </script>
 </body>
 </html>
+    
