@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Smith.box offers tokenized WEB2 & WEB3 domain NFT naming, digital identity management, blockchain security, and decentralized domains.">
+    <meta name="description" content="Smith.box offers tokenized WEB2 & WEB3 domain NFT naming.">
     <meta property="og:image" content="https://i.imgur.com/ngwLlPH.jpeg">
-    <title>Tokenized WEB2 & WEB3 Domain NFT Naming Service | Secure Digital ID Registration</title>
+    <title>Tokenized WEB2 & WEB3 Domain NFT Naming Service</title>
     <link rel="shortcut icon" href="images/meta-image.png" type="image/png">
     <link rel="apple-touch-icon" href="https://i.imgur.com/ngwLlPH.jpeg">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
@@ -298,9 +298,12 @@
 
         .cta-button::before, .submit-button::before {
             content: '';
+            position: absolute; content: '';
             position: absolute;
             top: 0;
-            left: -: 100%;
+            left: -100%;
+            width: 100%;
+            height: 100%;
             background: rgba(255, 255, 255, 0.2);
             transition: left 0.3s;
             z-index: -1;
@@ -308,6 +311,23 @@
 
         .cta-button:hover::before, .submit-button:hover::before {
             left: 100%;
+        }
+
+        #menu-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 4;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0; /* Change this to 1 to make the button visible */
+            transition: opacity 0.5s ease;
         }
 
         .section p, .section ul {
@@ -463,14 +483,14 @@
     <section id="home" class="section home">
         <div class="intro">
             <h2>What is a Digital ID?</h2>
-            <p>A Digital ID is a unique identifier that can be used to securely manage your online presence. Mint your own Digital ID to enjoy the full benefits of our tokenized WEB2 & WEB3 domain NFT naming service, offering decentralized domains, secure online identity, and blockchain security.</p>
+            <p>A Digital ID is a unique identifier that can be used to securely manage your online presence. Mint your own Digital ID to enjoy the full benefits of our tokenized WEB2 & WEB3 domain NFT naming service. Reserve your Digital ID today to start taking control of your online identity.</p>
         </div>
     </section>
 
     <section id="about" class="section about">
         <div class="content">
             <h2>About Our Service</h2>
-            <p>Welcome to Smith.box, your gateway to a revolutionary Web3 service that empowers users to create unique digital identities through personalized subdomains. With our platform, you can generate custom subdomains like jake.smith.box or jessica.smith.box, offering a secure and easily recognizable digital ID for all your online activities. Mint your own Digital ID with our tokenized WEB2 & WEB3 domain NFT naming service to enhance your online security and presence. Reserve your Digital ID and join our secure network today.</p>
+            <p>Welcome to Smith.box, your gateway to a revolutionary Web3 service that empowers users to create unique digital identities through personalized subdomains. With our platform, you can generate subdomains like jake.smith.box or jessica.smith.box, offering a secure and easily recognizable digital ID for all your online activities. Mint your own Digital ID with our tokenized WEB2 & WEB3 domain NFT naming service to enhance your online security and presence. Reserve your Digital ID and join our secure network today.</p>
             <p>At Smith.box, we leverage blockchain technology to ensure each Digital ID is tokenized and securely stored, guaranteeing full ownership and control over your identity. This prevents unauthorized access or tampering, ensuring your digital presence is always protected. Reserve your Digital ID to take advantage of our robust security measures.</p>
             <p>Your Digital ID also functions as an email address, such as jake@smith.box, merging your online presence with seamless and secure communication tools. This integration makes managing your digital identity more efficient and secure. Reserve your Digital ID to streamline your online interactions.</p>
             <p>Our Digital IDs can be used for various purposes, including secure logins on websites and applications, personalized email addresses, and even wallet addresses for cryptocurrency transactions. The versatility of our service ensures you can use your Digital ID across multiple platforms without compromising security or privacy. Reserve your Digital ID to unlock these benefits.</p>
@@ -501,7 +521,7 @@
         <div class="content">
             <h2>Contact Us</h2>
             <form>
-<label for="name">Name:</label>
+                <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
@@ -514,7 +534,7 @@
 
     <!-- New Social Share Section -->
     <div class="social-share">
-        <a href="https://www.facebook.com/sharer/sharer.php?u=Reserve Your WEB3 Digital ID at www.Smith.box" target="_blank">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=Reserve Your WEB3 Digial ID at www.Smith.box" target="_blank">
             <img src="https://i.imgur.com/ORIRFfD.png" alt="Facebook">
         </a>
         <a href="https://twitter.com/intent/tweet?url=YOUR_URL&text=YOUR_TEXT" target="_blank">
@@ -553,6 +573,25 @@
                 });
             });
 
+            // Make the menu button visible
+            setTimeout(() => {
+                const menuButton = document.getElementById('menu-button');
+                if (menuButton) {
+                    menuButton.style.opacity = '1';
+                }
+            }, 500);
+
+            // Menu button functionality
+            const menuButton = document.getElementById('menu-button');
+            const menuOverlay = document.getElementById('menu-overlay');
+
+            if (menuButton && menuOverlay) {
+                menuButton.addEventListener('click', function () {
+                    menuButton.classList.toggle('active');
+                    menuOverlay.classList.toggle('active');
+                });
+            }
+
             // Reveal sections on scroll
             const sections = document.querySelectorAll('.section');
             const revealOnScroll = () => {
@@ -576,7 +615,7 @@
 
             // Typing effect for subdomains in the header
             const subdomains = [
-                'Agent.Smith.box', 
+                '', 
                 'Sam.Smith.box', 
                 'Jessica.Smith.box', 
                 'Dave.Smith.box', 
