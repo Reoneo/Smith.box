@@ -326,8 +326,6 @@ p {
     background: rgba(255, 255, 255, 0.2);
     transition: left 0.3s;
     z-index: -1;
-}
-
 .cta-button:hover::before, .submit-button:hover::before {
     left: 100%;
 }
