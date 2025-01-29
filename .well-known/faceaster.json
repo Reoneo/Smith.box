@@ -1,0 +1,18 @@
+{
+  "accountAssociation": {
+    "header": "eyJmaWQiOjk3NDcxNiwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweGYyQ0M0NzFGN0MxRkFhMjgwODgwRkVjZUJjMzIyMjdEZGJjNEU3ZjIifQ",
+    "payload": "eyJkb21haW4iOiJzbWl0aC5ib3gifQ",
+    "signature": "MHgyZTYxMjI2YTc2MzcyMGYxNTE0MDdjZGZkN2QzZWFkYzc2NWFjZTk2M2NhOGJiY2VmZjQzMzljZjYzZTcwZjFjNTZhNTcxMzhjYTk0NWRiYzdmMjA1Y2YxN2I3ZjgyMzJhYThjNGJjYjliNmE3YzI1N2MyYTQ1N2QyZWEwOTg0NzFj"
+  },
+  "frame": {
+    "version": "1",
+    "name": "Example Frame",
+    "iconUrl": "https://smith.box/icon.png",
+    "homeUrl": "https://smith.box",
+    "imageUrl": "https://smith.box/image.png",
+    "buttonTitle": "Check this out",
+    "splashImageUrl": "https://smith.box/splash.png",
+    "splashBackgroundColor": "#eeccff",
+    "webhookUrl": "https://smith.box/api/webhook"
+  }
+}
