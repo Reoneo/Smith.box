@@ -14,6 +14,24 @@ body {
   color: #000;
 }
 
+/* Wallet-connect icon */
+#wallet-connect {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 5;
+  font-size: 1.75em;
+  color: #fff;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+#wallet-connect.connected {
+  color: #0f0; /* green when connected */
+}
+#wallet-connect:hover {
+  color: #ccc;
+}
+
 /* Header & Animated Gradient */
 .header {
   position: relative;
@@ -93,7 +111,7 @@ body {
   font-size: 1.5em;
   color: #fff;
   position: relative;
-  top: -0.2em;          /* nudged up slightly for alignment */
+  top: -0.2em; /* properly aligned */
   animation: blink-caret 0.75s step-end infinite;
 }
 @keyframes blink-caret {
@@ -133,5 +151,3 @@ body {
   color: #fff;
   font-size: 1.5em;
 }
-
-/* (Other section / form / footer styles unchanged) */
