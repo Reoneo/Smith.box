@@ -15,23 +15,23 @@
 
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- 1) ethers UMD build (exposes window.ethers) -->
+  <!-- ethers UMD build -->
   <script
     src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"
     defer
   ></script>
 
-  <!-- 2) Anime.js -->
+  <!-- Anime.js -->
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"
     defer
   ></script>
 
-  <!-- 3) Your logic -->
+  <!-- Your logic -->
   <script src="script.js" defer></script>
 </head>
 <body>
-  <!-- Wallet connect icon -->
+  <!-- Wallet Connect Icon -->
   <div id="wallet-connect" title="Connect Wallet">
     <i class="fas fa-wallet"></i>
   </div>
@@ -39,6 +39,7 @@
   <header class="header">
     <div class="header-content">
       <div class="image-wrapper">
+        <!-- this will be replaced by ENS avatar if available -->
         <img
           src="https://i.imgur.com/R3tbBZn.png"
           alt="Logo"
