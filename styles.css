@@ -33,21 +33,15 @@ body {
   z-index: 1;
 }
 @keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 .header::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255,255,255,0.1);
   backdrop-filter: blur(5px);
   z-index: 2;
 }
@@ -62,16 +56,16 @@ body {
   gap: 20px;
 }
 
-/* Logo in white circle */
+/* Logo in doubled white circle */
 .image-wrapper {
   background: #fff;
   border-radius: 50%;
-  padding: 10px;
+  padding: 20px;        /* doubled from 10px */
 }
 .image-wrapper img {
   display: block;
-  width: 120px;
-  height: 120px;
+  width: 240px;         /* doubled from 120px */
+  height: 240px;        /* doubled from 120px */
   border-radius: 50%;
 }
 
@@ -98,16 +92,13 @@ body {
 .caret {
   font-size: 1.5em;
   color: #fff;
+  position: relative;
+  top: -0.1em;          /* nudge up slightly */
   animation: blink-caret 0.75s step-end infinite;
 }
 @keyframes blink-caret {
-  0%,
-  100% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
+  0%, 100% { opacity: 0; }
+  50%      { opacity: 1; }
 }
 
 /* CTA Button */
