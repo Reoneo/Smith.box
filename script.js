@@ -1,7 +1,7 @@
 // script.js
 
 document.addEventListener('DOMContentLoaded', () => {
-  // --- 1) TYPING ANIMATION (unchanged) ---
+  // (1) TYPING ANIMATION (unchanged)…
   const subdomains = [
     'Agent.Smith.box',
     'Sam.Smith.box',
@@ -14,9 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'Tom.Smith.box'
   ];
   let idx = 0;
-  const typingSpeed = 100,
-        erasingSpeed = 50,
-        delayBetween = 2000;
+  const typingSpeed = 100, erasingSpeed = 50, delayBetween = 2000;
   const textEl = document.getElementById('changing-text');
 
   function typeWord(word, i = 0) {
@@ -41,8 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
   typeWord(subdomains[idx]);
 
 
-  // --- 2) SAFE WALLET CONNECT WITH REJECTION HANDLING ---
+  // (2) SAFE WALLET CONNECT + ENS AVATAR RESOLUTION
   const walletBtn = document.getElementById('wallet-connect');
+  const logoImg   = document.querySelector('.image-wrapper img');
   let provider, signer;
 
   async function connectWallet() {
@@ -55,21 +54,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
-      // This can throw if user rejects
       await provider.send('eth_requestAccounts', []);
       signer = provider.getSigner();
       const address = await signer.getAddress();
 
+      // 1) UI update
       walletBtn.classList.add('connected');
       walletBtn.title = address;
 
+      // 2) Fetch ENS profile via Cloudflare Worker API
+      //    GET /address/:address?texts=avatar  [oai_citation:0‡GitHub](https://github.com/gskril/ens-api?utm_source=chatgpt.com)
+      const apiURL = `https://ens-api.gskril.workers.dev/address/${address}?texts=avatar`;
+      const res    = await fetch(apiURL);
+      if (res.ok) {
+        const json = await res.json();
+        if (json.avatar) {
+          logoImg.src = json.avatar;
+        }
+      }
+      // 3) Listen for account/chain changes
       window.ethereum.on('accountsChanged', handleAccountsChanged);
-      window.ethereum.on('chainChanged', handleChainChanged);
+      window.ethereum.on('chainChanged',  handleChainChanged);
 
     } catch (err) {
-      // EIP-1193 userRejectedRequest error
       if (err.code === 4001) {
-        // user cancelled wallet connection — do nothing
         console.log('User rejected wallet connection');
       } else {
         console.error('Wallet connect failed', err);
@@ -82,6 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (accounts.length === 0) {
       walletBtn.classList.remove('connected');
       walletBtn.title = 'Connect Wallet';
+      // restore default logo
+      logoImg.src = 'https://i.imgur.com/R3tbBZn.png';
     } else {
       walletBtn.title = accounts[0];
     }
@@ -94,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('beforeunload', () => {
     if (window.ethereum && window.ethereum.removeListener) {
       window.ethereum.removeListener('accountsChanged', handleAccountsChanged);
-      window.ethereum.removeListener('chainChanged', handleChainChanged);
+      window.ethereum.removeListener('chainChanged',  handleChainChanged);
     }
   });
 
