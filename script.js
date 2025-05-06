@@ -1,11 +1,7 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // Quick guard: ensure ethers is loaded
-  if (typeof window.ethers === 'undefined') {
-    alert('Connection failed: ethers.js not loaded.');
-    return;
-  }
+// script.js
 
-  // --- 1) TYPING ANIMATION ---
+document.addEventListener('DOMContentLoaded', () => {
+  // --- 1) TYPING ANIMATION (unchanged) ---
   const subdomains = [
     'Agent.Smith.box',
     'Sam.Smith.box',
@@ -18,7 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
     'Tom.Smith.box'
   ];
   let idx = 0;
-  const typingSpeed = 100, erasingSpeed = 50, delayBetween = 2000;
+  const typingSpeed = 100,
+        erasingSpeed = 50,
+        delayBetween = 2000;
   const textEl = document.getElementById('changing-text');
 
   function typeWord(word, i = 0) {
@@ -29,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(eraseWord, delayBetween);
     }
   }
+
   function eraseWord() {
     if (textEl.textContent.length > 0) {
       textEl.textContent = textEl.textContent.slice(0, -1);
@@ -38,38 +37,44 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => typeWord(subdomains[idx]), typingSpeed);
     }
   }
+
   typeWord(subdomains[idx]);
 
-  // --- 2) SAFE WALLET CONNECT USING Ethers UMD API ---
+
+  // --- 2) SAFE WALLET CONNECT WITH REJECTION HANDLING ---
   const walletBtn = document.getElementById('wallet-connect');
   let provider, signer;
 
   async function connectWallet() {
+    if (typeof window.ethers === 'undefined') {
+      return alert('ethers.js not loaded.');
+    }
+    if (!window.ethereum) {
+      return alert('No Ethereum provider detected. Install MetaMask.');
+    }
+
     try {
-      if (!window.ethereum) {
-        alert('No Ethereum provider detected. Install MetaMask.');
-        return;
-      }
-
-      // 1) Create ethers provider
       provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
-      // 2) Request account access
+      // This can throw if user rejects
       await provider.send('eth_requestAccounts', []);
-
-      // 3) Get signer & address
       signer = provider.getSigner();
       const address = await signer.getAddress();
 
-      // 4) Update UI
       walletBtn.classList.add('connected');
       walletBtn.title = address;
 
-      // 5) Listen for changes
       window.ethereum.on('accountsChanged', handleAccountsChanged);
       window.ethereum.on('chainChanged', handleChainChanged);
+
     } catch (err) {
-      console.error('Wallet connect failed', err);
-      alert('Connection failed: ' + (err.message || err));
+      // EIP-1193 userRejectedRequest error
+      if (err.code === 4001) {
+        // user cancelled wallet connection — do nothing
+        console.log('User rejected wallet connection');
+      } else {
+        console.error('Wallet connect failed', err);
+        alert('Connection failed: ' + (err.message || err));
+      }
     }
   }
 
@@ -86,7 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.location.reload();
   }
 
-  // Cleanup listeners on unload
   window.addEventListener('beforeunload', () => {
     if (window.ethereum && window.ethereum.removeListener) {
       window.ethereum.removeListener('accountsChanged', handleAccountsChanged);
