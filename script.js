@@ -1,84 +1,96 @@
 // script.js
 
-// 1) Typing animation (unchanged from before)...
 document.addEventListener('DOMContentLoaded', () => {
+  // --- 1) TYPING ANIMATION (unchanged) ---
   const subdomains = [
-    'Agent.Smith.box','Sam.Smith.box','Jessica.Smith.box',
-    'Dave.Smith.box','Zoe.Smith.box','Wallet.Smith.box',
-    'NFT.Smith.box','1.Smith.box','Tom.Smith.box'
+    'Agent.Smith.box',
+    'Sam.Smith.box',
+    'Jessica.Smith.box',
+    'Dave.Smith.box',
+    'Zoe.Smith.box',
+    'Wallet.Smith.box',
+    'NFT.Smith.box',
+    '1.Smith.box',
+    'Tom.Smith.box'
   ];
   let idx = 0;
-  const speed = 100, eraseSpeed = 50, delay = 2000;
-  const el = document.getElementById('changing-text');
+  const typingSpeed = 100, erasingSpeed = 50, delayBetween = 2000;
+  const textEl = document.getElementById('changing-text');
 
-  function type(w,i=0){
-    if(i<w.length){
-      el.textContent += w.charAt(i);
-      setTimeout(()=>type(w,i+1),speed);
-    } else setTimeout(erase,delay);
-  }
-  function erase(){
-    if(el.textContent.length>0){
-      el.textContent = el.textContent.slice(0,-1);
-      setTimeout(erase,eraseSpeed);
+  function typeWord(word, i = 0) {
+    if (i < word.length) {
+      textEl.textContent += word.charAt(i);
+      setTimeout(() => typeWord(word, i+1), typingSpeed);
     } else {
-      idx=(idx+1)%subdomains.length;
-      setTimeout(()=>type(subdomains[idx]),speed);
+      setTimeout(eraseWord, delayBetween);
     }
   }
-  type(subdomains[idx]);
-});
-
-// 2) Wallet connect / disconnect via Web3Modal + ethers.js
-const providerOptions = {
-  walletconnect: {
-    package: window.WalletConnectProvider.default,
-    options: {
-      infuraId: 'YOUR_INFURA_ID'  // ← replace with your Infura ID or other RPC
+  function eraseWord() {
+    if (textEl.textContent.length > 0) {
+      textEl.textContent = textEl.textContent.slice(0, -1);
+      setTimeout(eraseWord, erasingSpeed);
+    } else {
+      idx = (idx + 1) % subdomains.length;
+      setTimeout(() => typeWord(subdomains[idx]), typingSpeed);
     }
   }
-};
+  typeWord(subdomains[idx]);
 
-const web3Modal = new window.Web3Modal.default({
-  cacheProvider: false,
-  providerOptions
-});
+  // --- 2) SAFE WALLET CONNECT ---
+  const walletBtn = document.getElementById('wallet-connect');
+  let provider, signer;
 
-let web3Provider, signer, userAddress;
+  async function connectWallet() {
+    try {
+      if (!window.ethereum) {
+        alert('No Ethereum provider detected. Install MetaMask.');
+        return;
+      }
 
-async function connectWallet() {
-  try {
-    const instance = await web3Modal.connect();
-    web3Provider = new ethers.providers.Web3Provider(instance);
-    signer = web3Provider.getSigner();
-    userAddress = await signer.getAddress();
+      // 1) create ethers provider and request accounts
+      provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
+      await provider.send('eth_requestAccounts', []);  // pop-up
 
-    // Update button UI
-    const btn = document.getElementById('wallet-button');
-    btn.classList.add('connected');
-    btn.querySelector('span').textContent =
-      userAddress.slice(0,6) + '…' + userAddress.slice(-4);
+      // 2) get signer and address
+      signer = provider.getSigner();
+      const address = await signer.getAddress();
 
-    // Listen for disconnect
-    instance.on('disconnect', resetUI);
-  } catch (e) {
-    console.error('Connection failed', e);
-    alert('Connection failed: ' + (e.message||e));
+      // 3) update UI
+      walletBtn.classList.add('connected');
+      walletBtn.title = address;
+
+      // 4) listen for account or chain changes
+      window.ethereum.on('accountsChanged', handleAccountsChanged);
+      window.ethereum.on('chainChanged', handleChainChanged);
+    } catch (err) {
+      console.error('Wallet connect failed', err);
+      alert('Connection failed: ' + (err.message || err));
+    }
   }
-}
 
-function resetUI() {
-  web3Modal.clearCachedProvider();
-  const btn = document.getElementById('wallet-button');
-  btn.classList.remove('connected');
-  btn.querySelector('span').textContent = 'Connect Wallet';
-}
-
-// On click: connect if not, else disconnect
-document.getElementById('wallet-button').addEventListener('click', () => {
-  if (!signer) {
-    connectWallet();
-  } else {
-    if (confirm('Disconnect wallet?')) resetUI();
+  function handleAccountsChanged(accounts) {
+    if (accounts.length === 0) {
+      // disconnected
+      walletBtn.classList.remove('connected');
+      walletBtn.title = 'Connect Wallet';
+    } else {
+      walletBtn.title = accounts[0];
+    }
   }
+
+  function handleChainChanged(_chainId) {
+    // recommended by EIP-1193: reload on chain change
+    window.location.reload();
+  }
+
+  // Clean up on unload
+  window.addEventListener('beforeunload', () => {
+    if (window.ethereum && window.ethereum.removeListener) {
+      window.ethereum.removeListener('accountsChanged', handleAccountsChanged);
+      window.ethereum.removeListener('chainChanged', handleChainChanged);
+    }
+  });
+
+  // Attach click
+  walletBtn.addEventListener('click', connectWallet);
 });
