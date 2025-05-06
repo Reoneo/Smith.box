@@ -5,135 +5,80 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <meta name="description" content="Smith.box offers tokenized WEB2 & WEB3 domain NFT naming.">
   <meta property="og:image" content="https://i.imgur.com/ngwLlPH.jpeg">
-  <title>Smith.box – Web3 ID</title>
+  <title>Tokenized WEB2 & WEB3 Domain NFT Naming Service</title>
 
-  <!-- RainbowKit default styles -->
-  <link rel="stylesheet"
-        href="https://unpkg.com/@rainbow-me/rainbowkit/dist/rainbowkit.css" />
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
 
-  <!-- Your styles -->
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- React & ReactDOM UMD builds -->
-  <script crossorigin
-          src="https://unpkg.com/react@18/umd/react.development.js"></script>
-  <script crossorigin
-          src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-  <!-- Babel (to compile JSX in-browser) -->
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <!-- ethers.js UMD -->
-  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
-  <!-- wagmi & RainbowKit UMD -->
-  <script src="https://unpkg.com/wagmi@0.10.14/dist/wagmi.umd.production.min.js"></script>
-  <script src="https://unpkg.com/@rainbow-me/rainbowkit@0.7.6/dist/rainbowkit.umd.production.min.js"></script>
+  <!-- 1) ethers UMD build (exposes window.ethers) -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"
+    defer
+  ></script>
+
+  <!-- 2) Anime.js -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"
+    defer
+  ></script>
+
+  <!-- 3) Your logic -->
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <!-- 1) Wallet button root -->
-  <div id="wallet-root" style="position:absolute; top:20px; left:20px; z-index:100;"></div>
+  <!-- Wallet connect icon -->
+  <div id="wallet-connect" title="Connect Wallet">
+    <i class="fas fa-wallet"></i>
+  </div>
 
-  <!-- 2) Your existing header / layout -->
   <header class="header">
     <div class="header-content">
       <div class="image-wrapper">
-        <img src="https://i.imgur.com/R3tbBZn.png" alt="Logo" loading="lazy" />
+        <img
+          src="https://i.imgur.com/R3tbBZn.png"
+          alt="Logo"
+          loading="lazy"
+        />
       </div>
+
       <h1 id="typed-header">Reserve Your Digital ID</h1>
+
       <div class="typing-wrapper">
         <span id="changing-text"></span><span class="caret">|</span>
       </div>
-      <a href="https://www.linkedin.com/company/smith-box"
-         class="cta-button" target="_blank">Learn More</a>
+
+      <a
+        href="https://www.linkedin.com/company/smith-box"
+        class="cta-button"
+        target="_blank"
+        >Learn More</a
+      >
     </div>
   </header>
+
   <nav class="navbar" id="navbar">
     <ul>
-      <li><a href="mailto:hello@smith.box" title="Email"><i class="fas fa-envelope"></i></a></li>
-      <li><a href="https://www.recruitment.box" title="Website" target="_blank"><i class="fas fa-globe"></i></a></li>
+      <li>
+        <a href="mailto:hello@smith.box" title="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://www.recruitment.box"
+          title="Website"
+          target="_blank"
+          ><i class="fas fa-globe"></i
+        ></a>
+      </li>
     </ul>
   </nav>
-  <!-- … rest of your sections … -->
 
-  <!-- 3) Your main app logic, in JSX -->
-  <script type="text/babel">
-    const { useState, useEffect } = React;
-    const {
-      WagmiConfig,
-      createClient,
-      configureChains,
-      useAccount,
-      useConnect,
-      useDisconnect,
-    } = window.wagmi;
-    const {
-      getDefaultWallets,
-      RainbowKitProvider,
-      ConnectButton,
-    } = window.RainbowKit;
-    const { mainnet } = window.wagmiChains;
-    const { publicProvider } = window.wagmiProviders;
-
-    // 1) Configure chains & providers
-    const { chains, provider } = configureChains(
-      [ mainnet ],
-      [ publicProvider() ]
-    );
-
-    // 2) Set up connectors via RainbowKit
-    const { connectors } = getDefaultWallets({
-      appName: 'Smith.box',
-      chains,
-    });
-
-    // 3) Create Wagmi client
-    const wagmiClient = createClient({
-      autoConnect: true,
-      connectors,
-      provider,
-    });
-
-    // 4) App component
-    function App() {
-      // useAccount gives us connection state
-      const { isConnected, address } = useAccount();
-      const { disconnect } = useDisconnect();
-
-      return (
-        <div>
-          {isConnected ? (
-            // When connected, show address + disconnect option
-            <div style={{ display:'flex', alignItems:'center', gap:'0.5rem' }}>
-              <span style={{ color:'#0f0' }}>
-                {address.slice(0,6)}…{address.slice(-4)}
-              </span>
-              <button onClick={disconnect}
-                      style={{
-                        background:'#9013fe',
-                        color:'#fff',
-                        border:'none',
-                        padding:'0.25rem 0.5rem',
-                        borderRadius:'4px',
-                        cursor:'pointer'
-                      }}>
-                Disconnect
-              </button>
-            </div>
-          ) : (
-            // When not connected, show RainbowKit connect menu
-            <ConnectButton showBalance={false} accountStatus="address" />
-          )}
-        </div>
-      );
-    }
-
-    // 5) Render into wallet-root
-    ReactDOM.render(
-      <WagmiConfig client={wagmiClient}>
-        <RainbowKitProvider chains={chains}>
-          <App />
-        </RainbowKitProvider>
-      </WagmiConfig>,
-      document.getElementById('wallet-root')
-    );
-  </script>
+  <!-- (Other sections...) -->
 </body>
 </html>
