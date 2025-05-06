@@ -1,6 +1,24 @@
-/* (All your existing CSS: no-scroll, gradient, doubled logo circle, caret top:-0.2em, etc.) */
+/* styles.css */
 
-/* Wallet button (top-left) */
+/* 1. Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;           /* disable all scrolling */
+  font-family: 'Arial', sans-serif;
+  background: #ffffff;
+  color: #000000;
+  scroll-behavior: auto;
+}
+
+/* 2. Wallet Button (top-left) */
 #wallet-button {
   position: absolute;
   top: 20px;
@@ -10,17 +28,287 @@
   align-items: center;
   gap: 6px;
   font-size: 1.2em;
-  color: #fff;
+  color: #ffffff;
   cursor: pointer;
   user-select: none;
-  transition: color 0.2s;
+  transition: color 0.2s ease;
 }
 #wallet-button.connected {
-  color: #0f0; /* green when connected */
+  color: #0f0;                /* green when connected */
 }
 #wallet-button span {
   font-size: 0.9em;
 }
 #wallet-button:hover {
-  color: #ccc;
+  color: #cccccc;
+}
+
+/* 3. Header & Animated Gradient */
+.header {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #4a90e2, #9013fe);
+  background-size: 300% 300%;
+  animation: gradientShift 8s infinite linear;
+  z-index: 1;
+}
+@keyframes gradientShift {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+.header::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(5px);
+  z-index: 2;
+}
+
+/* 4. Header Content Layout */
+.header-content {
+  position: relative;
+  text-align: center;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* 5. Logo in Doubled White Circle */
+.image-wrapper {
+  background: #ffffff;
+  border-radius: 50%;
+  padding: 20px;               /* doubled from 10px */
+}
+.image-wrapper img {
+  display: block;
+  width: 240px;                /* doubled from 120px */
+  height: 240px;               /* doubled from 120px */
+  border-radius: 50%;
+}
+
+/* 6. Main Heading */
+#typed-header {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #000000;
+}
+
+/* 7. Typing Animation & Blinking Caret */
+.typing-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+#changing-text {
+  font-size: 1.5em;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  min-height: 1.5em;
+}
+.caret {
+  font-size: 1.5em;
+  color: #ffffff;
+  position: relative;
+  top: -0.2em;                 /* nudge up slightly for alignment */
+  animation: blink-caret 0.75s step-end infinite;
+}
+@keyframes blink-caret {
+  0%, 100% { opacity: 0; }
+  50%      { opacity: 1; }
+}
+
+/* 8. Call-to-Action Button */
+.cta-button {
+  padding: 15px 30px;
+  background-color: #ffffff;
+  color: #4a90e2;
+  text-decoration: none;
+  border-radius: 25px;
+  font-size: 1.2em;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
+}
+.cta-button:hover {
+  background-color: #4a90e2;
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+/* 9. Navbar Icons (top-right) */
+.navbar {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 4;
+}
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+.navbar a {
+  color: #ffffff;
+  font-size: 1.5em;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.navbar a:hover {
+  color: #cccccc;
+}
+
+/* 10. Section Styling */
+.section {
+  padding: 60px 20px;
+  background-color: #ffffff;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 1200px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  text-align: left;
+}
+.section h2 {
+  font-size: 2em;
+  margin-bottom: 15px;
+}
+.section p {
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+.section ul {
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+.section ul li {
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+/* 11. Contact Form */
+section.contact form {
+  display: flex;
+  flex-direction: column;
+}
+section.contact label {
+  margin-bottom: 5px;
+  font-size: 1.1em;
+}
+section.contact input,
+section.contact textarea {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #555555;
+  border-radius: 5px;
+  background: #333333;
+  color: #ffffff;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 1em;
+}
+section.contact button.submit-button {
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4a90e2;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  font-size: 1.1em;
+}
+section.contact button.submit-button:hover {
+  background-color: #9013fe;
+  transform: scale(1.05);
+}
+
+/* 12. Social Share Icons */
+.social-share {
+  text-align: center;
+  margin: 20px 0 10px;
+}
+.social-share a {
+  display: inline-block;
+  margin: 0 10px;
+}
+.social-share img {
+  width: 40px;
+  height: auto;
+}
+
+/* 13. Footer */
+.footer {
+  text-align: center;
+  padding: 10px 0;
+  background-color: #000000;
+  color: #ffffff;
+  margin-top: 20px;
+  font-size: 0.9em;
+}
+
+/* 14. Media Queries */
+@media (max-width: 768px) {
+  .image-wrapper img {
+    width: 200px;
+    height: 200px;
+  }
+  #typed-header {
+    font-size: 1.5em;
+  }
+  #changing-text,
+  .caret {
+    font-size: 1.3em;
+  }
+  .cta-button {
+    padding: 12px 24px;
+    font-size: 1em;
+  }
+  .section {
+    padding: 40px 15px;
+  }
+  .section h2 {
+    font-size: 1.5em;
+  }
+  .section p {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .image-wrapper img {
+    width: 160px;
+    height: 160px;
+  }
+  #typed-header {
+    font-size: 1.3em;
+  }
+  #changing-text,
+  .caret {
+    font-size: 1em;
+  }
+  .cta-button {
+    padding: 8px 16px;
+    font-size: 0.9em;
+  }
+  .section {
+    padding: 30px 10px;
+  }
+  .section h2 {
+    font-size: 1.3em;
+  }
+  .section p {
+    font-size: 0.9em;
+  }
 }
