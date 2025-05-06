@@ -78,12 +78,12 @@ body {
 .image-wrapper {
   background: #fff;
   border-radius: 50%;
-  padding: 20px;
+  padding: 20px;        /* doubled from 10px */
 }
 .image-wrapper img {
   display: block;
-  width: 240px;
-  height: 240px;
+  width: 240px;         /* doubled from 120px */
+  height: 240px;        /* doubled from 120px */
   border-radius: 50%;
 }
 
@@ -111,7 +111,7 @@ body {
   font-size: 1.5em;
   color: #fff;
   position: relative;
-  top: -0.2em; /* properly aligned */
+  top: -0.2em;          /* properly aligned */
   animation: blink-caret 0.75s step-end infinite;
 }
 @keyframes blink-caret {
