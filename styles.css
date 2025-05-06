@@ -4,10 +4,11 @@
   padding: 0;
   box-sizing: border-box;
 }
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
-  overflow: hidden;        /* no scrolling */
+  overflow: hidden; /* disable scrolling */
   font-family: 'Arial', sans-serif;
   background: #ffffff;
   color: #000;
@@ -32,40 +33,60 @@ html, body {
   z-index: 1;
 }
 @keyframes gradientShift {
-  0%   { background-position:   0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position:   0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 .header::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(5px);
   z-index: 2;
 }
+
 .header-content {
   position: relative;
   text-align: center;
   z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Logo in white circle */
+.image-wrapper {
+  background: #fff;
+  border-radius: 50%;
+  padding: 10px;
 }
 .image-wrapper img {
-  max-width: 200px;
-  height: auto;
-  margin-bottom: 10px;
+  display: block;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+/* Main heading */
+#typed-header {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #000;
 }
 
 /* Typing effect & Blinking Caret */
 .typing-wrapper {
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 5px;
-}
-#typed-header {
-  font-size: 1.6em;
-  font-weight: bold;
-  color: #000;
 }
 #changing-text {
   font-size: 1.5em;
@@ -80,14 +101,17 @@ html, body {
   animation: blink-caret 0.75s step-end infinite;
 }
 @keyframes blink-caret {
-  0%, 100% { opacity: 0; }
-  50%      { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 /* CTA Button */
 .cta-button {
-  display: inline-block;
-  margin-top: 20px;
   padding: 15px 30px;
   background: #fff;
   color: #4a90e2;
@@ -119,4 +143,4 @@ html, body {
   font-size: 1.5em;
 }
 
-/* (Rest of your section / form / footer styles unchanged) */
+/* (Other section / form / footer styles unchanged) */
