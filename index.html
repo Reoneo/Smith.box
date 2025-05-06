@@ -2,82 +2,65 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <!-- Improved Meta Description -->
-  <meta name="description" content="Claim blockchain-powered subdomains with smith.box - Own & manage Web2 + Web3 domains as NFTs. Secure your decentralized identity for websites, NFTs, and dApps.">
-  
-  <!-- Open Graph Tags for Social Sharing -->
-  <meta property="og:title" content="smith.box | Decentralized Web2 + Web3 Subdomains & NFT Naming Service">
-  <meta property="og:description" content="Bridge Web2 domains with Web3 ownership. Create, trade, and manage NFT-based subdomains for your digital identity.">
-  <meta property="og:image" content="https://raw.seadn.io/files/acf5d75b1a286114b2d193089e4a553f.svg">
-  <meta property="og:url" content="https://smith.box">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smith.box</title>
 
-  <!-- Keyword-Optimized Title -->
-  <title>Decentralized Web2 + Web3 Subdomains & NFT Naming Service</title>
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
+  <!-- Stylesheet -->
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- Preconnect to CDNs for Faster Loading -->
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
-  <script src="script.js" defer></script>
+  <!-- PapaParse for CSV parsing -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <!-- ethers.js for wallet + contract interaction -->
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
 </head>
 <body>
-  <!-- Wallet connect icon -->
-  <div id="wallet-connect" title="Connect Wallet">
-    <i class="fas fa-wallet"></i>
-  </div>
+  <div class="header">
+    <!-- Wallet Connect Icon -->
+    <div id="wallet-connect" title="Connect Wallet">🔗</div>
 
-  <header class="header">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
     <div class="header-content">
-      <!-- Enhanced Alt Text for Logo -->
+      <!-- Domain Search Bar -->
+      <div class="search-bar">
+        <input
+          type="text"
+          id="domain-input"
+          placeholder="Enter subdomain (e.g. Zoe.Smith.box)"
+        />
+        <button id="search-btn">Check</button>
+      </div>
+      <div id="search-result"></div>
+
+      <!-- Logo -->
       <div class="image-wrapper">
-        <img src="https://i.imgur.com/R3tbBZn.png" 
-             alt="smith.box - Web3 Subdomain Service Logo" 
-             loading="lazy">
+        <img src="logo.png" alt="Smith.box Logo" />
       </div>
 
-      <!-- Keyword-Rich Header -->
-      <h1 id="typed-header">Own Your Web3 Identity</h1>
+      <!-- Main Heading -->
+      <h1 id="typed-header">Welcome to Smith.box</h1>
 
+      <!-- Typing Animation -->
       <div class="typing-wrapper">
         <span id="changing-text"></span><span class="caret">|</span>
       </div>
 
-      <!-- Improved CTA Anchor Text -->
-      <a href="https://www.linkedin.com/company/smith-box" 
-         class="cta-button" 
-         target="_blank"
-         aria-label="Join">
-        Join
-      </a>
+      <!-- Call To Action -->
+      <a href="#" class="cta-button">Get Started</a>
     </div>
-  </header>
+  </div>
 
-  <nav class="navbar" id="navbar">
-    <ul>
-      <li>
-        <a href="mailto:hello@smith.box" title="Email">
-          <i class="fas fa-envelope"></i>
-        </a>
-      </li>
-      <li>
-        <!-- Updated Website Link (verify URL) -->
-        <a href="https://recruitment.box" 
-           title="Talent Verified Onchain"
-           target="_blank"
-           aria-label="recruitment.box Website">
-          <i class="fas fa-globe"></i>
-        </a>
-      </li>
-    </ul>
-  </nav>
+  <!-- Your CSV of taken domains should be at /domains.csv -->
+
+  <!-- Your main script -->
+  <script src="script.js"></script>
 </body>
 </html>
