@@ -7,7 +7,7 @@
   <meta property="og:image" content="https://i.imgur.com/ngwLlPH.jpeg">
   <title>Tokenized WEB2 & WEB3 Domain NFT Naming Service</title>
 
-  <!-- Font Awesome for icons -->
+  <!-- Font Awesome -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -15,28 +15,33 @@
 
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- Ethers.js for wallet connection -->
+  <!-- 1) ethers UMD build (exposes window.ethers) -->
   <script
-    src="https://cdn.jsdelivr.net/npm/ethers@5.7.0/dist/ethers.min.js"
+    src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"
     defer
   ></script>
-  <!-- Anime.js and our logic -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
+
+  <!-- 2) Anime.js -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"
+    defer
+  ></script>
+
+  <!-- 3) Your logic -->
   <script src="script.js" defer></script>
 </head>
 <body>
-  <!-- Wallet Connect Icon (top-left) -->
+  <!-- Wallet connect icon -->
   <div id="wallet-connect" title="Connect Wallet">
     <i class="fas fa-wallet"></i>
   </div>
 
-  <!-- Header with animated gradient & typing -->
   <header class="header">
     <div class="header-content">
       <div class="image-wrapper">
         <img
           src="https://i.imgur.com/R3tbBZn.png"
-          alt="Logo Image"
+          alt="Logo"
           loading="lazy"
         />
       </div>
@@ -56,7 +61,6 @@
     </div>
   </header>
 
-  <!-- Top-right nav icons -->
   <nav class="navbar" id="navbar">
     <ul>
       <li>
@@ -75,7 +79,6 @@
     </ul>
   </nav>
 
-  <!-- (Other sections here...) -->
-
+  <!-- (Other sections...) -->
 </body>
 </html>
