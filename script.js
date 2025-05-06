@@ -1,17 +1,11 @@
 // script.js
 
 document.addEventListener('DOMContentLoaded', () => {
-  // (1) TYPING ANIMATION (unchanged)…
+  // 1) TYPING ANIMATION
   const subdomains = [
-    'Agent.Smith.box',
-    'Sam.Smith.box',
-    'Jessica.Smith.box',
-    'Dave.Smith.box',
-    'Zoe.Smith.box',
-    'Wallet.Smith.box',
-    'NFT.Smith.box',
-    '1.Smith.box',
-    'Tom.Smith.box'
+    'Agent.Smith.box', 'Sam.Smith.box', 'Jessica.Smith.box',
+    'Dave.Smith.box', 'Zoe.Smith.box','Wallet.Smith.box',
+    'NFT.Smith.box','1.Smith.box','Tom.Smith.box'
   ];
   let idx = 0;
   const typingSpeed = 100, erasingSpeed = 50, delayBetween = 2000;
@@ -38,13 +32,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   typeWord(subdomains[idx]);
 
-
-  // (2) SAFE WALLET CONNECT + ENS AVATAR RESOLUTION
+  // 2) SAFE WALLET CONNECT + ENS AVATAR LOOKUP
   const walletBtn = document.getElementById('wallet-connect');
-  const logoImg   = document.querySelector('.image-wrapper img');
+  const logoImg   = document.getElementById('logo-img');
   let provider, signer;
 
   async function connectWallet() {
+    console.log('[wallet] connectWallet start');
     if (typeof window.ethers === 'undefined') {
       return alert('ethers.js not loaded.');
     }
@@ -54,39 +48,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
+      // request accounts
       await provider.send('eth_requestAccounts', []);
       signer = provider.getSigner();
       const address = await signer.getAddress();
+      console.log('[wallet] connected:', address);
 
-      // 1) UI update
       walletBtn.classList.add('connected');
       walletBtn.title = address;
 
-      // 2) Fetch ENS profile via Cloudflare Worker API
-      //    GET /address/:address?texts=avatar  [oai_citation:0‡GitHub](https://github.com/gskril/ens-api?utm_source=chatgpt.com)
-      const apiURL = `https://ens-api.gskril.workers.dev/address/${address}?texts=avatar`;
-      const res    = await fetch(apiURL);
-      if (res.ok) {
-        const json = await res.json();
-        if (json.avatar) {
-          logoImg.src = json.avatar;
-        }
-      }
-      // 3) Listen for account/chain changes
+      // Attempt ENS lookup—but don't block page if it fails
+      lookupENSAvatar(address).catch(err => {
+        console.warn('[ENS] lookup failed:', err);
+      });
+
+      // listen for changes
       window.ethereum.on('accountsChanged', handleAccountsChanged);
       window.ethereum.on('chainChanged',  handleChainChanged);
 
     } catch (err) {
       if (err.code === 4001) {
-        console.log('User rejected wallet connection');
+        console.log('[wallet] user rejected request');
       } else {
-        console.error('Wallet connect failed', err);
+        console.error('[wallet] connect error', err);
         alert('Connection failed: ' + (err.message || err));
       }
     }
   }
 
+  async function lookupENSAvatar(address) {
+    console.log('[ENS] lookup for', address);
+    // public ENS-API worker endpoint
+    const url = `https://ens-api.gskril.workers.dev/address/${address}?texts=avatar`;
+    const resp = await fetch(url, { cache: 'no-store' });
+    if (!resp.ok) {
+      throw new Error(`HTTP ${resp.status}`);
+    }
+    const data = await resp.json();
+    console.log('[ENS] response', data);
+    if (data.avatar) {
+      // swap in avatar
+      logoImg.src = data.avatar;
+    } else {
+      console.log('[ENS] no avatar record found');
+    }
+  }
+
   function handleAccountsChanged(accounts) {
+    console.log('[wallet] accountsChanged', accounts);
     if (accounts.length === 0) {
       walletBtn.classList.remove('connected');
       walletBtn.title = 'Connect Wallet';
@@ -98,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleChainChanged(_chainId) {
+    console.log('[wallet] chainChanged', _chainId);
     window.location.reload();
   }
 
