@@ -1,49 +1,38 @@
-/* styles.css */
-
-/* 1. Reset & Base */
+/* Reset + Base */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 html,
 body {
   height: 100%;
   width: 100%;
-  overflow: hidden;           /* disable all scrolling */
+  overflow: hidden; /* disable scrolling */
   font-family: 'Arial', sans-serif;
   background: #ffffff;
-  color: #000000;
-  scroll-behavior: auto;
+  color: #000;
 }
 
-/* 2. Wallet Button (top-left) */
-#wallet-button {
+/* Wallet-connect icon */
+#wallet-connect {
   position: absolute;
   top: 20px;
   left: 20px;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 1.2em;
-  color: #ffffff;
+  z-index: 5;
+  font-size: 1.75em;
+  color: #fff;
   cursor: pointer;
-  user-select: none;
   transition: color 0.2s ease;
 }
-#wallet-button.connected {
-  color: #0f0;                /* green when connected */
+#wallet-connect.connected {
+  color: #0f0; /* green when connected */
 }
-#wallet-button span {
-  font-size: 0.9em;
-}
-#wallet-button:hover {
-  color: #cccccc;
+#wallet-connect:hover {
+  color: #ccc;
 }
 
-/* 3. Header & Animated Gradient */
+/* Header & Animated Gradient */
 .header {
   position: relative;
   overflow: hidden;
@@ -62,9 +51,9 @@ body {
   z-index: 1;
 }
 @keyframes gradientShift {
-  0%   { background-position: 0%   50%; }
+  0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
-  100% { background-position: 0%   50%; }
+  100% { background-position: 0% 50%; }
 }
 .header::after {
   content: '';
@@ -75,7 +64,6 @@ body {
   z-index: 2;
 }
 
-/* 4. Header Content Layout */
 .header-content {
   position: relative;
   text-align: center;
@@ -86,27 +74,27 @@ body {
   gap: 20px;
 }
 
-/* 5. Logo in Doubled White Circle */
+/* Logo in doubled white circle */
 .image-wrapper {
-  background: #ffffff;
+  background: #fff;
   border-radius: 50%;
-  padding: 20px;               /* doubled from 10px */
+  padding: 20px;
 }
 .image-wrapper img {
   display: block;
-  width: 240px;                /* doubled from 120px */
-  height: 240px;               /* doubled from 120px */
+  width: 240px;
+  height: 240px;
   border-radius: 50%;
 }
 
-/* 6. Main Heading */
+/* Main heading */
 #typed-header {
   font-size: 1.8em;
   font-weight: bold;
-  color: #000000;
+  color: #000;
 }
 
-/* 7. Typing Animation & Blinking Caret */
+/* Typing effect & Blinking Caret */
 .typing-wrapper {
   display: flex;
   align-items: center;
@@ -114,16 +102,16 @@ body {
 }
 #changing-text {
   font-size: 1.5em;
-  color: #ffffff;
+  color: #fff;
   white-space: nowrap;
   overflow: hidden;
   min-height: 1.5em;
 }
 .caret {
   font-size: 1.5em;
-  color: #ffffff;
+  color: #fff;
   position: relative;
-  top: -0.2em;                 /* nudge up slightly for alignment */
+  top: -0.2em; /* properly aligned */
   animation: blink-caret 0.75s step-end infinite;
 }
 @keyframes blink-caret {
@@ -131,23 +119,23 @@ body {
   50%      { opacity: 1; }
 }
 
-/* 8. Call-to-Action Button */
+/* CTA Button */
 .cta-button {
   padding: 15px 30px;
-  background-color: #ffffff;
+  background: #fff;
   color: #4a90e2;
   text-decoration: none;
   border-radius: 25px;
   font-size: 1.2em;
-  transition: background-color 0.3s, color 0.3s, transform 0.3s;
+  transition: background 0.3s, color 0.3s, transform 0.3s;
 }
 .cta-button:hover {
-  background-color: #4a90e2;
-  color: #ffffff;
+  background: #4a90e2;
+  color: #fff;
   transform: scale(1.05);
 }
 
-/* 9. Navbar Icons (top-right) */
+/* Navbar Icons */
 .navbar {
   position: absolute;
   top: 20px;
@@ -160,155 +148,6 @@ body {
   gap: 15px;
 }
 .navbar a {
-  color: #ffffff;
+  color: #fff;
   font-size: 1.5em;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.navbar a:hover {
-  color: #cccccc;
-}
-
-/* 10. Section Styling */
-.section {
-  padding: 60px 20px;
-  background-color: #ffffff;
-  margin: 20px auto;
-  width: 90%;
-  max-width: 1200px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  text-align: left;
-}
-.section h2 {
-  font-size: 2em;
-  margin-bottom: 15px;
-}
-.section p {
-  font-size: 1.1em;
-  line-height: 1.6;
-  margin-bottom: 15px;
-}
-.section ul {
-  padding-left: 20px;
-  margin-bottom: 15px;
-}
-.section ul li {
-  margin-bottom: 10px;
-  line-height: 1.6;
-}
-
-/* 11. Contact Form */
-section.contact form {
-  display: flex;
-  flex-direction: column;
-}
-section.contact label {
-  margin-bottom: 5px;
-  font-size: 1.1em;
-}
-section.contact input,
-section.contact textarea {
-  margin-bottom: 15px;
-  padding: 10px;
-  border: 1px solid #555555;
-  border-radius: 5px;
-  background: #333333;
-  color: #ffffff;
-  width: 100%;
-  box-sizing: border-box;
-  font-size: 1em;
-}
-section.contact button.submit-button {
-  padding: 15px;
-  border: none;
-  border-radius: 5px;
-  background-color: #4a90e2;
-  color: #ffffff;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
-  font-size: 1.1em;
-}
-section.contact button.submit-button:hover {
-  background-color: #9013fe;
-  transform: scale(1.05);
-}
-
-/* 12. Social Share Icons */
-.social-share {
-  text-align: center;
-  margin: 20px 0 10px;
-}
-.social-share a {
-  display: inline-block;
-  margin: 0 10px;
-}
-.social-share img {
-  width: 40px;
-  height: auto;
-}
-
-/* 13. Footer */
-.footer {
-  text-align: center;
-  padding: 10px 0;
-  background-color: #000000;
-  color: #ffffff;
-  margin-top: 20px;
-  font-size: 0.9em;
-}
-
-/* 14. Media Queries */
-@media (max-width: 768px) {
-  .image-wrapper img {
-    width: 200px;
-    height: 200px;
-  }
-  #typed-header {
-    font-size: 1.5em;
-  }
-  #changing-text,
-  .caret {
-    font-size: 1.3em;
-  }
-  .cta-button {
-    padding: 12px 24px;
-    font-size: 1em;
-  }
-  .section {
-    padding: 40px 15px;
-  }
-  .section h2 {
-    font-size: 1.5em;
-  }
-  .section p {
-    font-size: 1em;
-  }
-}
-
-@media (max-width: 480px) {
-  .image-wrapper img {
-    width: 160px;
-    height: 160px;
-  }
-  #typed-header {
-    font-size: 1.3em;
-  }
-  #changing-text,
-  .caret {
-    font-size: 1em;
-  }
-  .cta-button {
-    padding: 8px 16px;
-    font-size: 0.9em;
-  }
-  .section {
-    padding: 30px 10px;
-  }
-  .section h2 {
-    font-size: 1.3em;
-  }
-  .section p {
-    font-size: 0.9em;
-  }
 }
