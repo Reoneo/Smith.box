@@ -1,7 +1,11 @@
-// script.js
-
 document.addEventListener('DOMContentLoaded', () => {
-  // --- 1) TYPING ANIMATION (unchanged) ---
+  // Quick guard: ensure ethers is loaded
+  if (typeof window.ethers === 'undefined') {
+    alert('Connection failed: ethers.js not loaded.');
+    return;
+  }
+
+  // --- 1) TYPING ANIMATION ---
   const subdomains = [
     'Agent.Smith.box',
     'Sam.Smith.box',
@@ -20,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function typeWord(word, i = 0) {
     if (i < word.length) {
       textEl.textContent += word.charAt(i);
-      setTimeout(() => typeWord(word, i+1), typingSpeed);
+      setTimeout(() => typeWord(word, i + 1), typingSpeed);
     } else {
       setTimeout(eraseWord, delayBetween);
     }
@@ -36,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   typeWord(subdomains[idx]);
 
-  // --- 2) SAFE WALLET CONNECT ---
+  // --- 2) SAFE WALLET CONNECT USING Ethers UMD API ---
   const walletBtn = document.getElementById('wallet-connect');
   let provider, signer;
 
@@ -47,19 +51,20 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // 1) create ethers provider and request accounts
+      // 1) Create ethers provider
       provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
-      await provider.send('eth_requestAccounts', []);  // pop-up
+      // 2) Request account access
+      await provider.send('eth_requestAccounts', []);
 
-      // 2) get signer and address
+      // 3) Get signer & address
       signer = provider.getSigner();
       const address = await signer.getAddress();
 
-      // 3) update UI
+      // 4) Update UI
       walletBtn.classList.add('connected');
       walletBtn.title = address;
 
-      // 4) listen for account or chain changes
+      // 5) Listen for changes
       window.ethereum.on('accountsChanged', handleAccountsChanged);
       window.ethereum.on('chainChanged', handleChainChanged);
     } catch (err) {
@@ -70,7 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function handleAccountsChanged(accounts) {
     if (accounts.length === 0) {
-      // disconnected
       walletBtn.classList.remove('connected');
       walletBtn.title = 'Connect Wallet';
     } else {
@@ -79,11 +83,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleChainChanged(_chainId) {
-    // recommended by EIP-1193: reload on chain change
     window.location.reload();
   }
 
-  // Clean up on unload
+  // Cleanup listeners on unload
   window.addEventListener('beforeunload', () => {
     if (window.ethereum && window.ethereum.removeListener) {
       window.ethereum.removeListener('accountsChanged', handleAccountsChanged);
@@ -91,6 +94,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Attach click
   walletBtn.addEventListener('click', connectWallet);
 });
