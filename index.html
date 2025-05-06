@@ -8,6 +8,15 @@
   <!-- Stylesheet -->
   <link rel="stylesheet" href="styles.css" />
 
+  <!-- Font Awesome for icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-pVn+N6mEjgKqHxsBzE6xLqFl6UOq6Zg+kUcTn6qN5lcGX0XapwlS+vH+7Jc3UoWF4YEJf0oh/9z3N1ob+XvUsg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
   <!-- PapaParse for CSV parsing -->
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <!-- ethers.js for wallet + contract interaction -->
@@ -58,9 +67,36 @@
     </div>
   </div>
 
-  <!-- Your CSV of taken domains should be at /domains.csv -->
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-item">
+      <i class="fas fa-globe"></i>
+      <a href="https://www.smith.box" target="_blank" rel="noopener">www.smith.box</a>
+    </div>
 
-  <!-- Your main script -->
+    <div class="footer-item">
+      <i class="fas fa-envelope"></i>
+      <a href="mailto:hello@smith.box">hello@smith.box</a>
+    </div>
+
+    <div class="footer-item">
+      <i class="fas fa-cubes"></i>
+      <a
+        id="dynamic-link"
+        href="https://collectors.poap.xyz/scan/smith.box"
+        target="_blank"
+        rel="noopener"
+      >www.poap.xyz/smith.box</a>
+    </div>
+
+    <div class="footer-item">
+      <i class="fas fa-wallet"></i>
+      <span>Smith.box</span>
+      <i class="fab fa-ethereum"></i>
+    </div>
+  </footer>
+
+  <!-- Main Script -->
   <script src="script.js"></script>
 </body>
 </html>
