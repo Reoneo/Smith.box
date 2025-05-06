@@ -1,84 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <meta name="description" content="Smith.box offers tokenized WEB2 & WEB3 domain NFT naming.">
-  <meta property="og:image" content="https://i.imgur.com/ngwLlPH.jpeg">
-  <title>Tokenized WEB2 & WEB3 Domain NFT Naming Service</title>
-
-  <!-- Font Awesome -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-  />
-
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- ethers UMD build -->
-  <script
-    src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"
-    defer
-  ></script>
-
-  <!-- Anime.js -->
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"
-    defer
-  ></script>
-
-  <!-- Your logic -->
-  <script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <title>ENS Avatar Fetcher</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 2rem auto; }
+        .container { padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+        .avatar { max-width: 200px; margin-top: 20px; }
+        .method { margin-bottom: 2rem; }
+    </style>
 </head>
 <body>
-  <!-- Wallet Connect Icon -->
-  <div id="wallet-connect" title="Connect Wallet">
-    <i class="fas fa-wallet"></i>
-  </div>
+    <h1>ENS Avatar Fetcher</h1>
 
-  <header class="header">
-    <div class="header-content">
-      <div class="image-wrapper">
-        <!-- will swap to ENS avatar if any -->
-        <img
-          src="https://i.imgur.com/R3tbBZn.png"
-          alt="Logo"
-          loading="lazy"
-          id="logo-img"
-        />
-      </div>
-
-      <h1 id="typed-header">Reserve Your Digital ID</h1>
-
-      <div class="typing-wrapper">
-        <span id="changing-text"></span><span class="caret">|</span>
-      </div>
-
-      <a
-        href="https://www.linkedin.com/company/smith-box"
-        class="cta-button"
-        target="_blank"
-        >Learn More</a
-      >
+    <!-- Method 1: Using Wagmi -->
+    <div class="method">
+        <h2>Method 1: Using Wagmi + Viem</h2>
+        <div class="container">
+            <input type="text" id="ensInput1" placeholder="Enter ENS name (e.g., vitalik.eth)">
+            <button onclick="fetchWithWagmi()">Fetch Avatar</button>
+            <div id="avatarContainer1"></div>
+        </div>
     </div>
-  </header>
 
-  <nav class="navbar" id="navbar">
-    <ul>
-      <li>
-        <a href="mailto:hello@smith.box" title="Email">
-          <i class="fas fa-envelope"></i>
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://www.recruitment.box"
-          title="Website"
-          target="_blank"
-          ><i class="fas fa-globe"></i
-        ></a>
-      </li>
-    </ul>
-  </nav>
+    <!-- Method 2: Using ENSJS-v3 -->
+    <div class="method">
+        <h2>Method 2: Using ENSJS-v3</h2>
+        <div class="container">
+            <input type="text" id="ensInput2" placeholder="Enter ENS name (e.g., vitalik.eth)">
+            <button onclick="fetchWithENSJS()">Fetch Avatar</button>
+            <div id="avatarContainer2"></div>
+        </div>
+    </div>
+
+    <!-- Required Libraries -->
+    <!-- Wagmi + Viem -->
+    <script src="https://cdn.jsdelivr.net/npm/viem@1.0.0/dist/viem.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/wagmi@1.0.0/dist/wagmi.js"></script>
+    
+    <!-- ENSJS-v3 -->
+    <script src="https://cdn.jsdelivr.net/npm/@ensdomains/ensjs@3.0.0/dist/ensjs.umd.min.js"></script>
+
+    <script>
+        // ========== Method 1: Wagmi Implementation ==========
+        async function fetchWithWagmi() {
+            const ensName = document.getElementById('ensInput1').value;
+            const container = document.getElementById('avatarContainer1');
+            container.innerHTML = 'Loading...';
+
+            try {
+                const client = wagmi.createClient({
+                    transport: viem.http('https://mainnet.infura.io/v3/YOUR_INFURA_KEY')
+                });
+
+                const avatar = await wagmi.fetchEnsAvatar(client, {
+                    name: ensName,
+                    chainId: 1
+                });
+
+                if (avatar) {
+                    container.innerHTML = `<img src="${avatar}" class="avatar" alt="ENS Avatar">`;
+                } else {
+                    container.innerHTML = 'No avatar found for this ENS name';
+                }
+            } catch (error) {
+                container.innerHTML = `Error: ${error.message}`;
+            }
+        }
+
+        // ========== Method 2: ENSJS-v3 Implementation ==========
+        async function fetchWithENSJS() {
+            const ensName = document.getElementById('ensInput2').value;
+            const container = document.getElementById('avatarContainer2');
+            container.innerHTML = 'Loading...';
+
+            try {
+                const transport = viem.http('https://mainnet.infura.io/v3/YOUR_INFURA_KEY');
+                const ens = new ENSJS.ENS({ transport, chainId: 1 });
+                
+                const { url } = await ens.getAvatar(ensName);
+                
+                if (url) {
+                    container.innerHTML = `<img src="${url}" class="avatar" alt="ENS Avatar">`;
+                } else {
+                    container.innerHTML = 'No avatar found for this ENS name';
+                }
+            } catch (error) {
+                container.innerHTML = `Error: ${error.message}`;
+            }
+        }
+    </script>
+
+    <!-- Notes -->
+    <div style="margin-top: 2rem; color: #666;">
+        <h3>Important Notes:</h3>
+        <ul>
+            <li>Replace YOUR_INFURA_KEY with your actual Infura project ID</li>
+            <li>Make sure the ENS name has an avatar set in its resolver</li>
+            <li>For offchain avatars (CCIP Read), ensure your provider supports ERC-3668</li>
+            <li>You might need to handle CORS issues in production (consider using a proxy)</li>
+        </ul>
+    </div>
 </body>
 </html>
