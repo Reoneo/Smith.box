@@ -2,101 +2,83 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Smith.box</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="description" content="Smith.box offers tokenized WEB2 & WEB3 domain NFT naming.">
+  <meta property="og:image" content="https://i.imgur.com/ngwLlPH.jpeg">
+  <title>Tokenized WEB2 & WEB3 Domain NFT Naming Service</title>
 
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- Font Awesome for icons -->
+  <!-- Font Awesome -->
   <link
     rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    integrity="sha512-pVn+N6mEjgKqHxsBzE6xLqFl6UOq6Zg+kUcTn6qN5lcGX0XapwlS+vH+7Jc3UoWF4YEJf0oh/9z3N1ob+XvUsg=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
   />
 
-  <!-- PapaParse for CSV parsing -->
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-  <!-- ethers.js for wallet + contract interaction -->
-  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- 1) ethers UMD build (exposes window.ethers) -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"
+    defer
+  ></script>
+
+  <!-- 2) Anime.js -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"
+    defer
+  ></script>
+
+  <!-- 3) Your logic -->
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <div class="header">
-    <!-- Wallet Connect Icon -->
-    <div id="wallet-connect" title="Connect Wallet">🔗</div>
+  <!-- Wallet connect icon -->
+  <div id="wallet-connect" title="Connect Wallet">
+    <i class="fas fa-wallet"></i>
+  </div>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-      <ul>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-
-    <!-- Main Content -->
+  <header class="header">
     <div class="header-content">
-      <!-- Domain Search Bar -->
-      <div class="search-bar">
-        <input
-          type="text"
-          id="domain-input"
-          placeholder="Enter subdomain (e.g. Zoe.Smith.box)"
-        />
-        <button id="search-btn">Check</button>
-      </div>
-      <div id="search-result"></div>
-
-      <!-- Logo -->
       <div class="image-wrapper">
-        <img src="logo.png" alt="Smith.box Logo" />
+        <img
+          src="https://i.imgur.com/R3tbBZn.png"
+          alt="Logo"
+          loading="lazy"
+        />
       </div>
 
-      <!-- Main Heading -->
-      <h1 id="typed-header">Welcome to Smith.box</h1>
+      <h1 id="typed-header">Reserve Your Digital ID</h1>
 
-      <!-- Typing Animation -->
       <div class="typing-wrapper">
         <span id="changing-text"></span><span class="caret">|</span>
       </div>
 
-      <!-- Call To Action -->
-      <a href="#" class="cta-button">Get Started</a>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-item">
-      <i class="fas fa-globe"></i>
-      <a href="https://www.smith.box" target="_blank" rel="noopener">www.smith.box</a>
-    </div>
-
-    <div class="footer-item">
-      <i class="fas fa-envelope"></i>
-      <a href="mailto:hello@smith.box">hello@smith.box</a>
-    </div>
-
-    <div class="footer-item">
-      <i class="fas fa-cubes"></i>
       <a
-        id="dynamic-link"
-        href="https://collectors.poap.xyz/scan/smith.box"
+        href="https://www.linkedin.com/company/smith-box"
+        class="cta-button"
         target="_blank"
-        rel="noopener"
-      >www.poap.xyz/smith.box</a>
+        >Learn More</a
+      >
     </div>
+  </header>
 
-    <div class="footer-item">
-      <i class="fas fa-wallet"></i>
-      <span>Smith.box</span>
-      <i class="fab fa-ethereum"></i>
-    </div>
-  </footer>
+  <nav class="navbar" id="navbar">
+    <ul>
+      <li>
+        <a href="mailto:hello@smith.box" title="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://www.recruitment.box"
+          title="Website"
+          target="_blank"
+          ><i class="fas fa-globe"></i
+        ></a>
+      </li>
+    </ul>
+  </nav>
 
-  <!-- Main Script -->
-  <script src="script.js"></script>
+  <!-- (Other sections...) -->
 </body>
 </html>
