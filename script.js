@@ -1,107 +1,144 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // --- 1) TYPING ANIMATION ---
-  const subdomains = [
-    'Agent.Smith.box',
-    'Sam.Smith.box',
-    'Jessica.Smith.box',
-    'Dave.Smith.box',
-    'Zoe.Smith.box',
-    'Wallet.Smith.box',
-    'NFT.Smith.box',
-    '1.Smith.box',
-    'Tom.Smith.box'
-  ];
-  let idx = 0;
-  const typingSpeed = 100,
-        erasingSpeed = 50,
-        delayBetween = 2000;
-  const textEl = document.getElementById('changing-text');
+// ens-avatar-fetcher.js
 
-  function typeWord(word, i = 0) {
-    if (i < word.length) {
-      textEl.textContent += word.charAt(i);
-      setTimeout(() => typeWord(word, i + 1), typingSpeed);
-    } else {
-      setTimeout(eraseWord, delayBetween);
-    }
-  }
+// Configuration
+const CONFIG = {
+  infuraKey: 'YOUR_INFURA_KEY', // Replace with your Infura key
+  cacheTTL: 300000, // 5 minutes cache
+  ensjsVersion: '3.0.0',
+  defaultChainId: 1,
+  avatarSizes: [256, 512] // Supported avatar sizes
+};
 
-  function eraseWord() {
-    if (textEl.textContent.length > 0) {
-      textEl.textContent = textEl.textContent.slice(0, -1);
-      setTimeout(eraseWord, erasingSpeed);
-    } else {
-      idx = (idx + 1) % subdomains.length;
-      setTimeout(() => typeWord(subdomains[idx]), typingSpeed);
-    }
-  }
+// Cache Store
+const avatarCache = new Map();
 
-  typeWord(subdomains[idx]);
-
-  // --- 2) WALLET CONNECT + ENS Avatar Integration ---
-  const walletBtn = document.getElementById('wallet-connect');
-  let provider, signer;
-
-  async function connectWallet() {
-    if (typeof window.ethers === 'undefined') {
-      return alert('ethers.js not loaded.');
-    }
-    if (!window.ethereum) {
-      return alert('No Ethereum provider detected. Install MetaMask.');
-    }
-
-    try {
-      provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
-      await provider.send('eth_requestAccounts', []);
-      signer = provider.getSigner();
-      const address = await signer.getAddress();
-
-      walletBtn.classList.add('connected');
-      walletBtn.title = address;
-
-      window.ethereum.on('accountsChanged', handleAccountsChanged);
-      window.ethereum.on('chainChanged', handleChainChanged);
-
-      // Resolve ENS avatar using gskril/ens-api
-      fetch(`https://ens-api.sats.gg/ens/resolve/${address}`)
-        .then(res => res.json())
-        .then(data => {
-          if (data && data.avatar) {
-            const logoImg = document.querySelector('.image-wrapper img');
-            logoImg.src = data.avatar;
-          }
-        })
-        .catch(err => console.warn('ENS avatar not found:', err));
-
-    } catch (err) {
-      if (err.code === 4001) {
-        console.log('User rejected wallet connection');
-      } else {
-        console.error('Wallet connect failed', err);
-        alert('Connection failed: ' + (err.message || err));
-      }
-    }
-  }
-
-  function handleAccountsChanged(accounts) {
-    if (accounts.length === 0) {
-      walletBtn.classList.remove('connected');
-      walletBtn.title = 'Connect Wallet';
-    } else {
-      walletBtn.title = accounts[0];
-    }
-  }
-
-  function handleChainChanged(_chainId) {
-    window.location.reload();
-  }
-
-  window.addEventListener('beforeunload', () => {
-    if (window.ethereum && window.ethereum.removeListener) {
-      window.ethereum.removeListener('accountsChanged', handleAccountsChanged);
-      window.ethereum.removeListener('chainChanged', handleChainChanged);
-    }
-  });
-
-  walletBtn.addEventListener('click', connectWallet);
+// Initialize Providers
+const httpTransport = viem.http(`https://mainnet.infura.io/v3/${CONFIG.infuraKey}`);
+const wagmiClient = wagmi.createClient({
+  transport: httpTransport,
+  chainId: CONFIG.defaultChainId
 });
+
+const ensInstance = new ENSJS.ENS({
+  transport: httpTransport,
+  chainId: CONFIG.defaultChainId
+});
+
+// DOM Elements
+const elements = {
+  wagmiInput: document.getElementById('ensInput1'),
+  wagmiButton: document.querySelector('[onclick="fetchWithWagmi()"]'),
+  wagmiContainer: document.getElementById('avatarContainer1'),
+  
+  ensjsInput: document.getElementById('ensInput2'),
+  ensjsButton: document.querySelector('[onclick="fetchWithENSJS()"]'),
+  ensjsContainer: document.getElementById('avatarContainer2')
+};
+
+// Event Listeners
+document.addEventListener('DOMContentLoaded', () => {
+  elements.wagmiButton.addEventListener('click', handleWagmiFetch);
+  elements.ensjsButton.addEventListener('click', handleEnsjsFetch);
+  
+  // Add debounced input handlers
+  elements.wagmiInput.addEventListener('input', debounce(prefetchAvatar, 500));
+  elements.ensjsInput.addEventListener('input', debounce(prefetchAvatar, 500));
+});
+
+// Utility Functions
+const debounce = (fn, delay) => {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => fn.apply(this, args), delay);
+  };
+};
+
+const validateENSName = (name) => {
+  return /^([a-z0-9-]+\.)+eth$/.test(name);
+};
+
+const updateUI = (container, content, type = 'success') => {
+  container.innerHTML = content;
+  container.className = `${type} avatar-container`;
+};
+
+// Core Logic
+async function fetchEnsAvatar(name, method = 'wagmi') {
+  try {
+    if (!validateENSName(name)) {
+      throw new Error('Invalid ENS name format');
+    }
+
+    // Check cache first
+    const cacheKey = `${name}-${method}`;
+    const cached = avatarCache.get(cacheKey);
+    if (cached && Date.now() - cached.timestamp < CONFIG.cacheTTL) {
+      return cached.data;
+    }
+
+    let avatarUrl;
+    
+    if (method === 'wagmi') {
+      avatarUrl = await wagmi.fetchEnsAvatar(wagmiClient, { name });
+    } else {
+      const { url } = await ensInstance.getAvatar(name);
+      avatarUrl = url;
+    }
+
+    if (!avatarUrl) throw new Error('No avatar found');
+    
+    // Verify URL format and response
+    const validProtocols = ['https:', 'ipfs:', 'data:'];
+    const urlObj = new URL(avatarUrl);
+    if (!validProtocols.includes(urlObj.protocol)) {
+      throw new Error('Unsupported avatar protocol');
+    }
+
+    // Cache the result
+    avatarCache.set(cacheKey, {
+      data: avatarUrl,
+      timestamp: Date.now()
+    });
+
+    return avatarUrl;
+  } catch (error) {
+    console.error(`ENS Avatar Error (${method}):`, error);
+    throw error;
+  }
+}
+
+// Handlers
+async function handleWagmiFetch() {
+  const name = elements.wagmiInput.value.trim();
+  updateUI(elements.wagmiContainer, '<div class="loading">Searching ENS records...</div>', 'loading');
+
+  try {
+    const avatar = await fetchEnsAvatar(name, 'wagmi');
+    updateUI(elements.wagmiContainer, `
+      <img src="${avatar}" 
+           class="avatar-image" 
+           alt="ENS Avatar for ${name}"
+           loading="lazy"
+           srcset="${CONFIG.avatarSizes.map(size => `${avatar}?size=${size} ${size}w`).join(', ')}">
+      <div class="success">Avatar found for ${name}</div>
+    `);
+  } catch (error) {
+    updateUI(elements.wagmiContainer, `
+      <div class="error">Error: ${error.message}</div>
+    `, 'error');
+  }
+}
+
+async function handleEnsjsFetch() {
+  const name = elements.ensjsInput.value.trim();
+  updateUI(elements.ensjsContainer, '<div class="loading">Querying ENS resolver...</div>', 'loading');
+
+  try {
+    const avatar = await fetchEnsAvatar(name, 'ensjs');
+    updateUI(elements.ensjsContainer, `
+      <img src="${avatar}" 
+           class="avatar-image" 
+           alt="ENS Avatar for ${name}"
+           loading="lazy"
+           srcset="${CONFIG.avatarSizes.map(size => `${avatar}?size=${size} ${size}w`
