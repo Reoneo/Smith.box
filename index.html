@@ -1,110 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <meta name="description" content="Smith.box: ENS lookup & profile demo" />
-  <title>Smith.box ENS Lookup & Profile</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="description" content="Smith.box offers tokenized WEB2 & WEB3 domain NFT naming.">
+  <meta property="og:image" content="https://i.imgur.com/ngwLlPH.jpeg">
+  <title>Tokenized WEB2 & WEB3 Domain NFT Naming Service</title>
 
-  <!-- Font Awesome for icons -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-  />
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
 
-  <!-- Your existing styles -->
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css" />
 
-  <!-- --- Required Libraries --- -->
-  <!-- 1) ethers.js for Ethereum provider -->
-  <script
-    src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"
-    defer
-  ></script>
-  <!-- 2) ENS.js v3 UMD build -->
-  <script
-    src="https://cdn.jsdelivr.net/npm/@ensdomains/ensjs@3.3.0/dist/ens.min.js"
-    defer
-  ></script>
-  <!-- 3) graphql-request for The Graph (optional) -->
-  <script
-    src="https://cdn.jsdelivr.net/npm/graphql-request@5.0.0/build/globals/index.min.js"
-    defer
-  ></script>
+  <!-- 1) ethers UMD build (exposes window.ethers) -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"
+    defer
+  ></script>
 
-  <!-- 4) Your custom logic -->
-  <script src="search.js" defer></script>
-  <script src="profile.js" defer></script>
+  <!-- 2) Anime.js -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"
+    defer
+  ></script>
+
+  <!-- 3) Your logic -->
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <!-- Wallet connect icon (unchanged) -->
-  <div id="wallet-connect" title="Connect Wallet">
-    <i class="fas fa-wallet"></i>
-  </div>
+  <!-- Wallet connect icon -->
+  <div id="wallet-connect" title="Connect Wallet">
+    <i class="fas fa-wallet"></i>
+  </div>
 
-  <!-- SEARCH UI -->
-  <div id="search-container" class="page-section">
-    <header class="header">
-      <div class="header-content">
-        <h1>Find an ENS Profile</h1>
-        <div class="typing-wrapper">
-          <input
-            type="text"
-            id="ens-search-input"
-            placeholder="Enter ENS name or wallet address"
-            aria-label="ENS name or Ethereum address"
-          />
-          <button id="ens-search-button">Search</button>
-        </div>
-      </div>
-    </header>
-  </div>
+  <header class="header">
+    <div class="header-content">
+      <div class="image-wrapper">
+        <img
+          src="https://i.imgur.com/R3tbBZn.png"
+          alt="Logo"
+          loading="lazy"
+        />
+      </div>
 
-  <!-- PROFILE UI (initially hidden) -->
-  <div id="profile-container" class="page-section" style="display: none;">
-    <header class="header">
-      <div class="header-content">
-        <h1 id="profile-name">Loading…</h1>
-        <p id="profile-address" class="small-text"></p>
-      </div>
-    </header>
+      <h1 id="typed-header">Reserve Your Digital ID</h1>
 
-    <section class="profile-card">
-      <div class="avatar-wrapper">
-        <img
-          id="profile-avatar"
-          src="/default-avatar.png"
-          alt="Avatar"
-          loading="lazy"
-        />
-      </div>
-      <div class="profile-details">
-        <p id="profile-description"></p>
-        <div id="social-links" class="social-links"></div>
-        <div id="keyword-tags" class="keyword-tags"></div>
-      </div>
-    </section>
-  </div>
+      <div class="typing-wrapper">
+        <span id="changing-text"></span><span class="caret">|</span>
+      </div>
 
-  <!-- Tiny router: show search or profile based on ?q= -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const params = new URLSearchParams(window.location.search);
-      const query = params.get('q')?.trim();
-      if (query) {
-        // hide search, show profile
-        document.getElementById('search-container').style.display = 'none';
-        document.getElementById('profile-container').style.display = 'block';
-        // kick off profile.js logic
-        if (window.loadENSProfile) {
-          window.loadENSProfile(query);
-        }
-      } else {
-        // show search
-        document.getElementById('search-container').style.display = 'block';
-        document.getElementById('profile-container').style.display = 'none';
-      }
-    });
-  </script>
+      <a
+        href="https://www.linkedin.com/company/smith-box"
+        class="cta-button"
+        target="_blank"
+        >Learn More</a
+      >
+    </div>
+  </header>
+
+  <nav class="navbar" id="navbar">
+    <ul>
+      <li>
+        <a href="mailto:hello@smith.box" title="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://www.recruitment.box"
+          title="Website"
+          target="_blank"
+          ><i class="fas fa-globe"></i
+        ></a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- (Other sections...) -->
 </body>
 </html>
