@@ -26,7 +26,7 @@ body {
   transition: color 0.2s ease;
 }
 #wallet-connect.connected {
-  color: #0f0; /* green when connected */
+  color: #0f0;
 }
 #wallet-connect:hover {
   color: #ccc;
@@ -39,7 +39,8 @@ body {
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;      /* moved from center to top */
+  padding-top: 80px;            /* push content down from very top */
 }
 .header::before {
   content: '';
@@ -111,7 +112,7 @@ body {
   font-size: 1.5em;
   color: #fff;
   position: relative;
-  top: -0.2em; /* properly aligned */
+  top: -0.2em;
   animation: blink-caret 0.75s step-end infinite;
 }
 @keyframes blink-caret {
