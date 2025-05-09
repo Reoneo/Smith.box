@@ -8,7 +8,7 @@ html,
 body {
   height: 100%;
   width: 100%;
-  overflow: hidden; /* disable scrolling */
+  overflow-x: hidden; /* only disable horizontal scroll */
   font-family: 'Arial', sans-serif;
   background: #ffffff;
   color: #000;
@@ -39,7 +39,8 @@ body {
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;  /* align to top */
+  padding-top: 80px;        /* push content down from very top */
 }
 .header::before {
   content: '';
@@ -150,4 +151,33 @@ body {
 .navbar a {
   color: #fff;
   font-size: 1.5em;
+}
+
+/* Mobile tweaks */
+@media (max-width: 600px) {
+  .header {
+    padding-top: 60px;    /* bring content down below top bar */
+    justify-content: flex-start;
+  }
+
+  .image-wrapper {
+    padding: 15px;        /* smaller white circle container */
+  }
+  .image-wrapper img {
+    width: 140px;
+    height: 140px;
+  }
+
+  #typed-header {
+    font-size: 1.4em;
+  }
+
+  #changing-text {
+    font-size: 1.2em;
+  }
+
+  .cta-button {
+    padding: 12px 24px;
+    font-size: 1em;
+  }
 }
