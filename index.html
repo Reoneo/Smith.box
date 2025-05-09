@@ -1,91 +1,86 @@
-<!DOCTYPE html>
+Index.HTML:
+
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Smith.box offers a blockchain name service for Web3 families, degens, and businesses with EVM-compatible NFT integration and XRP PayString support.">
-  <meta name="keywords" content="Web3 name service, EVM compatible NFT, NFT smith.box, smith.box name service, xrp paystring integration, Web3 for families, degen NFT service, EVM NFT name service, Web3 family-oriented services, Web3 EVM solutions, NFT naming for degens, xrp paystring NFT service, blockchain name service, Web3 EVM compatibility, NFT services for families, smith.box for degens, crypto name service, EVM blockchain naming, Web3 domain service, NFT blockchain integration, XRP paystring and NFTs, Web3 digital identity, Degen crypto services, NFT family solutions, EVM name registration, Smith family blockchain, XRP payment solutions">
-  <title>smith.box | Web3 Name Service & EVM NFT Identity</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    html, body {
-      height: 100%;
-      width: 100%;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #4a90e2, #9013fe);
-      color: #fff;
-    }
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      height: 100vh;
-      text-align: center;
-      padding: 20px;
-    }
-    .image-wrapper {
-      background: #fff;
-      border-radius: 50%;
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-    .image-wrapper img {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-    h1 {
-      font-size: 1.8em;
-      margin-bottom: 10px;
-      color: #fff;
-    }
-    p {
-      font-size: 1.2em;
-      color: #f0f0f0;
-      margin-bottom: 20px;
-    }
-    .cta-button {
-      padding: 12px 25px;
-      background: #fff;
-      color: #4a90e2;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s ease;
-    }
-    .cta-button:hover {
-      background: #4a90e2;
-      color: #fff;
-    }
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="description" content="Smith.box offers tokenized WEB2 & WEB3 domain NFT naming.">
+  <meta property="og:image" content="https://i.imgur.com/ngwLlPH.jpeg">
+  <title>Tokenized WEB2 & WEB3 Domain NFT Naming Service</title>
 
-    @media screen and (max-width: 480px) {
-      .image-wrapper img {
-        width: 140px;
-        height: 140px;
-      }
-      h1 {
-        font-size: 1.5em;
-      }
-      p {
-        font-size: 1em;
-      }
-    }
-  </style>
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- 1) ethers UMD build (exposes window.ethers) -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"
+    defer
+  ></script>
+
+  <!-- 2) Anime.js -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"
+    defer
+  ></script>
+
+  <!-- 3) Your logic -->
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <div class="header">
-    <div class="image-wrapper">
-      <img src="https://i.imgur.com/R3tbBZn.png" alt="smith.box logo" />
-    </div>
-    <h1>Reserve Your Digital ID</h1>
-    <p>Agent.Smith.box</p>
-    <a href="#" class="cta-button">Learn More</a>
+  <!-- Wallet connect icon -->
+  <div id="wallet-connect" title="Connect Wallet">
+    <i class="fas fa-wallet"></i>
   </div>
+
+  <header class="header">
+    <div class="header-content">
+      <div class="image-wrapper">
+        <img
+          src="https://i.imgur.com/R3tbBZn.png"
+          alt="Logo"
+          loading="lazy"
+        />
+      </div>
+
+      <h1 id="typed-header">Reserve Your Digital ID</h1>
+
+      <div class="typing-wrapper">
+        <span id="changing-text"></span><span class="caret">|</span>
+      </div>
+
+      <a
+        href="https://www.linkedin.com/company/smith-box"
+        class="cta-button"
+        target="_blank"
+        >Learn More</a
+      >
+    </div>
+  </header>
+
+  <nav class="navbar" id="navbar">
+    <ul>
+      <li>
+        <a href="mailto:hello@smith.box" title="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://www.recruitment.box"
+          title="Website"
+          target="_blank"
+          ><i class="fas fa-globe"></i
+        ></a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- (Other sections...) -->
 </body>
 </html>
