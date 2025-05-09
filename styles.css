@@ -1,119 +1,183 @@
-/* Reset default browser styles */
+/* Reset + Base */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
-/* Body styling */
-body, html {
+html,
+body {
   height: 100%;
+  width: 100%;
+  overflow-x: hidden; /* only disable horizontal scroll */
   font-family: 'Arial', sans-serif;
+  background: #ffffff;
+  color: #000;
 }
 
-/* Header styling with centered content */
+/* Wallet-connect icon */
+#wallet-connect {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 5;
+  font-size: 1.75em;
+  color: #fff;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+#wallet-connect.connected {
+  color: #0f0; /* green when connected */
+}
+#wallet-connect:hover {
+  color: #ccc;
+}
+
+/* Header & Animated Gradient */
 .header {
   position: relative;
+  overflow: hidden;
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
+  align-items: flex-start;  /* align to top */
+  padding-top: 80px;        /* push content down from very top */
+}
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
   background: linear-gradient(135deg, #4a90e2, #9013fe);
   background-size: 300% 300%;
   animation: gradientShift 8s infinite linear;
-  padding: 20px;
-  overflow: hidden;
+  z-index: 1;
 }
-
 @keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
-
 .header::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(4px);
-  z-index: 1;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(5px);
+  z-index: 2;
 }
 
 .header-content {
   position: relative;
-  z-index: 2;
+  text-align: center;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  gap: 20px;
 }
 
-/* Logo wrapper */
+/* Logo in doubled white circle */
 .image-wrapper {
   background: #fff;
   border-radius: 50%;
-  padding: 16px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-  margin-bottom: 20px;
+  padding: 20px;
 }
-
 .image-wrapper img {
-  width: 160px;
-  height: 160px;
+  display: block;
+  width: 240px;
+  height: 240px;
   border-radius: 50%;
-  object-fit: cover;
 }
 
-/* Text styles */
-h1 {
-  color: #fff;
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-p {
-  color: #fff;
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
-/* Button */
-.cta-button {
-  background-color: #fff;
-  color: #4a90e2;
-  padding: 12px 24px;
-  border-radius: 30px;
-  text-decoration: none;
+/* Main heading */
+#typed-header {
+  font-size: 1.8em;
   font-weight: bold;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  color: #000;
 }
 
-.cta-button:hover {
-  background-color: #4a90e2;
+/* Typing effect & Blinking Caret */
+.typing-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+#changing-text {
+  font-size: 1.5em;
   color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  min-height: 1.5em;
+}
+.caret {
+  font-size: 1.5em;
+  color: #fff;
+  position: relative;
+  top: -0.2em; /* properly aligned */
+  animation: blink-caret 0.75s step-end infinite;
+}
+@keyframes blink-caret {
+  0%, 100% { opacity: 0; }
+  50%      { opacity: 1; }
 }
 
-/* Responsive adjustments */
-@media (max-width: 480px) {
+/* CTA Button */
+.cta-button {
+  padding: 15px 30px;
+  background: #fff;
+  color: #4a90e2;
+  text-decoration: none;
+  border-radius: 25px;
+  font-size: 1.2em;
+  transition: background 0.3s, color 0.3s, transform 0.3s;
+}
+.cta-button:hover {
+  background: #4a90e2;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* Navbar Icons */
+.navbar {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 4;
+}
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+.navbar a {
+  color: #fff;
+  font-size: 1.5em;
+}
+
+/* Mobile tweaks */
+@media (max-width: 600px) {
+  .header {
+    padding-top: 60px;    /* bring content down below top bar */
+    justify-content: flex-start;
+  }
+
+  .image-wrapper {
+    padding: 15px;        /* smaller white circle container */
+  }
   .image-wrapper img {
     width: 140px;
     height: 140px;
   }
 
-  h1 {
-    font-size: 20px;
+  #typed-header {
+    font-size: 1.4em;
   }
 
-  p {
-    font-size: 14px;
+  #changing-text {
+    font-size: 1.2em;
+  }
+
+  .cta-button {
+    padding: 12px 24px;
+    font-size: 1em;
   }
 }
