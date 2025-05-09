@@ -156,12 +156,14 @@ body {
 /* Mobile tweaks */
 @media (max-width: 600px) {
   .header {
-    padding-top: 60px;    /* bring content down below top bar */
-    justify-content: flex-start;
+    /* bring content down a bit from the top bar */
+    padding-top: 60px;
+    justify-content: flex-start; 
   }
 
   .image-wrapper {
-    padding: 15px;        /* smaller white circle container */
+    /* shrink the white circle container */
+    padding: 15px;
   }
   .image-wrapper img {
     width: 140px;
