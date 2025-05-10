@@ -1,185 +1,119 @@
-/* Reset + Base */
+/* Reset default browser styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-html,
-body {
+
+/* Body styling */
+body, html {
   height: 100%;
-  width: 100%;
-  overflow-x: hidden; /* only disable horizontal scroll */
   font-family: 'Arial', sans-serif;
-  background: #ffffff;
-  color: #000;
 }
 
-/* Wallet-connect icon */
-#wallet-connect {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  z-index: 5;
-  font-size: 1.75em;
-  color: #fff;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-#wallet-connect.connected {
-  color: #0f0; /* green when connected */
-}
-#wallet-connect:hover {
-  color: #ccc;
-}
-
-/* Header & Animated Gradient */
+/* Header styling with centered content */
 .header {
   position: relative;
-  overflow: hidden;
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start;  /* align to top */
-  padding-top: 80px;        /* push content down from very top */
-}
-.header::before {
-  content: '';
-  position: absolute;
-  inset: 0;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
   background: linear-gradient(135deg, #4a90e2, #9013fe);
   background-size: 300% 300%;
   animation: gradientShift 8s infinite linear;
-  z-index: 1;
+  padding: 20px;
+  overflow: hidden;
 }
+
 @keyframes gradientShift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
+
 .header::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(5px);
-  z-index: 2;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(4px);
+  z-index: 1;
 }
 
 .header-content {
   position: relative;
-  text-align: center;
-  z-index: 3;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  justify-content: center;
 }
 
-/* Logo in doubled white circle */
+/* Logo wrapper */
 .image-wrapper {
   background: #fff;
   border-radius: 50%;
-  padding: 20px;
+  padding: 16px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  margin-bottom: 20px;
 }
+
 .image-wrapper img {
-  display: block;
-  width: 240px;
-  height: 240px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
-/* Main heading */
-#typed-header {
-  font-size: 1.8em;
-  font-weight: bold;
-  color: #000;
-}
-
-/* Typing effect & Blinking Caret */
-.typing-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-#changing-text {
-  font-size: 1.5em;
+/* Text styles */
+h1 {
   color: #fff;
-  white-space: nowrap;
-  overflow: hidden;
-  min-height: 1.5em;
-}
-.caret {
-  font-size: 1.5em;
-  color: #fff;
-  position: relative;
-  top: -0.2em; /* properly aligned */
-  animation: blink-caret 0.75s step-end infinite;
-}
-@keyframes blink-caret {
-  0%, 100% { opacity: 0; }
-  50%      { opacity: 1; }
+  font-size: 24px;
+  margin-bottom: 10px;
 }
 
-/* CTA Button */
+p {
+  color: #fff;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* Button */
 .cta-button {
-  padding: 15px 30px;
-  background: #fff;
+  background-color: #fff;
   color: #4a90e2;
+  padding: 12px 24px;
+  border-radius: 30px;
   text-decoration: none;
-  border-radius: 25px;
-  font-size: 1.2em;
-  transition: background 0.3s, color 0.3s, transform 0.3s;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
+
 .cta-button:hover {
-  background: #4a90e2;
+  background-color: #4a90e2;
   color: #fff;
-  transform: scale(1.05);
 }
 
-/* Navbar Icons */
-.navbar {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 4;
-}
-.navbar ul {
-  list-style: none;
-  display: flex;
-  gap: 15px;
-}
-.navbar a {
-  color: #fff;
-  font-size: 1.5em;
-}
-
-/* Mobile tweaks */
-@media (max-width: 600px) {
-  .header {
-    /* bring content down a bit from the top bar */
-    padding-top: 60px;
-    justify-content: flex-start; 
-  }
-
-  .image-wrapper {
-    /* shrink the white circle container */
-    padding: 15px;
-  }
+/* Responsive adjustments */
+@media (max-width: 480px) {
   .image-wrapper img {
     width: 140px;
     height: 140px;
   }
 
-  #typed-header {
-    font-size: 1.4em;
+  h1 {
+    font-size: 20px;
   }
 
-  #changing-text {
-    font-size: 1.2em;
-  }
-
-  .cta-button {
-    padding: 12px 24px;
-    font-size: 1em;
+  p {
+    font-size: 14px;
   }
 }
