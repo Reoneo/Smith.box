@@ -42,6 +42,8 @@ body {
   align-items: flex-start;
   padding-top: 80px;
 }
+
+/* animated gradient background */
 .header::before {
   content: '';
   position: absolute;
@@ -49,31 +51,34 @@ body {
   background: linear-gradient(135deg, #4a90e2, #9013fe);
   background-size: 300% 300%;
   animation: gradientShift 8s infinite linear;
-  z-index: 1;
+  z-index: 0; /* behind canvas */
 }
+
+/* optional frosted-glass overlay */
 .header::after {
   content: '';
   position: absolute;
   inset: 0;
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(5px);
-  z-index: 2;
+  z-index: 1; /* between gradient and canvas */
 }
+
 @keyframes gradientShift {
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* WebGL canvas sits behind the content */
+/* WebGL canvas sits above gradient but below content */
 #webgl-canvas {
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: 2; /* above gradient/blur */
   pointer-events: none; /* allow clicks through to UI */
 }
 
-/* Header content above the canvas */
+/* Header content above everything */
 .header-content {
   position: relative;
   z-index: 3;
