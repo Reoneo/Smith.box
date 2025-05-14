@@ -2,352 +2,91 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="Reserve your on-chain digital ID with smith.box: EVM-compatible NFT domains, human-readable wallet addresses, crypto name registration, and smart XRP PayString integration." />
-  <meta name="keywords" content="
-    decentralized domain service,
-    blockchain name registry,
-    on-chain digital identity,
-    NFT domain minting,
-    EVM-compatible domain NFTs,
-    hybrid Web2-Web3 domains,
-    human-readable wallet addresses,
-    XRP PayString domains,
-    family Web3 domains,
-    degen-friendly NFT domains,
-    developer blockchain domains
-  " />
-  <meta property="og:title" content="Tokenized Naming Service | Reserve Your Digital ID" />
-  <meta property="og:description" content="Reserve your on-chain digital ID with smith.box: EVM-compatible NFT domains, human-readable wallet addresses, and smart XRP PayString integration." />
-  <meta property="og:image" content="https://i.imgur.com/ngwLlPH.jpeg" />
-
-  <title>Tokenized Naming Service | Reserve Your Digital ID</title>
-
-  <!-- Favicon -->
-  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-
-  <!-- Font Awesome -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-  />
-
+  <title>Futuristic 3D Cubes</title>
   <style>
-    /* Reset + Base */
-    * {
+    html, body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-    html, body {
-      height: 100%;
-      width: 100%;
-      overflow-x: hidden;
-      font-family: 'Arial', sans-serif;
-      background: #ffffff;
-      color: #000;
-    }
-
-    /* Wallet-connect icon */
-    #wallet-connect {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      z-index: 5;
-      font-size: 1.75em;
-      color: #fff;
-      cursor: pointer;
-      transition: color 0.2s ease;
-    }
-    #wallet-connect.connected {
-      color: #0f0;
-    }
-    #wallet-connect:hover {
-      color: #ccc;
-    }
-
-    /* ========== Hero Container ========== */
-    .header {
-      position: relative;
       overflow: hidden;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding-top: 80px;
-      background: none;
+      background-color: black;
     }
-    .header::before,
-    .header::after {
-      content: none !important;
-    }
-
-    /* WebGL canvas sits at the very back */
-    #webgl-canvas {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* Header content on top */
-    .header-content {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-      text-align: center;
-    }
-
-    /* Logo circle */
-    .image-wrapper {
-      background: #fff;
-      border-radius: 50%;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-    }
-    .image-wrapper img {
-      width: 240px;
-      height: 240px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
-    /* Main heading */
-    #typed-header {
-      font-size: 1.8em;
-      font-weight: bold;
-      color: #000;
-    }
-
-    /* Typing effect & Caret */
-    .typing-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    #changing-text {
-      font-size: 1.5em;
-      color: #000;
-      white-space: nowrap;
-      overflow: hidden;
-      min-height: 1.5em;
-    }
-    .caret {
-      font-size: 1.5em;
-      color: #000;
-      animation: blink-caret 0.75s step-end infinite;
-    }
-    @keyframes blink-caret {
-      0%,100% { opacity: 0; }
-      50%     { opacity: 1; }
-    }
-
-    /* CTA Button */
-    .cta-button {
-      padding: 15px 30px;
-      background: #000;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 25px;
-      font-size: 1.2em;
-      transition: background 0.3s, transform 0.3s;
-    }
-    .cta-button:hover {
-      background: #333;
-      transform: scale(1.05);
-    }
-
-    /* Hidden nav-links for SEO */
-    .hidden-links {
-      display: none !important;
-    }
-
-    /* Navbar (if shown) */
-    .navbar {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      z-index: 2;
-    }
-    .navbar ul {
-      list-style: none;
-      display: flex;
-      gap: 15px;
-    }
-    .navbar a {
-      color: #000;
-      font-size: 1.5em;
-    }
-
-    /* ============ Mobile Tweaks ============ */
-    @media (max-width: 600px) {
-      .header { padding-top: 60px; }
-      .image-wrapper { padding: 15px; }
-      .image-wrapper img { width: 140px; height: 140px; }
-      #typed-header { font-size: 1.4em; }
-      #changing-text { font-size: 1.2em; }
-      .cta-button { padding: 12px 24px; font-size: 1em; }
+    canvas {
+      display: block;
     }
   </style>
 </head>
 <body>
-
-  <!-- Wallet connect -->
-  <div id="wallet-connect" title="Connect Wallet">
-    <i class="fas fa-wallet"></i>
-  </div>
-
-  <header class="header">
-    <!-- 3D canvas -->
-    <div id="webgl-canvas"></div>
-
-    <!-- Hero content -->
-    <div class="header-content">
-      <div class="image-wrapper">
-        <img src="https://i.imgur.com/R3tbBZn.png"
-             alt="smith.box logo – Web3 name service & EVM NFT domains"
-             loading="lazy" />
-      </div>
-      <h1 id="typed-header">Reserve Your Digital ID</h1>
-      <div class="typing-wrapper">
-        <span id="changing-text"></span><span class="caret">|</span>
-      </div>
-      <a href="https://www.linkedin.com/company/smith-box"
-         class="cta-button" target="_blank">Learn More</a>
-    </div>
-  </header>
-
-  <!-- Hidden nav for SEO -->
-  <nav class="navbar hidden-links" id="navbar">
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#features">Features</a></li>
-      <li><a href="#how-it-works">How It Works</a></li>
-      <li><a href="#pricing">Pricing</a></li>
-      <li><a href="#docs">Docs</a></li>
-      <li><a href="mailto:hello@smith.box"><i class="fas fa-envelope"></i></a></li>
-      <li><a href="https://www.recruitment.box" target="_blank"><i class="fas fa-globe"></i></a></li>
-    </ul>
-  </nav>
-
-  <main class="content">
-    <!-- your sections… -->
-  </main>
-
-  <!-- Three.js & controls -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/js/controls/OrbitControls.js"></script>
-
-  <!-- ethers.js & anime.js -->
-  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r148/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.148.0/examples/js/controls/OrbitControls.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // --- 1) Typing Animation ----
-      const subdomains = [
-        'Agent.Smith.box','Aaliyah.Smith.box','Marcel.Smith.box',
-        'Maleek.Smith.box','Lauren.Smith.box','Wallet.Smith.box',
-        'NFT.Smith.box','1.Smith.box','YourName.Smith.box'
-      ];
-      let idx = 0, typingSpeed = 100, erasingSpeed = 50, delayBetween = 2000;
-      const textEl = document.getElementById('changing-text');
-      function typeWord(word, i = 0) {
-        if (i < word.length) {
-          textEl.textContent += word.charAt(i);
-          setTimeout(() => typeWord(word, i + 1), typingSpeed);
-        } else setTimeout(eraseWord, delayBetween);
-      }
-      function eraseWord() {
-        if (textEl.textContent.length > 0) {
-          textEl.textContent = textEl.textContent.slice(0, -1);
-          setTimeout(eraseWord, erasingSpeed);
-        } else {
-          idx = (idx + 1) % subdomains.length;
-          setTimeout(() => typeWord(subdomains[idx]), typingSpeed);
-        }
-      }
-      typeWord(subdomains[idx]);
+    // Scene setup
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x000000, 0.12);
 
-      // --- 2) Wallet Connect ---
-      const walletBtn = document.getElementById('wallet-connect');
-      async function connectWallet() {
-        if (!window.ethers || !window.ethereum) {
-          return alert('Install MetaMask and load ethers.js.');
-        }
-        try {
-          const provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
-          await provider.send('eth_requestAccounts', []);
-          const signer = provider.getSigner();
-          const address = await signer.getAddress();
-          walletBtn.classList.add('connected');
-          walletBtn.title = address;
-          window.ethereum.on('accountsChanged', accounts => {
-            if (accounts.length === 0) {
-              walletBtn.classList.remove('connected');
-              walletBtn.title = 'Connect Wallet';
-            } else walletBtn.title = accounts[0];
-          });
-          window.ethereum.on('chainChanged', () => location.reload());
-        } catch (err) {
-          if (err.code !== 4001) alert('Connection failed: ' + err.message);
-        }
-      }
-      walletBtn.addEventListener('click', connectWallet);
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.z = 5;
 
-      // --- 3) THREE.JS Scene ---
-      const container = document.getElementById('webgl-canvas');
-      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      container.appendChild(renderer.domElement);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    document.body.appendChild(renderer.domElement);
 
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 0.01, 10);
-      camera.position.set(0, 0, 2);
+    // Lights
+    const ambientLight = new THREE.AmbientLight(0x8888ff, 1.5);
+    scene.add(ambientLight);
 
-      const controls = new THREE.OrbitControls(camera, renderer.domElement);
-      controls.enablePan = false;
-      controls.enableDamping = true;
-      controls.dampingFactor = 0.05;
-      controls.minPolarAngle = Math.PI/2;
-      controls.maxPolarAngle = Math.PI/2;
-      controls.minAzimuthAngle = -Math.PI/4;
-      controls.maxAzimuthAngle = Math.PI/4;
+    const pointLight = new THREE.PointLight(0x00ffff, 2, 100);
+    pointLight.position.set(10, 10, 10);
+    scene.add(pointLight);
 
-      const cubeGeo = new THREE.BoxGeometry(0.05,0.05,0.05);
-      const cubeMat = new THREE.MeshNormalMaterial();
-      for (let i=0; i<1000; i++){
-        const cube = new THREE.Mesh(cubeGeo,cubeMat);
-        let pos;
-        do {
-          pos = new THREE.Vector3(
-            (Math.random()-0.5)*6,
-            (Math.random()-0.5)*6,
-            (Math.random()-0.5)*6
-          );
-        } while (pos.length()<1);
-        cube.position.copy(pos);
-        scene.add(cube);
-      }
-
-      function animate() {
-        controls.update();
-        renderer.render(scene, camera);
-      }
-      renderer.setAnimationLoop(animate);
-
-      window.addEventListener('resize', () => {
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        camera.aspect = window.innerWidth/window.innerHeight;
-        camera.updateProjectionMatrix();
-      });
+    // Cube geometry and material
+    const cubeGeometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+    const cubeMaterial = new THREE.MeshStandardMaterial({
+      color: 0x00ffff,
+      emissive: 0x00ffff,
+      emissiveIntensity: 0.4,
+      metalness: 0.6,
+      roughness: 0.2
     });
+
+    // Create many cubes
+    const cubes = [];
+    for (let i = 0; i < 150; i++) {
+      const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+      cube.position.set(
+        (Math.random() - 0.5) * 20,
+        (Math.random() - 0.5) * 20,
+        (Math.random() - 0.5) * 20
+      );
+      cube.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+      scene.add(cube);
+      cubes.push(cube);
+    }
+
+    // Controls (optional)
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.1;
+
+    // Animate
+    function animate() {
+      requestAnimationFrame(animate);
+      cubes.forEach(cube => {
+        cube.rotation.x += 0.002;
+        cube.rotation.y += 0.002;
+      });
+      controls.update();
+      renderer.render(scene, camera);
+    }
+
+    // Handle resizing
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    animate();
   </script>
 </body>
 </html>
