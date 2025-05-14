@@ -32,7 +32,7 @@ body {
   color: #ccc;
 }
 
-/* ========== Hero & Gradient ========== */
+/* ========== Hero Container ========== */
 .header {
   position: relative;
   overflow: hidden;
@@ -41,47 +41,21 @@ body {
   justify-content: center;
   align-items: flex-start;
   padding-top: 80px;
+  background: none;            /* no gradient */
 }
 
-/* animated gradient background */
-.header::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #4a90e2, #9013fe);
-  background-size: 300% 300%;
-  animation: gradientShift 8s infinite linear;
-  z-index: 0; /* behind canvas */
-}
-
-/* (OPTIONAL) frosted-glass overlay — comment it out if you don’t want any washout */
-.header::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(5px);
-  z-index: 1; /* between gradient and canvas */
-}
-
-@keyframes gradientShift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* WebGL canvas sits above gradient/blur but below content */
+/* WebGL canvas sits behind content */
 #webgl-canvas {
   position: absolute;
   inset: 0;
-  z-index: 2;      /* ↑ this must be higher than ::before and ::after */
-  pointer-events: none;
+  z-index: 0;                  /* bottom layer */
+  pointer-events: none;        /* allow clicks through */
 }
 
 /* Header content on top of everything */
 .header-content {
   position: relative;
-  z-index: 3;
+  z-index: 1;                  /* above the canvas */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -89,7 +63,7 @@ body {
   text-align: center;
 }
 
-/* Logo in doubled white circle */
+/* Logo in white circle */
 .image-wrapper {
   background: #fff;
   border-radius: 50%;
@@ -119,14 +93,14 @@ body {
 }
 #changing-text {
   font-size: 1.5em;
-  color: #fff;
+  color: #000;                /* switch to black since no gradient */
   white-space: nowrap;
   overflow: hidden;
   min-height: 1.5em;
 }
 .caret {
   font-size: 1.5em;
-  color: #fff;
+  color: #000;
   animation: blink-caret 0.75s step-end infinite;
 }
 @keyframes blink-caret {
@@ -137,17 +111,15 @@ body {
 /* CTA Button */
 .cta-button {
   padding: 15px 30px;
-  background: #fff;
-  color: #4a90e2;
+  background: #000;
+  color: #fff;
   text-decoration: none;
   border-radius: 25px;
   font-size: 1.2em;
   transition: background 0.3s, color 0.3s, transform 0.3s;
 }
 .cta-button:hover {
-  background: #4a90e2;
-  color: #fff;
-  transform: scale(1.05);
+  background: #333;
 }
 
 /* Hidden navigation links for SEO */
@@ -155,12 +127,12 @@ body {
   display: none !important;
 }
 
-/* Navbar (if ever displayed) */
+/* Navbar (if ever shown) */
 .navbar {
   position: absolute;
   top: 20px;
   right: 20px;
-  z-index: 4;
+  z-index: 2;
 }
 .navbar ul {
   list-style: none;
@@ -168,7 +140,7 @@ body {
   gap: 15px;
 }
 .navbar a {
-  color: #fff;
+  color: #000;
   font-size: 1.5em;
 }
 
