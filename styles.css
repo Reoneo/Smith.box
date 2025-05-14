@@ -8,7 +8,7 @@ html,
 body {
   height: 100%;
   width: 100%;
-  overflow-x: hidden;            /* allow vertical scroll, hide only horizontal */
+  overflow-x: hidden; /* allow vertical scroll, hide only horizontal */
   font-family: 'Arial', sans-serif;
   background: #ffffff;
   color: #000;
@@ -32,15 +32,15 @@ body {
   color: #ccc;
 }
 
-/* Header & Animated Gradient */
+/* ========== Hero & Gradient ========== */
 .header {
   position: relative;
   overflow: hidden;
   height: 100vh;
   display: flex;
-  justify-content: center;       /* center horizontally */
-  align-items: flex-start;       /* push to top, allow padding-top to control vertical */
-  padding-top: 80px;             /* desktop offset from top */
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 80px;
 }
 .header::before {
   content: '';
@@ -51,11 +51,6 @@ body {
   animation: gradientShift 8s infinite linear;
   z-index: 1;
 }
-@keyframes gradientShift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
 .header::after {
   content: '';
   position: absolute;
@@ -64,8 +59,21 @@ body {
   backdrop-filter: blur(5px);
   z-index: 2;
 }
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-/* Centered header content */
+/* WebGL canvas sits behind the content */
+#webgl-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none; /* allow clicks through to UI */
+}
+
+/* Header content above the canvas */
 .header-content {
   position: relative;
   z-index: 3;
@@ -85,7 +93,6 @@ body {
   justify-content: center;
 }
 .image-wrapper img {
-  display: block;
   width: 240px;
   height: 240px;
   border-radius: 50%;
@@ -115,8 +122,6 @@ body {
 .caret {
   font-size: 1.5em;
   color: #fff;
-  position: relative;
-  top: -0.2em;
   animation: blink-caret 0.75s step-end infinite;
 }
 @keyframes blink-caret {
@@ -140,7 +145,12 @@ body {
   transform: scale(1.05);
 }
 
-/* Navbar Icons */
+/* Hidden navigation links for SEO */
+.hidden-links {
+  display: none !important;
+}
+
+/* Navbar (if ever displayed) */
 .navbar {
   position: absolute;
   top: 20px;
@@ -160,7 +170,7 @@ body {
 /* ============ Mobile Optimizations ============ */
 @media (max-width: 600px) {
   .header {
-    padding-top: 60px;           /* bring down into the "red circle" */
+    padding-top: 60px;
   }
 
   .image-wrapper {
