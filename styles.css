@@ -54,7 +54,7 @@ body {
   z-index: 0; /* behind canvas */
 }
 
-/* optional frosted-glass overlay */
+/* (OPTIONAL) frosted-glass overlay — comment it out if you don’t want any washout */
 .header::after {
   content: '';
   position: absolute;
@@ -70,15 +70,15 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* WebGL canvas sits above gradient but below content */
+/* WebGL canvas sits above gradient/blur but below content */
 #webgl-canvas {
   position: absolute;
   inset: 0;
-  z-index: 2; /* above gradient/blur */
-  pointer-events: none; /* allow clicks through to UI */
+  z-index: 2;      /* ↑ this must be higher than ::before and ::after */
+  pointer-events: none;
 }
 
-/* Header content above everything */
+/* Header content on top of everything */
 .header-content {
   position: relative;
   z-index: 3;
@@ -177,7 +177,6 @@ body {
   .header {
     padding-top: 60px;
   }
-
   .image-wrapper {
     padding: 15px;
   }
@@ -185,15 +184,12 @@ body {
     width: 140px;
     height: 140px;
   }
-
   #typed-header {
     font-size: 1.4em;
   }
-
   #changing-text {
     font-size: 1.2em;
   }
-
   .cta-button {
     padding: 12px 24px;
     font-size: 1em;
