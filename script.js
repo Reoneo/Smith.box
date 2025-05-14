@@ -1,7 +1,9 @@
 // script.js
 
 document.addEventListener('DOMContentLoaded', () => {
-  // --- 1) TYPING ANIMATION ---
+  //
+  // 1) TYPING ANIMATION
+  //
   const subdomains = [
     'Agent.Smith.box',
     'Aaliyah.Smith.box',
@@ -14,9 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
     'YourName.Smith.box'
   ];
   let idx = 0;
-  const typingSpeed = 100,
-        erasingSpeed = 50,
-        delayBetween = 2000;
+  const typingSpeed = 100;
+  const erasingSpeed = 50;
+  const delayBetween = 2000;
   const textEl = document.getElementById('changing-text');
 
   function typeWord(word, i = 0) {
@@ -38,10 +40,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // start typing
+  // kick off the first word
   typeWord(subdomains[idx]);
 
-  // --- 2) SAFE WALLET CONNECT WITH REJECTION HANDLING ---
+
+  //
+  // 2) WALLET CONNECT WITH ethers.js
+  //
   const walletBtn = document.getElementById('wallet-connect');
   let provider, signer;
 
@@ -55,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
-      await provider.send('eth_requestAccounts', []);  // request access
+      await provider.send('eth_requestAccounts', []);
       signer = provider.getSigner();
       const address = await signer.getAddress();
 
@@ -66,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
       window.ethereum.on('chainChanged', handleChainChanged);
     } catch (err) {
       if (err.code === 4001) {
-        // user rejected connection
         console.log('User rejected wallet connection');
       } else {
         console.error('Wallet connect failed', err);
@@ -96,7 +100,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // --- 3) THREE.JS 3D SCENE INIT ---
+
+  //
+  // 3) THREE.JS + ORBITCONTROLS 3D CUBE SWARM
+  //
   const container = document.getElementById('webgl-canvas');
 
   // create renderer with transparent background
@@ -104,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
   container.appendChild(renderer.domElement);
 
-  // scene & camera
+  // create scene & camera
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(
     70,
@@ -114,19 +121,19 @@ document.addEventListener('DOMContentLoaded', () => {
   );
   camera.position.set(0, 0, 2);
 
-  // orbit controls (locked to front view)
+  // orbit controls
   const controls = new THREE.OrbitControls(camera, renderer.domElement);
   controls.enablePan = false;
   controls.enableDamping = true;
   controls.dampingFactor = 0.05;
-  // restrict pitch to 90° (horizontal only)
+  // lock vertical tilt (pitch) to horizontal only
   controls.minPolarAngle = Math.PI / 2;
   controls.maxPolarAngle = Math.PI / 2;
-  // restrict yaw to ±45°
+  // restrict yaw rotation ±45°
   controls.minAzimuthAngle = -Math.PI / 4;
   controls.maxAzimuthAngle =  Math.PI / 4;
 
-  // create 1,000 cubes around origin
+  // add 1,000 cubes around the origin
   const cubeGeo = new THREE.BoxGeometry(0.05, 0.05, 0.05);
   const cubeMat = new THREE.MeshNormalMaterial();
   for (let i = 0; i < 1000; i++) {
@@ -143,14 +150,14 @@ document.addEventListener('DOMContentLoaded', () => {
     scene.add(cube);
   }
 
-  // render loop
+  // animation loop
   function animate() {
     controls.update();
     renderer.render(scene, camera);
   }
   renderer.setAnimationLoop(animate);
 
-  // handle window resize
+  // handle resizing
   window.addEventListener('resize', () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     camera.aspect = window.innerWidth / window.innerHeight;
