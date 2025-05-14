@@ -8,9 +8,9 @@ html,
 body {
   height: 100%;
   width: 100%;
-  overflow-x: hidden; /* allow vertical scroll, hide only horizontal */
+  overflow-x: hidden;      /* allow vertical scroll, hide only horizontal */
   font-family: 'Arial', sans-serif;
-  background: #ffffff;
+  background: #ffffff;     /* solid white page background */
   color: #000;
 }
 
@@ -26,7 +26,7 @@ body {
   transition: color 0.2s ease;
 }
 #wallet-connect.connected {
-  color: #0f0; /* green when connected */
+  color: #0f0;
 }
 #wallet-connect:hover {
   color: #ccc;
@@ -41,21 +41,27 @@ body {
   justify-content: center;
   align-items: flex-start;
   padding-top: 80px;
-  background: none;            /* no gradient */
+  background: none;        /* no gradient, just transparent */
 }
 
-/* WebGL canvas sits behind content */
+/* remove any header pseudo-elements so nothing covers the canvas */
+.header::before,
+.header::after {
+  content: none !important;
+}
+
+/* WebGL canvas sits at the very back of the header */
 #webgl-canvas {
   position: absolute;
   inset: 0;
-  z-index: 0;                  /* bottom layer */
-  pointer-events: none;        /* allow clicks through */
+  z-index: 0;              /* bottom layer */
+  pointer-events: none;    /* clicks pass through */
 }
 
-/* Header content on top of everything */
+/* Header content on top of the canvas */
 .header-content {
   position: relative;
-  z-index: 1;                  /* above the canvas */
+  z-index: 1;              /* above the cubes */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,7 +69,7 @@ body {
   text-align: center;
 }
 
-/* Logo in white circle */
+/* Logo circle */
 .image-wrapper {
   background: #fff;
   border-radius: 50%;
@@ -85,7 +91,7 @@ body {
   color: #000;
 }
 
-/* Typing effect & Blinking Caret */
+/* Typing effect & Caret */
 .typing-wrapper {
   display: flex;
   align-items: center;
@@ -93,7 +99,7 @@ body {
 }
 #changing-text {
   font-size: 1.5em;
-  color: #000;                /* switch to black since no gradient */
+  color: #000;             /* black text now */
   white-space: nowrap;
   overflow: hidden;
   min-height: 1.5em;
@@ -104,8 +110,8 @@ body {
   animation: blink-caret 0.75s step-end infinite;
 }
 @keyframes blink-caret {
-  0%, 100% { opacity: 0; }
-  50%      { opacity: 1; }
+  0%,100% { opacity: 0; }
+  50%     { opacity: 1; }
 }
 
 /* CTA Button */
@@ -116,18 +122,19 @@ body {
   text-decoration: none;
   border-radius: 25px;
   font-size: 1.2em;
-  transition: background 0.3s, color 0.3s, transform 0.3s;
+  transition: background 0.3s, transform 0.3s;
 }
 .cta-button:hover {
   background: #333;
+  transform: scale(1.05);
 }
 
-/* Hidden navigation links for SEO */
+/* Hidden nav-links for SEO */
 .hidden-links {
   display: none !important;
 }
 
-/* Navbar (if ever shown) */
+/* Navbar (if shown) */
 .navbar {
   position: absolute;
   top: 20px;
@@ -144,7 +151,7 @@ body {
   font-size: 1.5em;
 }
 
-/* ============ Mobile Optimizations ============ */
+/* ============ Mobile Tweaks ============ */
 @media (max-width: 600px) {
   .header {
     padding-top: 60px;
