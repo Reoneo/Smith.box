@@ -24,6 +24,11 @@
 
   <link rel="stylesheet" href="styles.css" />
 
+  <!-- Hide links visually but keep them in the DOM for SEO -->
+  <style>
+    .hidden-links { display: none !important; }
+  </style>
+
   <!-- 1) ethers UMD build (exposes window.ethers) -->
   <script
     src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"
@@ -69,26 +74,16 @@
     </div>
   </header>
 
-  <nav class="navbar" id="navbar">
+  <!-- Internal navigation links (hidden) -->
+  <nav class="navbar hidden-links" id="navbar">
     <ul>
       <li><a href="#about">About</a></li>
       <li><a href="#features">Features</a></li>
       <li><a href="#how-it-works">How It Works</a></li>
       <li><a href="#pricing">Pricing</a></li>
       <li><a href="#docs">Docs</a></li>
-      <li>
-        <a href="mailto:hello@smith.box" title="Email">
-          <i class="fas fa-envelope"></i>
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://www.recruitment.box"
-          title="Website"
-          target="_blank"
-        ><i class="fas fa-globe"></i>
-        </a>
-      </li>
+      <li><a href="mailto:hello@smith.box" title="Email"><i class="fas fa-envelope"></i></a></li>
+      <li><a href="https://www.recruitment.box" title="Website" target="_blank"><i class="fas fa-globe"></i></a></li>
     </ul>
   </nav>
 
@@ -128,7 +123,7 @@
 
     <section id="docs">
       <h2>Documentation & Support</h2>
-      <p>
+      <p class="hidden-links">
         Visit our <a href="https://docs.smith.box" target="_blank">Developer Docs</a> for API references, SDK guides, and integration tutorials. Reach out to <a href="mailto:support@smith.box">support@smith.box</a> for custom enterprise solutions.
       </p>
     </section>
