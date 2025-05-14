@@ -68,7 +68,7 @@
       color: #ccc;
     }
 
-    /* ========== Hero & Gradient ========== */
+    /* ========== Hero Container ========== */
     .header {
       position: relative;
       overflow: hidden;
@@ -77,41 +77,25 @@
       justify-content: center;
       align-items: flex-start;
       padding-top: 80px;
+      background: none;
     }
-    .header::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, #4a90e2, #9013fe);
-      background-size: 300% 300%;
-      animation: gradientShift 8s infinite linear;
-      z-index: 1;
-    }
+    .header::before,
     .header::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(5px);
-      z-index: 2;
-    }
-    @keyframes gradientShift {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      content: none !important;
     }
 
-    /* WebGL canvas sits behind the content */
+    /* WebGL canvas sits at the very back */
     #webgl-canvas {
       position: absolute;
       inset: 0;
       z-index: 0;
+      pointer-events: none;
     }
 
-    /* Header content above the canvas */
+    /* Header content on top */
     .header-content {
       position: relative;
-      z-index: 3;
+      z-index: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -119,7 +103,7 @@
       text-align: center;
     }
 
-    /* Logo in doubled white circle */
+    /* Logo circle */
     .image-wrapper {
       background: #fff;
       border-radius: 50%;
@@ -141,7 +125,7 @@
       color: #000;
     }
 
-    /* Typing effect & Blinking Caret */
+    /* Typing effect & Caret */
     .typing-wrapper {
       display: flex;
       align-items: center;
@@ -149,14 +133,14 @@
     }
     #changing-text {
       font-size: 1.5em;
-      color: #fff;
+      color: #000;
       white-space: nowrap;
       overflow: hidden;
       min-height: 1.5em;
     }
     .caret {
       font-size: 1.5em;
-      color: #fff;
+      color: #000;
       animation: blink-caret 0.75s step-end infinite;
     }
     @keyframes blink-caret {
@@ -167,25 +151,41 @@
     /* CTA Button */
     .cta-button {
       padding: 15px 30px;
-      background: #fff;
-      color: #4a90e2;
+      background: #000;
+      color: #fff;
       text-decoration: none;
       border-radius: 25px;
       font-size: 1.2em;
-      transition: background 0.3s, color 0.3s, transform 0.3s;
+      transition: background 0.3s, transform 0.3s;
     }
     .cta-button:hover {
-      background: #4a90e2;
-      color: #fff;
+      background: #333;
       transform: scale(1.05);
     }
 
-    /* Hidden nav links for SEO */
+    /* Hidden nav-links for SEO */
     .hidden-links {
       display: none !important;
     }
 
-    /* Mobile tweaks */
+    /* Navbar (if shown) */
+    .navbar {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 2;
+    }
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 15px;
+    }
+    .navbar a {
+      color: #000;
+      font-size: 1.5em;
+    }
+
+    /* ============ Mobile Tweaks ============ */
     @media (max-width: 600px) {
       .header { padding-top: 60px; }
       .image-wrapper { padding: 15px; }
@@ -204,7 +204,7 @@
   </div>
 
   <header class="header">
-    <!-- 3D canvas container -->
+    <!-- 3D canvas -->
     <div id="webgl-canvas"></div>
 
     <!-- Hero content -->
@@ -227,7 +227,12 @@
   <nav class="navbar hidden-links" id="navbar">
     <ul>
       <li><a href="#about">About</a></li>
-      <!-- …other links… -->
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#docs">Docs</a></li>
+      <li><a href="mailto:hello@smith.box"><i class="fas fa-envelope"></i></a></li>
+      <li><a href="https://www.recruitment.box" target="_blank"><i class="fas fa-globe"></i></a></li>
     </ul>
   </nav>
 
@@ -237,81 +242,112 @@
 
   <!-- Three.js & controls -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/js/loaders/FontLoader.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/js/geometries/TextGeometry.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/js/controls/OrbitControls.js"></script>
 
-  <!-- ethers.js & anime.js & your logic -->
-  <script
-    src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"
-    defer></script>
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"
-    defer></script>
-  <script src="script.js" defer></script>
+  <!-- ethers.js & anime.js -->
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
 
-  <!-- Inline 3D scene init -->
   <script>
-    // Wait until the DOM is ready
-    window.addEventListener('DOMContentLoaded', () => {
-      const container = document.getElementById('webgl-canvas');
-      const width = container.clientWidth;
-      const height = container.clientHeight;
+    document.addEventListener('DOMContentLoaded', () => {
+      // --- 1) Typing Animation ----
+      const subdomains = [
+        'Agent.Smith.box','Aaliyah.Smith.box','Marcel.Smith.box',
+        'Maleek.Smith.box','Lauren.Smith.box','Wallet.Smith.box',
+        'NFT.Smith.box','1.Smith.box','YourName.Smith.box'
+      ];
+      let idx = 0, typingSpeed = 100, erasingSpeed = 50, delayBetween = 2000;
+      const textEl = document.getElementById('changing-text');
+      function typeWord(word, i = 0) {
+        if (i < word.length) {
+          textEl.textContent += word.charAt(i);
+          setTimeout(() => typeWord(word, i + 1), typingSpeed);
+        } else setTimeout(eraseWord, delayBetween);
+      }
+      function eraseWord() {
+        if (textEl.textContent.length > 0) {
+          textEl.textContent = textEl.textContent.slice(0, -1);
+          setTimeout(eraseWord, erasingSpeed);
+        } else {
+          idx = (idx + 1) % subdomains.length;
+          setTimeout(() => typeWord(subdomains[idx]), typingSpeed);
+        }
+      }
+      typeWord(subdomains[idx]);
 
-      // Renderer with transparent background
+      // --- 2) Wallet Connect ---
+      const walletBtn = document.getElementById('wallet-connect');
+      async function connectWallet() {
+        if (!window.ethers || !window.ethereum) {
+          return alert('Install MetaMask and load ethers.js.');
+        }
+        try {
+          const provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
+          await provider.send('eth_requestAccounts', []);
+          const signer = provider.getSigner();
+          const address = await signer.getAddress();
+          walletBtn.classList.add('connected');
+          walletBtn.title = address;
+          window.ethereum.on('accountsChanged', accounts => {
+            if (accounts.length === 0) {
+              walletBtn.classList.remove('connected');
+              walletBtn.title = 'Connect Wallet';
+            } else walletBtn.title = accounts[0];
+          });
+          window.ethereum.on('chainChanged', () => location.reload());
+        } catch (err) {
+          if (err.code !== 4001) alert('Connection failed: ' + err.message);
+        }
+      }
+      walletBtn.addEventListener('click', connectWallet);
+
+      // --- 3) THREE.JS Scene ---
+      const container = document.getElementById('webgl-canvas');
       const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
       renderer.setSize(window.innerWidth, window.innerHeight);
       container.appendChild(renderer.domElement);
 
-      // Scene & camera
       const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 10);
+      const camera = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 0.01, 10);
       camera.position.set(0, 0, 2);
 
-      // OrbitControls (clamp to show only front hemisphere)
       const controls = new THREE.OrbitControls(camera, renderer.domElement);
       controls.enablePan = false;
       controls.enableDamping = true;
       controls.dampingFactor = 0.05;
-      // lock vertical look at horizon
-      controls.minPolarAngle = Math.PI / 2;
-      controls.maxPolarAngle = Math.PI / 2;
-      // limit sideways rotation to ±45°
-      controls.minAzimuthAngle = -Math.PI / 4;
-      controls.maxAzimuthAngle =  Math.PI / 4;
+      controls.minPolarAngle = Math.PI/2;
+      controls.maxPolarAngle = Math.PI/2;
+      controls.minAzimuthAngle = -Math.PI/4;
+      controls.maxAzimuthAngle = Math.PI/4;
 
-      // Add 1,000 cubes around center
-      const cubeGeo = new THREE.BoxGeometry(0.05, 0.05, 0.05);
+      const cubeGeo = new THREE.BoxGeometry(0.05,0.05,0.05);
       const cubeMat = new THREE.MeshNormalMaterial();
-      for (let i = 0; i < 1000; i++) {
-        const cube = new THREE.Mesh(cubeGeo, cubeMat);
+      for (let i=0; i<1000; i++){
+        const cube = new THREE.Mesh(cubeGeo,cubeMat);
         let pos;
         do {
           pos = new THREE.Vector3(
-            (Math.random() - 0.5) * 6,
-            (Math.random() - 0.5) * 6,
-            (Math.random() - 0.5) * 6
+            (Math.random()-0.5)*6,
+            (Math.random()-0.5)*6,
+            (Math.random()-0.5)*6
           );
-        } while (pos.length() < 1);
+        } while (pos.length()<1);
         cube.position.copy(pos);
         scene.add(cube);
       }
 
-      // Animation loop
       function animate() {
         controls.update();
         renderer.render(scene, camera);
       }
       renderer.setAnimationLoop(animate);
 
-      // Handle resize
       window.addEventListener('resize', () => {
         renderer.setSize(window.innerWidth, window.innerHeight);
-        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.aspect = window.innerWidth/window.innerHeight;
         camera.updateProjectionMatrix();
       });
     });
   </script>
-
 </body>
 </html>
