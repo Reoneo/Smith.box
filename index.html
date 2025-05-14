@@ -1,92 +1,104 @@
+Smith.box index.html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Futuristic 3D Cubes</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background-color: black;
-    }
-    canvas {
-      display: block;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Smith.box offers Web3 name service, EVM compatible NFT naming, NFT smith.box, crypto name service and smart xrp paystring integration for families, degens, and developers." />
+  <meta name="keywords" content="Web3 name service, EVM compatible NFT, NFT smith.box, smith.box name service, xrp paystring integration, Web3 for families, degen NFT service, EVM NFT name service, Web3 family-oriented services, Web3 EVM solutions, NFT naming for degens, xrp paystring NFT service, blockchain name service, Web3 EVM compatibility, NFT services for families, smith.box for degens, crypto name service, EVM blockchain naming, Web3 domain service, NFT blockchain integration, XRP paystring and NFTs, Web3 digital identity, Degen crypto services, NFT family solutions, EVM name registration, Smith family blockchain, XRP payment solutions" />
+  <meta property="og:title" content="smith.box – Tokenized WEB2 & WEB3 Domain NFT Naming Service" />
+  <meta property="og:description" content="Reserve your digital ID with smith.box. We provide Web3 name service, EVM compatible NFT domains, xrp paystring integration, family & degen-friendly NFT naming." />
+  <meta property="og:image" content="https://i.imgur.com/ngwLlPH.jpeg" />
+
+  <title>smith.box – Smith.box Naming Service</title>
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- 1) ethers UMD build (exposes window.ethers) -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"
+    defer
+  ></script>
+
+  <!-- 2) Anime.js -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"
+    defer
+  ></script>
+
+  <!-- 3) Your logic -->
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r148/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.148.0/examples/js/controls/OrbitControls.js"></script>
-  <script>
-    // Scene setup
-    const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x000000, 0.12);
+  <!-- Wallet connect icon -->
+  <div id="wallet-connect" title="Connect Wallet">
+    <i class="fas fa-wallet"></i>
+  </div>
 
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
-    camera.position.z = 5;
+  <header class="header">
+    <div class="header-content">
+      <div class="image-wrapper">
+        <img
+          src="https://i.imgur.com/R3tbBZn.png"
+          alt="smith.box logo – Web3 name service & EVM NFT domains"
+          loading="lazy"
+        />
+      </div>
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    document.body.appendChild(renderer.domElement);
+      <h1 id="typed-header">Reserve Your Digital ID</h1>
 
-    // Lights
-    const ambientLight = new THREE.AmbientLight(0x8888ff, 1.5);
-    scene.add(ambientLight);
+      <div class="typing-wrapper">
+        <span id="changing-text"></span><span class="caret">|</span>
+      </div>
 
-    const pointLight = new THREE.PointLight(0x00ffff, 2, 100);
-    pointLight.position.set(10, 10, 10);
-    scene.add(pointLight);
+      <a
+        href="https://www.linkedin.com/company/smith-box"
+        class="cta-button"
+        target="_blank"
+      >Learn More</a>
+    </div>
+  </header>
 
-    // Cube geometry and material
-    const cubeGeometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
-    const cubeMaterial = new THREE.MeshStandardMaterial({
-      color: 0x00ffff,
-      emissive: 0x00ffff,
-      emissiveIntensity: 0.4,
-      metalness: 0.6,
-      roughness: 0.2
-    });
+  <nav class="navbar" id="navbar">
+    <ul>
+      <li>
+        <a href="mailto:hello@smith.box" title="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://www.recruitment.box"
+          title="Website"
+          target="_blank"
+        ><i class="fas fa-globe"></i
+        ></a>
+      </li>
+    </ul>
+  </nav>
 
-    // Create many cubes
-    const cubes = [];
-    for (let i = 0; i < 150; i++) {
-      const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-      cube.position.set(
-        (Math.random() - 0.5) * 20,
-        (Math.random() - 0.5) * 20,
-        (Math.random() - 0.5) * 20
-      );
-      cube.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
-      scene.add(cube);
-      cubes.push(cube);
-    }
+  <!-- Hidden keyword stash for SEO crawlers -->
+  <div style="display:none;">
+    Web3 name service, EVM compatible NFT, NFT smith.box, smith.box name service,
+    xrp paystring integration, Web3 for families, degen NFT service,
+    EVM NFT name service, Web3 family-oriented services, Web3 EVM solutions,
+    NFT naming for degens, xrp paystring NFT service, blockchain name service,
+    Web3 EVM compatibility, NFT services for families, smith.box for degens,
+    crypto name service, EVM blockchain naming, Web3 domain service,
+    NFT blockchain integration, XRP paystring and NFTs, Web3 digital identity,
+    Degen crypto services, NFT family solutions, EVM name registration,
+    Smith family blockchain, XRP payment solutions
+  </div>
 
-    // Controls (optional)
-    const controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.1;
-
-    // Animate
-    function animate() {
-      requestAnimationFrame(animate);
-      cubes.forEach(cube => {
-        cube.rotation.x += 0.002;
-        cube.rotation.y += 0.002;
-      });
-      controls.update();
-      renderer.render(scene, camera);
-    }
-
-    // Handle resizing
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-
-    animate();
-  </script>
+  <!-- (Other sections...) -->
 </body>
 </html>
