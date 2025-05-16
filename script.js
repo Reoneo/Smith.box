@@ -1,3 +1,5 @@
+// script.js
+
 document.addEventListener('DOMContentLoaded', () => {
   // ─── 1) TYPING HEADER ───
   const subdomains = [
@@ -36,9 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // start typing
+  // Start the typing loop
   typeWord(subdomains[idx]);
-
 
   // ─── 2) WALLET CONNECT ───
   const walletBtn = document.getElementById('wallet-connect');
@@ -51,17 +52,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
-      await provider.send('eth_requestAccounts', []); // request access
+      await provider.send('eth_requestAccounts', []); // prompt user
       signer = provider.getSigner();
       const address = await signer.getAddress();
 
       walletBtn.classList.add('connected');
       walletBtn.title = address;
 
-      // handle account/network changes
       window.ethereum.on('accountsChanged', handleAccountsChanged);
       window.ethereum.on('chainChanged', handleChainChanged);
-
     } catch (err) {
       if (err.code === 4001) {
         console.log('User rejected wallet connection');
@@ -93,39 +92,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-
-  // ─── 3) FEATURE ROTATOR ───
-  const featureList = [
-    // Plain text
-    'ENS Powered Web3 username',
-    // Link version
-    '<a href="https://recruitment.box/smith.box" target="_blank" rel="noopener">Recruitment.box/smith.box</a>',
-
-    'NFT-bound ownership and control',
-    '<a href="https://www.smith.box" target="_blank" rel="noopener">www.smith.box</a>',
-
-    'Website and email hosting via ICANN DNS resolution',
-    '<a href="mailto:hello@smith.box">hello@smith.box</a>',
-
-    'Onchain management of name records (Avatar, Handles, A, CNAME, MX)'
-  ];
-
-  const container = document.getElementById('features');
-
-  // build DOM nodes
-  featureList.forEach((html, i) => {
-    const div = document.createElement('div');
-    div.className = 'feature' + (i === 0 ? ' active' : '');
-    div.innerHTML = html;
-    container.appendChild(div);
-  });
-
-  // rotation loop
-  let current = 0;
-  setInterval(() => {
-    const items = container.querySelectorAll('.feature');
-    items[current].classList.remove('active');
-    current = (current + 1) % items.length;
-    items[current].classList.add('active');
-  }, 4000); // switch every 4s
+  // ─── 3) FEATURE-BOX ENTRANCE ANIMATION ───
+  // Uses Anime.js, which we included in the <head>.
+  if (typeof anime !== 'undefined') {
+    anime({
+      targets: '.feature-box',
+      opacity: [0, 1],
+      translateY: [20, 0],
+      easing: 'easeOutQuad',
+      duration: 800,
+      delay: anime.stagger(200) // each box starts 0.2s after the last
+    });
+  }
 });
