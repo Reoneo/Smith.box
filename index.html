@@ -3,33 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  
-  <!-- SEO Meta Tags -->
+  <title>smith.box – Tokenized WEB2 & WEB3 Domain NFT Naming Service</title>
   <meta name="description" content="Smith.box – your tokenized Web3 name service offering ENS‑powered usernames, NFT ownership, ICANN DNS hosting, and full on‑chain record management." />
-  <meta name="keywords" content="
-    ENS Powered Web3 username,
-    NFT-bound ownership and control,
-    Website and email hosting via ICANN DNS resolution,
-    Onchain management of name records,
-    Avatar Handles A CNAME MX" />
-
+  <meta name="keywords" content="ENS Powered Web3 username, NFT-bound ownership and control, Website and email hosting via ICANN DNS resolution, Onchain management of name records, Avatar Handles A CNAME MX" />
   <meta property="og:title" content="smith.box – Tokenized WEB2 & WEB3 Domain NFT Naming Service" />
   <meta property="og:description" content="Reserve your digital ID with smith.box. ENS usernames, NFT domains, ICANN DNS hosting, & on‑chain name management." />
   <meta property="og:image" content="https://i.imgur.com/ngwLlPH.jpeg" />
 
-  <title>smith.box – Smith.box Naming Service</title>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-  <!-- Font Awesome -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-  />
-
+  <!-- Anime.js for optional entrance animation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
   <!-- ethers.js for wallet connect -->
-  <script
-    src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"
-    defer
-  ></script>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js" defer></script>
 
   <style>
     /* ─── Reset + Base ─── */
@@ -64,37 +52,31 @@
       z-index:1;
     }
     @keyframes gradientShift {
-      0%{background-position:0% 50%}
-      50%{background-position:100% 50%}
-      100%{background-position:0% 50%}
+      0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}
     }
     .header::after {
       content:''; position:absolute; inset:0;
-      background:rgba(255,255,255,0.1);
-      backdrop-filter:blur(5px);
+      background:rgba(255,255,255,0.1); backdrop-filter:blur(5px);
       z-index:2;
     }
 
     /* ─── Header Content ─── */
     .header-content {
       position:relative; z-index:3;
-      display:flex; flex-direction:column;
-      align-items:center; gap:20px; text-align:center;
+      display:flex; flex-direction:column; align-items:center;
+      gap:20px; text-align:center;
     }
     .image-wrapper {
-      background:#fff; border-radius:50%;
-      padding:20px; display:flex; justify-content:center;
+      background:#fff; border-radius:50%; padding:20px;
+      display:flex; justify-content:center;
     }
     .image-wrapper img {
-      width:240px; height:240px;
-      border-radius:50%; object-fit:cover;
+      width:240px; height:240px; border-radius:50%; object-fit:cover;
     }
     #typed-header {
       font-size:1.8em; font-weight:bold; color:#000;
     }
-    .typing-wrapper {
-      display:flex; align-items:center; gap:5px;
-    }
+    .typing-wrapper { display:flex; align-items:center; gap:5px; }
     #changing-text {
       font-size:1.5em; color:#fff;
       white-space:nowrap; overflow:hidden; min-height:1.5em;
@@ -104,9 +86,7 @@
       position:relative; top:-0.2em;
       animation:blink-caret .75s step-end infinite;
     }
-    @keyframes blink-caret {
-      0%,100%{opacity:0}50%{opacity:1}
-    }
+    @keyframes blink-caret {0%,100%{opacity:0}50%{opacity:1}}
     .cta-button {
       padding:15px 30px; background:#fff; color:#4a90e2;
       text-decoration:none; border-radius:25px; font-size:1.2em;
@@ -120,30 +100,23 @@
     .navbar {
       position:absolute; top:20px; right:20px; z-index:4;
     }
-    .navbar ul {
-      list-style:none; display:flex; gap:15px;
-    }
+    .navbar ul { list-style:none; display:flex; gap:15px; }
     .navbar a { color:#fff; font-size:1.5em; }
 
     /* ─── Feature Grid ─── */
     .feature-grid {
-      position:absolute;
-      bottom:10%; left:50%;
+      position:absolute; bottom:10%; left:50%;
       transform:translateX(-50%);
       width:90%; max-width:1000px;
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-      gap:20px;
-      z-index:3;
-      pointer-events:auto;
-      padding:10px;
+      gap:20px; z-index:3; pointer-events:auto; padding:10px;
     }
     .feature-box {
       background:rgba(255,255,255,0.15);
       border:1px solid rgba(255,255,255,0.3);
-      border-radius:12px;
-      padding:20px; color:#fff;
-      text-align:center;
+      border-radius:12px; padding:20px;
+      color:#fff; text-align:center;
       opacity:0; transform:translateY(20px);
       animation:fadeUpIn .8s forwards;
     }
@@ -151,7 +124,6 @@
     .feature-box:nth-child(2){animation-delay:.4s}
     .feature-box:nth-child(3){animation-delay:.6s}
     .feature-box:nth-child(4){animation-delay:.8s}
-
     .feature-box h3 { margin-bottom:8px; font-size:1.2em; }
     .feature-box small {
       display:block; margin-top:4px; font-size:.85em;
@@ -161,22 +133,34 @@
       display:inline-block; margin-top:6px;
       color:#fff; text-decoration:underline;
     }
-
-    @keyframes fadeUpIn {
-      to { opacity:1; transform:translateY(0); }
-    }
+    @keyframes fadeUpIn { to{opacity:1;transform:translateY(0);} }
 
     /* ─── Mobile Optimizations ─── */
-    @media(max-width:600px) {
-      .header { padding-top:60px }
-      .image-wrapper { padding:15px }
-      .image-wrapper img { width:140px; height:140px }
-      #typed-header { font-size:1.4em }
-      #changing-text { font-size:1.2em }
-      .cta-button { padding:12px 24px; font-size:1em }
+    @media(max-width:600px){
+      .header { padding-top:60px; padding-bottom:20px; }
+      #typed-header { font-size:1.6em; }
+      #changing-text,.caret { font-size:1.2em; }
+      .cta-button { padding:10px 20px; font-size:1em; }
+      .feature-grid {
+        position:relative; transform:none; bottom:auto; left:auto;
+        width:100%; max-width:none; margin:0 auto 20px;
+        display:flex; flex-direction:column; gap:12px;
+        padding:0 12px; z-index:1;
+      }
+      .feature-box {
+        padding:16px 12px; font-size:1em;
+        background:rgba(255,255,255,0.2); border:none;
+        box-shadow:0 2px 8px rgba(0,0,0,0.15); border-radius:10px;
+        opacity:1; transform:none; animation:none;
+      }
+      .feature-box h3 { font-size:1.15em; margin-bottom:6px; }
+      .feature-box small { font-size:.8em; margin-top:4px; }
+      .feature-box a { font-size:.9em; margin-top:4px; }
+      #wallet-connect, .navbar { z-index:5; }
     }
   </style>
 </head>
+
 <body>
 
   <!-- Wallet Connect Icon -->
@@ -188,35 +172,25 @@
   <header class="header">
     <div class="header-content">
       <div class="image-wrapper">
-        <img
-          src="https://i.imgur.com/R3tbBZn.png"
-          alt="smith.box logo – Web3 name service & EVM NFT domains"
-          loading="lazy"
-        />
+        <img src="https://i.imgur.com/R3tbBZn.png"
+             alt="smith.box logo – Web3 name service & EVM NFT domains"
+             loading="lazy" />
       </div>
       <h1 id="typed-header">Reserve Your Digital ID</h1>
       <div class="typing-wrapper">
         <span id="changing-text"></span><span class="caret">|</span>
       </div>
-      <a
-        href="https://www.linkedin.com/company/smith-box"
-        class="cta-button"
-        target="_blank"
-      >Learn More</a>
+      <a href="https://www.linkedin.com/company/smith-box"
+         class="cta-button" target="_blank">Learn More</a>
     </div>
   </header>
 
   <!-- Navbar -->
   <nav class="navbar">
     <ul>
-      <li>
-        <a href="mailto:hello@smith.box"><i class="fas fa-envelope"></i></a>
-      </li>
-      <li>
-        <a href="https://www.recruitment.box/smith.box/" target="_blank">
-          <i class="fas fa-globe"></i>
-        </a>
-      </li>
+      <li><a href="mailto:hello@smith.box"><i class="fas fa-envelope"></i></a></li>
+      <li><a href="https://www.recruitment.box/smith.box/" target="_blank">
+        <i class="fas fa-globe"></i></a></li>
     </ul>
   </nav>
 
@@ -233,9 +207,7 @@
     </div>
     <div class="feature-box">
       <h3>Website &amp; Email Hosting via ICANN DNS Resolution</h3>
-      <a href="https://www.smith.box" target="_blank" rel="noopener">
-        www.smith.box
-      </a><br/>
+      <a href="https://www.smith.box" target="_blank" rel="noopener">www.smith.box</a><br/>
       <a href="mailto:hello@smith.box">hello@smith.box</a>
     </div>
     <div class="feature-box">
@@ -244,34 +216,60 @@
     </div>
   </section>
 
-  <!-- Main Script -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Typing animation
-      const subs = ['Agent.Smith.box','Sam.Smith.box','Jessica.Smith.box','Dave.Smith.box','Zoe.Smith.box','Wallet.Smith.box','NFT.Smith.box','1.Smith.box','Tom.Smith.box'];
-      let i = 0, tp=100, er=50, db=2000;
-      const el = document.getElementById('changing-text');
-      function type(w, j=0){ if(j<w.length){ el.textContent+=w[j]; setTimeout(()=>type(w,j+1),tp); }
-        else setTimeout(erase,db); }
-      function erase(){ if(el.textContent){ el.textContent=el.textContent.slice(0,-1); setTimeout(erase,er); }
-        else { i=(i+1)%subs.length; setTimeout(()=>type(subs[i]),tp); } }
+      // Typing effect
+      const subs = [
+        'Agent.Smith.box','Sam.Smith.box','Jessica.Smith.box',
+        'Dave.Smith.box','Zoe.Smith.box','Wallet.Smith.box',
+        'NFT.Smith.box','1.Smith.box','Tom.Smith.box'
+      ];
+      let idx=0, tp=100, er=50, db=2000;
+      const txt = document.getElementById('changing-text');
+      function type(w,i=0){
+        if(i<w.length){
+          txt.textContent+=w[i];
+          setTimeout(()=>type(w,i+1),tp);
+        } else setTimeout(erase,db);
+      }
+      function erase(){
+        if(txt.textContent){
+          txt.textContent=txt.textContent.slice(0,-1);
+          setTimeout(erase,er);
+        } else {
+          idx=(idx+1)%subs.length;
+          setTimeout(()=>type(subs[idx]),tp);
+        }
+      }
       type(subs[0]);
 
       // Wallet connect
-      const walletBtn = document.getElementById('wallet-connect');
-      async function connect() {
-        if (!window.ethers||!window.ethereum) return alert('Install an EVM wallet.');
-        try {
-          const prov = new ethers.providers.Web3Provider(window.ethereum,'any');
+      const btn = document.getElementById('wallet-connect');
+      async function connect(){
+        if(!window.ethers||!window.ethereum) return alert('Install an EVM wallet.');
+        try{
+          const prov=new ethers.providers.Web3Provider(window.ethereum,'any');
           await prov.send('eth_requestAccounts',[]);
-          const addr = await prov.getSigner().getAddress();
-          walletBtn.classList.add('connected');
-          walletBtn.title = addr;
-          window.ethereum.on('accountsChanged', a=>{ if(a.length) walletBtn.title=a[0]; else walletBtn.classList.remove('connected'); });
-          window.ethereum.on('chainChanged', ()=>location.reload());
-        } catch(e){ if(e.code!==4001) alert('Connection failed: '+e.message); }
+          const addr=await prov.getSigner().getAddress();
+          btn.classList.add('connected');
+          btn.title=addr;
+          window.ethereum.on('accountsChanged',a=>{ if(a.length) btn.title=a[0]; else btn.classList.remove('connected'); });
+          window.ethereum.on('chainChanged',()=>location.reload());
+        }catch(e){ if(e.code!==4001) alert('Connection failed: '+e.message); }
       }
-      walletBtn.addEventListener('click', connect);
+      btn.addEventListener('click',connect);
+
+      // Animate feature-boxes (optional)
+      if(typeof anime!=='undefined'){
+        anime({
+          targets:'.feature-box',
+          opacity:[0,1],
+          translateY:[20,0],
+          easing:'easeOutQuad',
+          duration:800,
+          delay:anime.stagger(200)
+        });
+      }
     });
   </script>
 </body>
