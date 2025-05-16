@@ -41,7 +41,7 @@ body {
   display: flex;
   justify-content: center;   /* center horizontally */
   align-items: flex-start;   /* start at top; use padding for offset */
-  padding-top: 80px;         /* desktop offset */
+  padding-top: 80px;         /* desktop top offset */
 }
 .header::before {
   content: '';
@@ -160,7 +160,7 @@ body {
 /* ─── Feature Grid ─── */
 .feature-grid {
   position: absolute;
-  bottom: 10%;             /* adjust vertical placement */
+  bottom: 10%;               /* adjust vertical placement */
   left: 50%;
   transform: translateX(-50%);
   width: 90%;
@@ -215,24 +215,71 @@ body {
 
 /* ─── Mobile Optimizations ─── */
 @media (max-width: 600px) {
+  /* Header padding adjustments */
   .header {
     padding-top: 60px;
+    padding-bottom: 20px;    /* add space below header */
   }
-  .image-wrapper {
-    padding: 15px;
+
+  /* Feature grid flows under header */
+  .feature-grid {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: none;
+    margin: 0 auto 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 12px;
+    z-index: 1;
   }
-  .image-wrapper img {
-    width: 140px;
-    height: 140px;
+
+  /* Single‑column boxes with softer look */
+  .feature-box {
+    padding: 16px 12px;
+    font-size: 1em;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    opacity: 1;
+    transform: none;
+    animation: none;
   }
+
+  .feature-box h3 {
+    font-size: 1.15em;
+    margin-bottom: 6px;
+  }
+  .feature-box small {
+    font-size: 0.8em;
+    margin-top: 4px;
+  }
+  .feature-box a {
+    font-size: 0.9em;
+    margin-top: 4px;
+  }
+
+  /* Shrink header text */
   #typed-header {
-    font-size: 1.4em;
+    font-size: 1.6em;
   }
-  #changing-text {
+  #changing-text, .caret {
     font-size: 1.2em;
   }
+
+  /* Tweak CTA button */
   .cta-button {
-    padding: 12px 24px;
+    padding: 10px 20px;
     font-size: 1em;
+  }
+
+  /* Ensure icons stay on top */
+  #wallet-connect,
+  .navbar {
+    z-index: 5;
   }
 }
