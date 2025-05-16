@@ -5,10 +5,16 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Smith.box offers Web3 name service, EVM compatible NFT naming, NFT smith.box, crypto name service and smart xrp paystring integration for families, degens, and developers." />
-  <meta name="keywords" content="Web3 name service, EVM compatible NFT, NFT smith.box, smith.box name service, xrp paystring integration, Web3 for families, degen NFT service, EVM NFT name service, Web3 family-oriented services, Web3 EVM solutions, NFT naming for degens, xrp paystring NFT service, blockchain name service, Web3 EVM compatibility, NFT services for families, smith.box for degens, crypto name service, EVM blockchain naming, Web3 domain service, NFT blockchain integration, XRP paystring and NFTs, Web3 digital identity, Degen crypto services, NFT family solutions, EVM name registration, Smith family blockchain, XRP payment solutions" />
+  <meta name="description" content="Smith.box – your tokenized Web3 name service offering ENS‑powered usernames, NFT ownership, ICANN DNS hosting, and full on‑chain record management." />
+  <meta name="keywords" content="
+    ENS Powered Web3 username,
+    NFT-bound ownership and control,
+    Website and email hosting via ICANN DNS resolution,
+    Onchain management of name records,
+    Avatar Handles A CNAME MX" />
+
   <meta property="og:title" content="smith.box – Tokenized WEB2 & WEB3 Domain NFT Naming Service" />
-  <meta property="og:description" content="Reserve your digital ID with smith.box. We provide Web3 name service, EVM compatible NFT domains, xrp paystring integration, family & degen-friendly NFT naming." />
+  <meta property="og:description" content="Reserve your digital ID with smith.box. ENS usernames, NFT domains, ICANN DNS hosting, & on‑chain name management." />
   <meta property="og:image" content="https://i.imgur.com/ngwLlPH.jpeg" />
 
   <title>smith.box – Smith.box Naming Service</title>
@@ -19,84 +25,190 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
   />
 
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- 1) ethers UMD build (exposes window.ethers) -->
-  <script
-    src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"
-    defer
-  ></script>
-
-  <!-- 2) Anime.js -->
+  <!-- Anime.js (optional) -->
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"
     defer
   ></script>
 
-  <!-- 3) Your logic -->
-  <script src="script.js" defer></script>
+  <!-- ethers.js -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"
+    defer
+  ></script>
+
+  <!-- Your main CSS -->
+  <style>
+    /* ─── Reset + Base ─── */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { width:100%; height:100%; overflow-x:hidden; font-family:'Arial',sans-serif; background:#fff; color:#000; }
+
+    /* ─── Wallet-connect icon ─── */
+    #wallet-connect { position:absolute; top:20px; left:20px; z-index:5; font-size:1.75em; color:#fff; cursor:pointer; transition:color .2s; }
+    #wallet-connect.connected { color:#0f0; }
+    #wallet-connect:hover { color:#ccc; }
+
+    /* ─── Header & Animated Gradient ─── */
+    .header { position:relative; overflow:hidden; height:100vh; display:flex; justify-content:center; align-items:flex-start; padding-top:80px; }
+    .header::before {
+      content:''; position:absolute; inset:0;
+      background: linear-gradient(135deg,#4a90e2,#9013fe);
+      background-size:300% 300%;
+      animation:gradientShift 8s infinite linear;
+      z-index:1;
+    }
+    @keyframes gradientShift {
+      0%   { background-position:0% 50%; }
+      50%  { background-position:100% 50%; }
+      100% { background-position:0% 50%; }
+    }
+    .header::after {
+      content:''; position:absolute; inset:0;
+      background:rgba(255,255,255,0.1); backdrop-filter:blur(5px);
+      z-index:2;
+    }
+
+    /* ─── Header Content ─── */
+    .header-content { position:relative; z-index:3; display:flex; flex-direction:column; align-items:center; gap:20px; text-align:center; }
+    .image-wrapper { background:#fff; border-radius:50%; padding:20px; display:flex; justify-content:center; }
+    .image-wrapper img { width:240px; height:240px; border-radius:50%; object-fit:cover; }
+    #typed-header { font-size:1.8em; font-weight:bold; color:#000; }
+    .typing-wrapper { display:flex; align-items:center; gap:5px; }
+    #changing-text { font-size:1.5em; color:#fff; white-space:nowrap; overflow:hidden; min-height:1.5em; }
+    .caret { font-size:1.5em; color:#fff; position:relative; top:-0.2em; animation:blink-caret .75s step-end infinite; }
+    @keyframes blink-caret { 0%,100%{opacity:0;}50%{opacity:1;} }
+
+    .cta-button {
+      padding:15px 30px; background:#fff; color:#4a90e2;
+      text-decoration:none; border-radius:25px; font-size:1.2em;
+      transition:background .3s,color .3s,transform .3s;
+    }
+    .cta-button:hover { background:#4a90e2; color:#fff; transform:scale(1.05); }
+
+    /* ─── Navbar Icons ─── */
+    .navbar { position:absolute; top:20px; right:20px; z-index:4; }
+    .navbar ul { list-style:none; display:flex; gap:15px; }
+    .navbar a { color:#fff; font-size:1.5em; }
+
+    /* ─── Feature‑showcase ─── */
+    .feature-showcase {
+      position:absolute; bottom:10%; left:50%; transform:translateX(-50%);
+      width:80%; max-width:800px; height:120px; overflow:hidden; z-index:3; pointer-events:none;
+    }
+    .feature-showcase .feature {
+      position:absolute; top:0; left:0; width:100%; height:100%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.4em; color:#fff; opacity:0;
+      transition:opacity 1s ease-in-out;
+    }
+    .feature-showcase .feature.active { opacity:1; }
+    .feature-showcase .feature a {
+      color:#fff; text-decoration:underline; pointer-events:auto;
+    }
+
+    /* ─── Mobile ─── */
+    @media(max-width:600px) {
+      .header { padding-top:60px; }
+      .image-wrapper { padding:15px; }
+      .image-wrapper img { width:140px; height:140px; }
+      #typed-header { font-size:1.4em; }
+      #changing-text { font-size:1.2em; }
+      .cta-button { padding:12px 24px; font-size:1em; }
+    }
+  </style>
 </head>
+
 <body>
-  <!-- Wallet connect icon -->
-  <div id="wallet-connect" title="Connect Wallet">
-    <i class="fas fa-wallet"></i>
-  </div>
+  <!-- Wallet connect -->
+  <div id="wallet-connect" title="Connect Wallet"><i class="fas fa-wallet"></i></div>
 
   <header class="header">
     <div class="header-content">
       <div class="image-wrapper">
-        <img
-          src="https://i.imgur.com/R3tbBZn.png"
-          alt="smith.box logo – Web3 name service & EVM NFT domains"
-          loading="lazy"
-        />
+        <img src="https://i.imgur.com/R3tbBZn.png"
+             alt="smith.box logo – Web3 name service & EVM NFT domains"
+             loading="lazy" />
       </div>
-
       <h1 id="typed-header">Reserve Your Digital ID</h1>
-
       <div class="typing-wrapper">
         <span id="changing-text"></span><span class="caret">|</span>
       </div>
-
-      <a
-        href="https://www.linkedin.com/company/smith-box"
-        class="cta-button"
-        target="_blank"
-      >Learn More</a>
+      <a href="https://www.linkedin.com/company/smith-box"
+         class="cta-button" target="_blank">Learn More</a>
     </div>
   </header>
 
   <nav class="navbar" id="navbar">
     <ul>
-      <li>
-        <a href="mailto:hello@smith.box" title="Email">
-          <i class="fas fa-envelope"></i>
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://www.recruitment.box/smith.box/"
-          title="Website"
-          target="_blank"
-        ><i class="fas fa-globe"></i
-        ></a>
-      </li>
+      <li><a href="mailto:hello@smith.box"><i class="fas fa-envelope"></i></a></li>
+      <li><a href="https://www.recruitment.box/smith.box/" target="_blank"><i class="fas fa-globe"></i></a></li>
     </ul>
   </nav>
 
-  <!-- Hidden keyword stash for SEO crawlers -->
-  <div style="display:none;">
-    Web3 name service, EVM compatible NFT, NFT smith.box, smith.box name service,
-    xrp paystring integration, Web3 for families, degen NFT service,
-    EVM NFT name service, Web3 family-oriented services, Web3 EVM solutions,
-    NFT naming for degens, xrp paystring NFT service, blockchain name service,
-    Web3 EVM compatibility, NFT services for families, smith.box for degens,
-    crypto name service, EVM blockchain naming, Web3 domain service,
-    NFT blockchain integration, XRP paystring and NFTs, Web3 digital identity,
-    Degen crypto services, NFT family solutions, EVM name registration,
-    Smith family blockchain, XRP payment solutions
-  </div>
+  <!-- Feature Rotator -->
+  <section id="features" class="feature-showcase"></section>
 
-  <!-- (Other sections...) -->
+  <!-- Main logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // --- TYPING HEADER (unchanged) ---
+      const subdomains = [
+        'Agent.Smith.box','Sam.Smith.box','Jessica.Smith.box',
+        'Dave.Smith.box','Zoe.Smith.box','Wallet.Smith.box',
+        'NFT.Smith.box','1.Smith.box','Tom.Smith.box'
+      ];
+      let idx = 0, typingSpeed=100, erasingSpeed=50, delayBetween=2000;
+      const textEl = document.getElementById('changing-text');
+      function typeWord(w,i=0){ if(i<w.length){ textEl.textContent+=w[i]; setTimeout(()=>typeWord(w,i+1),typingSpeed); }
+        else setTimeout(eraseWord,delayBetween);
+      }
+      function eraseWord(){ if(textEl.textContent){ textEl.textContent=textEl.textContent.slice(0,-1); setTimeout(eraseWord,erasingSpeed); }
+        else { idx=(idx+1)%subdomains.length; setTimeout(()=>typeWord(subdomains[idx]),typingSpeed); }
+      }
+      typeWord(subdomains[idx]);
+
+      // --- WALLET CONNECT (unchanged) ---
+      const walletBtn = document.getElementById('wallet-connect');
+      let provider, signer;
+      async function connectWallet() {
+        if (!window.ethers || !window.ethereum) return alert('Install MetaMask.');
+        try {
+          provider = new ethers.providers.Web3Provider(window.ethereum,'any');
+          await provider.send('eth_requestAccounts',[]);
+          signer = provider.getSigner();
+          walletBtn.classList.add('connected');
+          walletBtn.title = await signer.getAddress();
+          window.ethereum.on('accountsChanged', ac=>{ if(!ac.length) walletBtn.classList.remove('connected'); else walletBtn.title=ac[0]; });
+          window.ethereum.on('chainChanged', ()=>location.reload());
+        } catch(err){ if(err.code!==4001) alert('Connection failed: '+err.message); }
+      }
+      walletBtn.addEventListener('click', connectWallet);
+
+      // --- FEATURE ROTATOR ---
+      const featureList = [
+        'ENS Powered Web3 username',
+        '<a href="https://recruitment.box/smith.box" target="_blank" rel="noopener">Recruitment.box/smith.box</a>',
+        'NFT-bound ownership and control',
+        '<a href="https://www.smith.box" target="_blank" rel="noopener">www.smith.box</a>',
+        'Website & email hosting via ICANN DNS resolution',
+        '<a href="mailto:hello@smith.box">hello@smith.box</a>',
+        'Onchain management of name records (Avatar, Handles, A, CNAME, MX)'
+      ];
+      const container = document.getElementById('features');
+      featureList.forEach((html,i)=>{
+        const div = document.createElement('div');
+        div.className = 'feature' + (i===0?' active':'');
+        div.innerHTML = html;
+        container.appendChild(div);
+      });
+      let current = 0;
+      setInterval(()=>{
+        const items = container.querySelectorAll('.feature');
+        items[current].classList.remove('active');
+        current = (current+1)%items.length;
+        items[current].classList.add('active');
+      }, 4000);
+    });
+  </script>
 </body>
 </html>
