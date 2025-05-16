@@ -1,7 +1,5 @@
-// script.js
-
 document.addEventListener('DOMContentLoaded', () => {
-  // --- 1) TYPING ANIMATION (unchanged) ---
+  // ─── 1) TYPING HEADER ───
   const subdomains = [
     'Agent.Smith.box',
     'Sam.Smith.box',
@@ -38,38 +36,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // start typing
   typeWord(subdomains[idx]);
 
 
-  // --- 2) SAFE WALLET CONNECT WITH REJECTION HANDLING ---
+  // ─── 2) WALLET CONNECT ───
   const walletBtn = document.getElementById('wallet-connect');
   let provider, signer;
 
   async function connectWallet() {
-    if (typeof window.ethers === 'undefined') {
-      return alert('ethers.js not loaded.');
-    }
-    if (!window.ethereum) {
-      return alert('No Ethereum provider detected. Install MetaMask.');
+    if (typeof window.ethers === 'undefined' || !window.ethereum) {
+      return alert('MetaMask (or another EVM wallet) not detected.');
     }
 
     try {
       provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
-      // This can throw if user rejects
-      await provider.send('eth_requestAccounts', []);
+      await provider.send('eth_requestAccounts', []); // request access
       signer = provider.getSigner();
       const address = await signer.getAddress();
 
       walletBtn.classList.add('connected');
       walletBtn.title = address;
 
+      // handle account/network changes
       window.ethereum.on('accountsChanged', handleAccountsChanged);
       window.ethereum.on('chainChanged', handleChainChanged);
 
     } catch (err) {
-      // EIP-1193 userRejectedRequest error
       if (err.code === 4001) {
-        // user cancelled wallet connection — do nothing
         console.log('User rejected wallet connection');
       } else {
         console.error('Wallet connect failed', err);
@@ -91,6 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.location.reload();
   }
 
+  walletBtn.addEventListener('click', connectWallet);
   window.addEventListener('beforeunload', () => {
     if (window.ethereum && window.ethereum.removeListener) {
       window.ethereum.removeListener('accountsChanged', handleAccountsChanged);
@@ -98,5 +93,39 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  walletBtn.addEventListener('click', connectWallet);
+
+  // ─── 3) FEATURE ROTATOR ───
+  const featureList = [
+    // Plain text
+    'ENS Powered Web3 username',
+    // Link version
+    '<a href="https://recruitment.box/smith.box" target="_blank" rel="noopener">Recruitment.box/smith.box</a>',
+
+    'NFT-bound ownership and control',
+    '<a href="https://www.smith.box" target="_blank" rel="noopener">www.smith.box</a>',
+
+    'Website and email hosting via ICANN DNS resolution',
+    '<a href="mailto:hello@smith.box">hello@smith.box</a>',
+
+    'Onchain management of name records (Avatar, Handles, A, CNAME, MX)'
+  ];
+
+  const container = document.getElementById('features');
+
+  // build DOM nodes
+  featureList.forEach((html, i) => {
+    const div = document.createElement('div');
+    div.className = 'feature' + (i === 0 ? ' active' : '');
+    div.innerHTML = html;
+    container.appendChild(div);
+  });
+
+  // rotation loop
+  let current = 0;
+  setInterval(() => {
+    const items = container.querySelectorAll('.feature');
+    items[current].classList.remove('active');
+    current = (current + 1) % items.length;
+    items[current].classList.add('active');
+  }, 4000); // switch every 4s
 });
