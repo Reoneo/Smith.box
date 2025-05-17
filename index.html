@@ -3,274 +3,100 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>smith.box – Tokenized WEB2 & WEB3 Domain NFT Naming Service</title>
-  <meta name="description" content="Smith.box – your tokenized Web3 name service offering ENS‑powered usernames, NFT ownership, ICANN DNS hosting, and full on‑chain record management." />
-  <meta name="keywords" content="ENS Powered Web3 username, NFT-bound ownership and control, Website and email hosting via ICANN DNS resolution, Onchain management of name records, Avatar Handles A CNAME MX" />
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Smith.box offers Web3 name service, EVM compatible NFT naming, NFT smith.box, crypto name service and smart xrp paystring integration for families, degens, and developers." />
+  <meta name="keywords" content="Web3 name service, EVM compatible NFT, NFT smith.box, smith.box name service, xrp paystring integration, Web3 for families, degen NFT service, EVM NFT name service, Web3 family-oriented services, Web3 EVM solutions, NFT naming for degens, xrp paystring NFT service, blockchain name service, Web3 EVM compatibility, NFT services for families, smith.box for degens, crypto name service, EVM blockchain naming, Web3 domain service, NFT blockchain integration, XRP paystring and NFTs, Web3 digital identity, Degen crypto services, NFT family solutions, EVM name registration, Smith family blockchain, XRP payment solutions" />
   <meta property="og:title" content="smith.box – Tokenized WEB2 & WEB3 Domain NFT Naming Service" />
-  <meta property="og:description" content="Reserve your digital ID with smith.box. ENS usernames, NFT domains, ICANN DNS hosting, & on‑chain name management." />
+  <meta property="og:description" content="Reserve your digital ID with smith.box. We provide Web3 name service, EVM compatible NFT domains, xrp paystring integration, family & degen-friendly NFT naming." />
   <meta property="og:image" content="https://i.imgur.com/ngwLlPH.jpeg" />
 
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <title>smith.box – Smith.box Naming Service</title>
 
-  <!-- Anime.js for optional entrance animation -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
-  <!-- ethers.js for wallet connect -->
-  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js" defer></script>
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
 
-  <style>
-    /* ─── Reset + Base ─── */
-    * { margin:0; padding:0; box-sizing:border-box; }
-    html, body {
-      width:100%; height:100%;
-      overflow-x:hidden;
-      font-family:'Arial',sans-serif;
-      background:#fff; color:#000;
-    }
+  <link rel="stylesheet" href="styles.css" />
 
-    /* ─── Wallet‑connect icon ─── */
-    #wallet-connect {
-      position:absolute; top:20px; left:20px; z-index:5;
-      font-size:1.75em; color:#fff; cursor:pointer;
-      transition:color .2s ease;
-    }
-    #wallet-connect.connected { color:#0f0; }
-    #wallet-connect:hover  { color:#ccc; }
+  <!-- 1) ethers UMD build (exposes window.ethers) -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"
+    defer
+  ></script>
 
-    /* ─── Header & Animated Gradient ─── */
-    .header {
-      position:relative; overflow:hidden; height:100vh;
-      display:flex; justify-content:center; align-items:flex-start;
-      padding-top:80px;
-    }
-    .header::before {
-      content:''; position:absolute; inset:0;
-      background: linear-gradient(135deg,#4a90e2,#9013fe);
-      background-size:300% 300%;
-      animation:gradientShift 8s infinite linear;
-      z-index:1;
-    }
-    @keyframes gradientShift {
-      0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}
-    }
-    .header::after {
-      content:''; position:absolute; inset:0;
-      background:rgba(255,255,255,0.1); backdrop-filter:blur(5px);
-      z-index:2;
-    }
+  <!-- 2) Anime.js -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"
+    defer
+  ></script>
 
-    /* ─── Header Content ─── */
-    .header-content {
-      position:relative; z-index:3;
-      display:flex; flex-direction:column; align-items:center;
-      gap:20px; text-align:center;
-    }
-    .image-wrapper {
-      background:#fff; border-radius:50%; padding:20px;
-      display:flex; justify-content:center;
-    }
-    .image-wrapper img {
-      width:240px; height:240px; border-radius:50%; object-fit:cover;
-    }
-    #typed-header {
-      font-size:1.8em; font-weight:bold; color:#000;
-    }
-    .typing-wrapper { display:flex; align-items:center; gap:5px; }
-    #changing-text {
-      font-size:1.5em; color:#fff;
-      white-space:nowrap; overflow:hidden; min-height:1.5em;
-    }
-    .caret {
-      font-size:1.5em; color:#fff;
-      position:relative; top:-0.2em;
-      animation:blink-caret .75s step-end infinite;
-    }
-    @keyframes blink-caret {0%,100%{opacity:0}50%{opacity:1}}
-    .cta-button {
-      padding:15px 30px; background:#fff; color:#4a90e2;
-      text-decoration:none; border-radius:25px; font-size:1.2em;
-      transition:background .3s,color .3s,transform .3s;
-    }
-    .cta-button:hover {
-      background:#4a90e2; color:#fff; transform:scale(1.05);
-    }
-
-    /* ─── Navbar Icons ─── */
-    .navbar {
-      position:absolute; top:20px; right:20px; z-index:4;
-    }
-    .navbar ul { list-style:none; display:flex; gap:15px; }
-    .navbar a { color:#fff; font-size:1.5em; }
-
-    /* ─── Feature Grid ─── */
-    .feature-grid {
-      position:absolute; bottom:10%; left:50%;
-      transform:translateX(-50%);
-      width:90%; max-width:1000px;
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-      gap:20px; z-index:3; pointer-events:auto; padding:10px;
-    }
-    .feature-box {
-      background:rgba(255,255,255,0.15);
-      border:1px solid rgba(255,255,255,0.3);
-      border-radius:12px; padding:20px;
-      color:#fff; text-align:center;
-      opacity:0; transform:translateY(20px);
-      animation:fadeUpIn .8s forwards;
-    }
-    .feature-box:nth-child(1){animation-delay:.2s}
-    .feature-box:nth-child(2){animation-delay:.4s}
-    .feature-box:nth-child(3){animation-delay:.6s}
-    .feature-box:nth-child(4){animation-delay:.8s}
-    .feature-box h3 { margin-bottom:8px; font-size:1.2em; }
-    .feature-box small {
-      display:block; margin-top:4px; font-size:.85em;
-      color:rgba(255,255,255,0.8);
-    }
-    .feature-box a {
-      display:inline-block; margin-top:6px;
-      color:#fff; text-decoration:underline;
-    }
-    @keyframes fadeUpIn { to{opacity:1;transform:translateY(0);} }
-
-    /* ─── Mobile Optimizations ─── */
-    @media(max-width:600px){
-      .header { padding-top:60px; padding-bottom:20px; }
-      #typed-header { font-size:1.6em; }
-      #changing-text,.caret { font-size:1.2em; }
-      .cta-button { padding:10px 20px; font-size:1em; }
-      .feature-grid {
-        position:relative; transform:none; bottom:auto; left:auto;
-        width:100%; max-width:none; margin:0 auto 20px;
-        display:flex; flex-direction:column; gap:12px;
-        padding:0 12px; z-index:1;
-      }
-      .feature-box {
-        padding:16px 12px; font-size:1em;
-        background:rgba(255,255,255,0.2); border:none;
-        box-shadow:0 2px 8px rgba(0,0,0,0.15); border-radius:10px;
-        opacity:1; transform:none; animation:none;
-      }
-      .feature-box h3 { font-size:1.15em; margin-bottom:6px; }
-      .feature-box small { font-size:.8em; margin-top:4px; }
-      .feature-box a { font-size:.9em; margin-top:4px; }
-      #wallet-connect, .navbar { z-index:5; }
-    }
-  </style>
+  <!-- 3) Your logic -->
+  <script src="script.js" defer></script>
 </head>
-
 <body>
-
-  <!-- Wallet Connect Icon -->
+  <!-- Wallet connect icon -->
   <div id="wallet-connect" title="Connect Wallet">
     <i class="fas fa-wallet"></i>
   </div>
 
-  <!-- Header -->
   <header class="header">
     <div class="header-content">
       <div class="image-wrapper">
-        <img src="https://i.imgur.com/R3tbBZn.png"
-             alt="smith.box logo – Web3 name service & EVM NFT domains"
-             loading="lazy" />
+        <img
+          src="https://i.imgur.com/R3tbBZn.png"
+          alt="smith.box logo – Web3 name service & EVM NFT domains"
+          loading="lazy"
+        />
       </div>
+
       <h1 id="typed-header">Reserve Your Digital ID</h1>
+
       <div class="typing-wrapper">
         <span id="changing-text"></span><span class="caret">|</span>
       </div>
-      <a href="https://www.linkedin.com/company/smith-box"
-         class="cta-button" target="_blank">Learn More</a>
+
+      <a
+        href="https://www.linkedin.com/company/smith-box"
+        class="cta-button"
+        target="_blank"
+      >Learn More</a>
     </div>
   </header>
 
-  <!-- Navbar -->
-  <nav class="navbar">
+  <nav class="navbar" id="navbar">
     <ul>
-      <li><a href="mailto:hello@smith.box"><i class="fas fa-envelope"></i></a></li>
-      <li><a href="https://www.recruitment.box/smith.box/" target="_blank">
-        <i class="fas fa-globe"></i></a></li>
+      <li>
+        <a href="mailto:hello@smith.box" title="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://www.recruitment.box"
+          title="Website"
+          target="_blank"
+        ><i class="fas fa-globe"></i
+        ></a>
+      </li>
     </ul>
   </nav>
 
-  <!-- Feature Grid -->
-  <section class="feature-grid">
-    <div class="feature-box">
-      <h3>ENS Powered Web3 Username</h3>
-      <a href="https://recruitment.box/smith.box" target="_blank" rel="noopener">
-        recruitment.box/smith.box
-      </a>
-    </div>
-    <div class="feature-box">
-      <h3>NFT‑Bound Ownership &amp; Control</h3>
-    </div>
-    <div class="feature-box">
-      <h3>Website &amp; Email Hosting via ICANN DNS Resolution</h3>
-      <a href="https://www.smith.box" target="_blank" rel="noopener">www.smith.box</a><br/>
-      <a href="mailto:hello@smith.box">hello@smith.box</a>
-    </div>
-    <div class="feature-box">
-      <h3>On‑chain Management of Name Records</h3>
-      <small>(Avatar, Handles, A, CNAME, MX)</small>
-    </div>
-  </section>
+  <!-- Hidden keyword stash for SEO crawlers -->
+  <div style="display:none;">
+    Web3 name service, EVM compatible NFT, NFT smith.box, smith.box name service,
+    xrp paystring integration, Web3 for families, degen NFT service,
+    EVM NFT name service, Web3 family-oriented services, Web3 EVM solutions,
+    NFT naming for degens, xrp paystring NFT service, blockchain name service,
+    Web3 EVM compatibility, NFT services for families, smith.box for degens,
+    crypto name service, EVM blockchain naming, Web3 domain service,
+    NFT blockchain integration, XRP paystring and NFTs, Web3 digital identity,
+    Degen crypto services, NFT family solutions, EVM name registration,
+    Smith family blockchain, XRP payment solutions
+  </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Typing effect
-      const subs = [
-        'Agent.Smith.box','Sam.Smith.box','Jessica.Smith.box',
-        'Dave.Smith.box','Zoe.Smith.box','Wallet.Smith.box',
-        'NFT.Smith.box','1.Smith.box','Tom.Smith.box'
-      ];
-      let idx=0, tp=100, er=50, db=2000;
-      const txt = document.getElementById('changing-text');
-      function type(w,i=0){
-        if(i<w.length){
-          txt.textContent+=w[i];
-          setTimeout(()=>type(w,i+1),tp);
-        } else setTimeout(erase,db);
-      }
-      function erase(){
-        if(txt.textContent){
-          txt.textContent=txt.textContent.slice(0,-1);
-          setTimeout(erase,er);
-        } else {
-          idx=(idx+1)%subs.length;
-          setTimeout(()=>type(subs[idx]),tp);
-        }
-      }
-      type(subs[0]);
-
-      // Wallet connect
-      const btn = document.getElementById('wallet-connect');
-      async function connect(){
-        if(!window.ethers||!window.ethereum) return alert('Install an EVM wallet.');
-        try{
-          const prov=new ethers.providers.Web3Provider(window.ethereum,'any');
-          await prov.send('eth_requestAccounts',[]);
-          const addr=await prov.getSigner().getAddress();
-          btn.classList.add('connected');
-          btn.title=addr;
-          window.ethereum.on('accountsChanged',a=>{ if(a.length) btn.title=a[0]; else btn.classList.remove('connected'); });
-          window.ethereum.on('chainChanged',()=>location.reload());
-        }catch(e){ if(e.code!==4001) alert('Connection failed: '+e.message); }
-      }
-      btn.addEventListener('click',connect);
-
-      // Animate feature-boxes (optional)
-      if(typeof anime!=='undefined'){
-        anime({
-          targets:'.feature-box',
-          opacity:[0,1],
-          translateY:[20,0],
-          easing:'easeOutQuad',
-          duration:800,
-          delay:anime.stagger(200)
-        });
-      }
-    });
-  </script>
+  <!-- (Other sections...) -->
 </body>
 </html>
