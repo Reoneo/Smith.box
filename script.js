@@ -1,7 +1,7 @@
 // script.js
 
 document.addEventListener('DOMContentLoaded', () => {
-  // ─── 1) HEADER TYPING EFFECT ───
+  // --- 1) TYPING ANIMATION (unchanged) ---
   const subdomains = [
     'Agent.Smith.box',
     'Sam.Smith.box',
@@ -14,23 +14,23 @@ document.addEventListener('DOMContentLoaded', () => {
     'Tom.Smith.box'
   ];
   let idx = 0;
-  const typingSpeed = 100;
-  const erasingSpeed = 50;
-  const delayBetween = 2000;
-  const changingTextEl = document.getElementById('changing-text');
+  const typingSpeed = 100,
+        erasingSpeed = 50,
+        delayBetween = 2000;
+  const textEl = document.getElementById('changing-text');
 
-  function typeWord(word, charIndex = 0) {
-    if (charIndex < word.length) {
-      changingTextEl.textContent += word.charAt(charIndex);
-      setTimeout(() => typeWord(word, charIndex + 1), typingSpeed);
+  function typeWord(word, i = 0) {
+    if (i < word.length) {
+      textEl.textContent += word.charAt(i);
+      setTimeout(() => typeWord(word, i + 1), typingSpeed);
     } else {
       setTimeout(eraseWord, delayBetween);
     }
   }
 
   function eraseWord() {
-    if (changingTextEl.textContent.length > 0) {
-      changingTextEl.textContent = changingTextEl.textContent.slice(0, -1);
+    if (textEl.textContent.length > 0) {
+      textEl.textContent = textEl.textContent.slice(0, -1);
       setTimeout(eraseWord, erasingSpeed);
     } else {
       idx = (idx + 1) % subdomains.length;
@@ -38,22 +38,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Start the typing loop
   typeWord(subdomains[idx]);
 
 
-  // ─── 2) WALLET CONNECT ───
+  // --- 2) SAFE WALLET CONNECT WITH REJECTION HANDLING ---
   const walletBtn = document.getElementById('wallet-connect');
   let provider, signer;
 
   async function connectWallet() {
-    if (typeof window.ethers === 'undefined' || !window.ethereum) {
-      return alert('MetaMask (or another EVM-compatible wallet) not detected.');
+    if (typeof window.ethers === 'undefined') {
+      return alert('ethers.js not loaded.');
+    }
+    if (!window.ethereum) {
+      return alert('No Ethereum provider detected. Install MetaMask.');
     }
 
     try {
       provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
-      await provider.send('eth_requestAccounts', []); // Prompt user
+      // This can throw if user rejects
+      await provider.send('eth_requestAccounts', []);
       signer = provider.getSigner();
       const address = await signer.getAddress();
 
@@ -62,9 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       window.ethereum.on('accountsChanged', handleAccountsChanged);
       window.ethereum.on('chainChanged', handleChainChanged);
+
     } catch (err) {
+      // EIP-1193 userRejectedRequest error
       if (err.code === 4001) {
-        // User rejected request
+        // user cancelled wallet connection — do nothing
         console.log('User rejected wallet connection');
       } else {
         console.error('Wallet connect failed', err);
@@ -86,19 +91,12 @@ document.addEventListener('DOMContentLoaded', () => {
     window.location.reload();
   }
 
+  window.addEventListener('beforeunload', () => {
+    if (window.ethereum && window.ethereum.removeListener) {
+      window.ethereum.removeListener('accountsChanged', handleAccountsChanged);
+      window.ethereum.removeListener('chainChanged', handleChainChanged);
+    }
+  });
+
   walletBtn.addEventListener('click', connectWallet);
-
-
-  // ─── 3) OPTIONAL: FEATURE-BOX ENTRANCE ANIMATION ───
-  // Requires Anime.js loaded via <script> in your HTML
-  if (typeof anime !== 'undefined') {
-    anime({
-      targets: '.feature-box',
-      opacity: [0, 1],
-      translateY: [20, 0],
-      easing: 'easeOutQuad',
-      duration: 800,
-      delay: anime.stagger(200) // stagger each by 0.2s
-    });
-  }
 });
