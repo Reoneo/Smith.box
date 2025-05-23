@@ -3,8 +3,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   // --- 1) TYPING ANIMATION (unchanged) ---
   const subdomains = [
-    'Agent.Smith.box',
-    'Sam.Smith.box',
+    'Marcel.Smith.box',
+    'Caty.Smith.box',
     'Jessica.Smith.box',
     'Dave.Smith.box',
     'Zoe.Smith.box',
