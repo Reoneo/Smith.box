@@ -1,49 +1,102 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Hidden-Text Viewer</title>
-  <style>
-    body { font-family: sans-serif; margin: 1rem; }
-    #output { border: 1px solid #ccc; padding: 1rem; margin-top: 1rem; white-space: pre-wrap; }
-    label, input, button { font-size: 1rem; }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Smith.box offers Web3 name service, EVM compatible NFT naming, NFT smith.box, crypto name service and smart xrp paystring integration for families, degens, and developers." />
+  <meta name="keywords" content="Web3 name service, EVM compatible NFT, NFT smith.box, smith.box name service, xrp paystring integration, Web3 for families, degen NFT service, EVM NFT name service, Web3 family-oriented services, Web3 EVM solutions, NFT naming for degens, xrp paystring NFT service, blockchain name service, Web3 EVM compatibility, NFT services for families, smith.box for degens, crypto name service, EVM blockchain naming, Web3 domain service, NFT blockchain integration, XRP paystring and NFTs, Web3 digital identity, Degen crypto services, NFT family solutions, EVM name registration, Smith family blockchain, XRP payment solutions" />
+  <meta property="og:title" content="smith.box – Tokenized WEB2 & WEB3 Domain NFT Naming Service" />
+  <meta property="og:description" content="Reserve your digital ID with smith.box. We provide Web3 name service, EVM compatible NFT domains, xrp paystring integration, family & degen-friendly NFT naming." />
+  <meta property="og:image" content="https://i.imgur.com/ngwLlPH.jpeg" />
+
+  <title>smith.box – Smith.box Naming Service</title>
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- 1) ethers UMD build (exposes window.ethers) -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"
+    defer
+  ></script>
+
+  <!-- 2) Anime.js -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"
+    defer
+  ></script>
+
+  <!-- 3) Your logic -->
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <label>Page URL: <input type="text" id="url" size="50" placeholder="https://example.com"></label>
-  <button id="load">Load + Reveal</button>
-  <div id="output"></div>
+  <!-- Wallet connect icon -->
+  <div id="wallet-connect" title="Connect Wallet">
+    <i class="fas fa-wallet"></i>
+  </div>
 
-  <script>
-    document.getElementById('load').addEventListener('click', async () => {
-      const url = document.getElementById('url').value.trim();
-      if (!url) return alert('Enter a URL');
-      // Use a CORS-free proxy like allorigins
-      const proxy = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url);
-      let html;
-      try {
-        const resp = await fetch(proxy);
-        html = await resp.text();
-      } catch (e) {
-        return document.getElementById('output').textContent = '❌ Fetch failed: ' + e;
-      }
+  <header class="header">
+    <div class="header-content">
+      <div class="image-wrapper">
+        <img
+          src="https://i.imgur.com/R3tbBZn.png"
+          alt="smith.box logo – Web3 name service & EVM NFT domains"
+          loading="lazy"
+        />
+      </div>
 
-      // Parse and strip hiding
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
-      doc.querySelectorAll('*').forEach(el => {
-        const s = getComputedStyle(el);
-        if (s.display === 'none' || s.visibility === 'hidden' || el.hidden || el.classList.contains('hidden')) {
-          el.style.display    = 'block';
-          el.style.visibility = 'visible';
-          el.hidden = false;
-        }
-      });
+      <h1 id="typed-header">Reserve Your Digital ID</h1>
 
-      // Serialize only the body’s text
-      const text = doc.body.innerText;
-      document.getElementById('output').textContent = text;
-    });
-  </script>
+      <div class="typing-wrapper">
+        <span id="changing-text"></span><span class="caret">|</span>
+      </div>
+
+      <a
+        href="https://www.linkedin.com/company/smith-box"
+        class="cta-button"
+        target="_blank"
+      >Learn More</a>
+    </div>
+  </header>
+
+  <nav class="navbar" id="navbar">
+    <ul>
+      <li>
+        <a href="mailto:hello@smith.box" title="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://www.recruitment.box"
+          title="Website"
+          target="_blank"
+        ><i class="fas fa-globe"></i
+        ></a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Hidden keyword stash for SEO crawlers -->
+  <div style="display:none;">
+    Web3 name service, EVM compatible NFT, NFT smith.box, smith.box name service,
+    xrp paystring integration, Web3 for families, degen NFT service,
+    EVM NFT name service, Web3 family-oriented services, Web3 EVM solutions,
+    NFT naming for degens, xrp paystring NFT service, blockchain name service,
+    Web3 EVM compatibility, NFT services for families, smith.box for degens,
+    crypto name service, EVM blockchain naming, Web3 domain service,
+    NFT blockchain integration, XRP paystring and NFTs, Web3 digital identity,
+    Degen crypto services, NFT family solutions, EVM name registration,
+    Smith family blockchain, XRP payment solutions
+  </div>
+
+  <!-- (Other sections...) -->
 </body>
 </html>
