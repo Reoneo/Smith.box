@@ -3,15 +3,15 @@
 document.addEventListener('DOMContentLoaded', () => {
   // --- 1) TYPING ANIMATION (unchanged) ---
   const subdomains = [
-    'Agent.Smith.box',
-    'Sam.Smith.box',
-    'Jessica.Smith.box',
-    'Dave.Smith.box',
-    'Zoe.Smith.box',
+    'Marcel.Smith.box',
+    'Aaliyah.Smith.box',
+    'Maleek.Smith.box',
+    'Lauren.Smith.box',
+    'Reon.Smith.box',
+    'Site.Smith.box',
     'Wallet.Smith.box',
-    'NFT.Smith.box',
-    '1.Smith.box',
-    'Tom.Smith.box'
+    'Email.Smith.box',
+    'username.Smith.box'
   ];
   let idx = 0;
   const typingSpeed = 100,
